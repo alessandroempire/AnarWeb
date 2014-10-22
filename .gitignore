@@ -1,0 +1,5 @@
+*.swp
+joins/*.pyc
+anarapp/*.pyc
+anar/*.pyc
+*.pyc
