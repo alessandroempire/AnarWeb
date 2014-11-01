@@ -102,6 +102,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -136,7 +137,8 @@ INSTALLED_APPS = (
     'south',
     'joins',
     'haystack',
-	'smart_selects'
+    'smart_selects',
+    'debug_toolbar'
 )
 
 # A sample logging configuration. The only tangible logging
@@ -201,4 +203,11 @@ SUIT_CONFIG = {
 
     # misc
       'LIST_PER_PAGE': 50
+      
 }
+
+INTERNAL_IPS = {'127.0.0.1'}
+
+def show_toolbar(request):
+    return True
+SHOW_TOOLBAR_CALLBACK = show_toolbar
