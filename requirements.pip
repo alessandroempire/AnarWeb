@@ -28,3 +28,4 @@ django-mptt==0.5.4
 django-suit==0.2.5
 django-smart-selects==1.0.9
 Whoosh==2.4
+django-nested-inlines

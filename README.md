@@ -25,6 +25,9 @@
 10) Instalar el modulo nested_inlines: pip install git+git://github.com/Soaa-/django-nested-inlines.git#egg=django-nested-inlines
 
 -- A ese nivel, ya se deberia poder ver la interfaz del sistema. Probar con: python manage.py runserver y visitando: localhost:8000--
+(python manage.py runserver 0.0.0.0:8000)
+	(python manage.py runserver 0.0.0.0:80 &) para background
+
 
 11) En la carpeta del proyecto sincronizar la base de datos python manage.py syncdb (si pide usuario y password, puede usar usuario: anar y password: anarpass, igual como esta estipulado en el settings.py)
 
