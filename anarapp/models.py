@@ -201,8 +201,8 @@ class Indicaciones(models.Model):
     abbr = 'ind'
     
     class Meta:
-        verbose_name = '6. Indicaciones para llegar al Yacimiento'
-        verbose_name_plural = '6. Indicaciones para llegar al Yacimiento'
+        verbose_name = '6. Indicaciones para llegar al Yac' #aqui cambiar!!!!
+        verbose_name_plural = '6. Indicaciones para llegar al Yac'
 
     def __unicode__(self):
         return '' # '# ' + str(self.id)
@@ -1646,17 +1646,17 @@ class BibYacimiento(Bibliografia):
                                  blank=True)
     
     esFotografia = models.BooleanField('31.1.7. Con fotografía')
-    tieneFotografia = models.ImageField('31.1.6.1. Fotografía - Archivo', 
+    tieneFotografia = models.ImageField('31.1.7.1. Fotografía - Archivo', 
                                  upload_to='bibliografia_yac/%Y_%m', 
                                  null=True, 
                                  blank=True)
-    escolor = models.BooleanField('31.1.7.1. Color')
-    esBlancoYNegro = models.BooleanField('31.1.7.2. B/N')
-    esDiapositiva = models.BooleanField('31.1.7.3. Diapositiva')
-    esPapel = models.BooleanField('31.1.7.4. Papel')
-    esDigital = models.BooleanField('31.1.7.5. Digital')
-    esNegativo = models.BooleanField('31.1.7.6. Negativo')
-    descripcion  = CharField('31.1.8. Con mapa ', blank = True)
+    escolor = models.BooleanField('31.1.7.1.1. Color')
+    esBlancoYNegro = models.BooleanField('31.1.7.1.2. B/N')
+    esDiapositiva = models.BooleanField('31.1.7.2. Diapositiva')
+    esPapel = models.BooleanField('31.1.7.3. Papel')
+    esDigital = models.BooleanField('31.1.7.4. Digital')
+    esNegativo = models.BooleanField('31.1.7.5. Negativo')
+    description = models.BooleanField('31.1.8. Con mapa')
     tieneMapa = models.ImageField('31.1.8.1. Mapa - Archivo', 
                                  upload_to='bibliografia_yac/%Y_%m', 
                                  null=True, 
@@ -1667,7 +1667,7 @@ class BibYacimiento(Bibliografia):
     
     class Meta:
         verbose_name = 'Bibliografía'
-        verbose_name_plural = '31.1. Apoyos'
+        verbose_name_plural = '31 Apoyos'
 
 class BibPiedra(Bibliografia):
 
@@ -1709,11 +1709,14 @@ class MatAudioVisual (models.Model):
     def __unicode__(self):
         return '' # '# ' + str(self.id)	
 
-class MatAVYacimiento(MatAudioVisual):
+class MatAVYacimiento(models.Model):
 
     yacimiento = models.ForeignKey(Yacimiento, related_name='MatAVYacimiento')
     
     abbr = 'avy'
+
+    def __unicode__(self):
+        return '' # '# ' + str(self.id) 
     
     class Meta:
         verbose_name = 'Material audiovisual'
