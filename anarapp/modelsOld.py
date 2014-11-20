@@ -1703,8 +1703,8 @@ class BibPiedra(Bibliografia):
 
 class MatAudioVisual (models.Model):
 
-    #formato = CharField('1. Formato')
-    #archivo = models.FileField('2. Material AV - Archivo', upload_to='audiovisual/%Y_%m', null=True, blank=True)
+    formato = CharField('1. Formato')
+    archivo = models.FileField('2. Material AV - Archivo', upload_to='audiovisual/%Y_%m', null=True, blank=True)
 	
     def __unicode__(self):
         return '' # '# ' + str(self.id)	
@@ -1712,81 +1712,53 @@ class MatAudioVisual (models.Model):
 class MatAVYacimiento(MatAudioVisual):
 
     yacimiento = models.ForeignKey(Yacimiento, related_name='MatAVYacimiento')
-    ismatavy = models.BooleanField('31.2. Material audiovisual')
-    format = CharField('31.2.1. Formato')
-    archive = models.FileField('31.2.2. Material AV - Archivo', upload_to='audiovisual/%Y_%m', null=True, blank=True)
     
     abbr = 'avy'
     
     class Meta:
         verbose_name = 'Material audiovisual'
-        verbose_name_plural = ''
+        verbose_name_plural = '31.2. Material audiovisual'
 
 class MatAVPiedra(MatAudioVisual):
 
     piedra = models.ForeignKey(Piedra, related_name='MatAVPiedra')
-    ismatavy = models.BooleanField('13.5. Material audiovisual')
-    format = CharField('13.5.1. Formato')
-    archive = models.FileField('13.5.2. Material AV - Archivo', upload_to='audiovisual/%Y_%m', null=True, blank=True)
     
     abbr = 'avp'
 
     class Meta:
         verbose_name = 'Material audiovisual'
-        verbose_name_plural = ''
+        verbose_name_plural = '13.5. Material audiovisual'
     
 # Videos 
 
 class Video (models.Model):
 
-    #anio = models.IntegerField('0. Año')
-    #formato = CharField('1. Formato',)
-    #titulo = CharField('2. Titulo')
-    #autor = CharField('3. Autor')    
-    #institucion = CharField('4. Institucion',)
-    #numReferencia = models.IntegerField('5. Nro de referencia')
-    #isFromAnar = models.BooleanField('6. ¿Es de ANAR?')
-    #numCopia = models.IntegerField('6.1. Nro de copia')
-    #archivo = models.FileField('7. Video - Archivo', upload_to='video/%Y_%m', null=True, blank=True)
-    
+    anio = models.IntegerField('0. Año')
+    formato = CharField('1. Formato',)
+    titulo = CharField('2. Titulo')
+    autor = CharField('3. Autor')    
+    institucion = CharField('4. Institucion',)
+    numReferencia = models.IntegerField('5. Nro de referencia')
+    isFromAnar = models.BooleanField('6. ¿Es de ANAR?')
+    numCopia = models.IntegerField('6.1. Nro de copia')
+    archivo = models.FileField('7. Video - Archivo', upload_to='video/%Y_%m', null=True, blank=True)
+	
     def __unicode__(self):
-        return '' # '# ' + str(self.id) 
+        return '' # '# ' + str(self.id)	
     
 class VideoYacimiento (Video) :
 
     yacimiento = models.ForeignKey(Yacimiento, related_name='VideoYacimiento')
-    isvidyac = models.BooleanField('31.3. Videos')
-    anioy = models.IntegerField('31.3.0. Año')
-    formatoy = CharField('31.3.1. Formato',)
-    tituloy = CharField('31.3.2. Titulo')
-    autory = CharField('31.3.3. Autor')    
-    instituciony = CharField('31.3.4. Institucion',)
-    numReferenciay = models.IntegerField('31.3.5. Nro de referencia')
-    isFromAnary = models.BooleanField('31.3.6. ¿Es de ANAR?')
-    numCopiay = models.IntegerField('31.3.6.1. Nro de copia')
-    archivoy = models.FileField('31.3.7. Video - Archivo', upload_to='video/%Y_%m', null=True, blank=True)
     
     abbr = 'vdy'
     
     class Meta:
         verbose_name = 'Video'
-        verbose_name_plural = ''
+        verbose_name_plural = '31.3. Videos'
 
 class VideoPiedra (Video) :
 
     piedra = models.ForeignKey(Piedra, related_name='VideoPiedra')
-    isvidyac = models.BooleanField('13.6. Videos')
-    anioy = models.IntegerField('13.6.0. Año')
-    formatoy = CharField('13.6.1. Formato',)
-    tituloy = CharField('13.6.2. Titulo')
-    autory = CharField('13.6.3. Autor')    
-    instituciony = CharField('13.6.4. Institucion',)
-    numReferenciay = models.IntegerField('13.6.5. Nro de referencia')
-    isFromAnary = models.BooleanField('13.6.6. ¿Es de ANAR?')
-    numCopiay = models.IntegerField('13.6.1. Nro de copia')
-    archivoy = models.FileField('13.6.7. Video - Archivo', upload_to='video/%Y_%m', null=True, blank=True)
-
-    abbr = 'vdp'
     
     abbr = 'vdp'
     
@@ -1804,36 +1776,16 @@ class Pelicula (Video):
 class PeliYacimiento (Pelicula):
     
     yacimiento = models.ForeignKey(Yacimiento, related_name='PeliYacimiento')
-    isvidyac = models.BooleanField('31.4. Películas')
-    anioy = models.IntegerField('31.4.0. Año')
-    formatoy = CharField('31.4.1. Formato',)
-    tituloy = CharField('31.4.2. Titulo')
-    autory = CharField('31.4.3. Autor')    
-    instituciony = CharField('31.4.4. Institucion',)
-    numReferenciay = models.IntegerField('31.4.5. Nro de referencia')
-    isFromAnary = models.BooleanField('31.4.6. ¿Es de ANAR?')
-    numCopiay = models.IntegerField('31.4.1. Nro de copia')
-    archivoy = models.FileField('31.4.7. Video - Archivo', upload_to='video/%Y_%m', null=True, blank=True)
     
     abbr = 'ply'
     
     class Meta:
         verbose_name = 'Película'
-        verbose_name_plural = ''
+        verbose_name_plural = '31.4. Películas'
 
 class PeliculaPiedra (Pelicula):
 
     piedra = models.ForeignKey(Piedra, related_name='PeliculaPiedra')
-    isvidyac = models.BooleanField('13.7. Películas')
-    anioy = models.IntegerField('13.7.0. Año')
-    formatoy = CharField('13.7.1. Formato',)
-    tituloy = CharField('13.7.2. Titulo')
-    autory = CharField('13.7.3. Autor')    
-    instituciony = CharField('13.7.4. Institucion',)
-    numReferenciay = models.IntegerField('13.7.5. Nro de referencia')
-    isFromAnary = models.BooleanField('13.7.6. ¿Es de ANAR?')
-    numCopiay = models.IntegerField('13.7.1. Nro de copia')
-    archivoy = models.FileField('13.7.7. Video - Archivo', upload_to='video/%Y_%m', null=True, blank=True)
     
     abbr = 'plp'
     
@@ -1845,7 +1797,7 @@ class PeliculaPiedra (Pelicula):
 
 class PaginaWeb (models.Model):
     
-    #direccionURL = models.URLField ('31.5.1. URL de página web')
+    direccionURL = models.URLField ('31.5.1. URL de página web')
 	
     def __unicode__(self):
         return '' # '# ' + str(self.id)	
@@ -1853,78 +1805,69 @@ class PaginaWeb (models.Model):
 class PaginaWebYac (PaginaWeb):
 
     yacimiento = models.ForeignKey(Yacimiento, related_name='PaginaWebYac')
-    tieneWb = models.BooleanField('31.5. Página Web')
-    direccionURLy = models.URLField ('31.5.1. URL de página web')
     
     abbr = 'pwy'
     
     class Meta:
         verbose_name = 'Página Web'
-        verbose_name_plural = ''
+        verbose_name_plural = '31.5. Página Web'
 
 class PaginaWebPiedra (PaginaWeb):
 
     piedra = models.ForeignKey(Piedra, related_name='PaginaWebPiedra')
-    tieneWb = models.BooleanField('13.8. Página Web')
-    direccionURLP = models.URLField ('13.8.1. URL de página web')
     
     abbr = 'pwp'
     
     class Meta:
         verbose_name = 'Página Web'
-        verbose_name_plural = ''
+        verbose_name_plural = '13.8. Página Web'
 
 # Multimedia
 
 class Multimedia (models.Model):
 
-    #tecnica = CharField('31.6.1. Técnica', )
-    #archivo = models.FileField('31.6.2. Multimedia - Archivo', upload_to='multimedia/%Y_%m', null=True, blank=True)
+    tecnica = CharField('31.6.1. Técnica', )
+    archivo = models.FileField('31.6.2. Multimedia - Archivo', upload_to='multimedia/%Y_%m', null=True, blank=True)
     def __unicode__(self):
         return '' # '# ' + str(self.id)	
 
 class MultimediaYac (Multimedia):
 
     yacimiento = models.ForeignKey(Yacimiento, related_name='MultimediaYac')
-    ismult = models.BooleanField('31.6. Multimedia')
-    tecnicaY = CharField('31.6.1. Técnica', )
-    archivoY = models.FileField('31.6.2. Multimedia - Archivo', upload_to='multimedia/%Y_%m', null=True, blank=True)
-
+    
     abbr = 'mmy'
     
     class Meta:
         verbose_name = 'Multimedia'
-        verbose_name_plural = ''
+        verbose_name_plural = '31.6. Multimedia'
 
 class MultimediaPiedra (Multimedia):
 
     piedra = models.ForeignKey(Piedra, related_name='MultimediaPiedra')
-    ismult = models.BooleanField('13.9. Multimedia')
-    tecnicaP = CharField('31.6.1. Técnica', )
-    archivoP = models.FileField('31.6.2. Multimedia - Archivo', upload_to='multimedia/%Y_%m', null=True, blank=True)
+    
     abbr = 'mmp'
     
     class Meta:
         verbose_name = 'Multimedia'
-        verbose_name_plural = ''
+        verbose_name_plural = '13.9. Multimedia'
 
 # Obtencion de informacion
 
 class ObtencionInfo (models.Model):
 
-    #prospeccion = models.BooleanField('32.1. Prospección sistemática')
-    #comunicacion = models.BooleanField('32.2. Comunicación personal')
-    #nombre = CharField('32.2.1. Nombre')
-    #direccion = CharField('32.2.2. Dirección', blank = True)
-    #telefono = CharField('32.2.3. Telefono/Fax',  blank = True)
-    #telefonoCel = CharField('32.2.4. Telefono celular',  blank = True)
-    #mail = models.EmailField('32.2.5. Correo electrónico', blank = True)
-    #paginaWeb = models.URLField('32.2.6. Página Web', blank = True)
-    #twitter = CharField('32.2.7. Twitter',  blank = True)
-    #nombreFacebook = CharField('32.2.8. Perfil Facebook',  blank = True)
-    #blog = models.URLField('32.2.9. Blog', blank = True)
-    #fecha = models.CharField('32.2.10. Fecha', blank = True, null= True, max_length=100)
-    #verificado = models.BooleanField('32.2.3. Verificado en el campo')
+    prospeccion = models.BooleanField('32.1. Prospección sistemática')
+    comunicacion = models.BooleanField('32.2. Comunicación personal')
+    nombre = CharField('32.2.1. Nombre')
+    direccion = CharField('32.2.2. Dirección', blank = True)
+    telefono = CharField('32.2.3. Telefono/Fax',  blank = True)
+    telefonoCel = CharField('32.2.4. Telefono celular',  blank = True)
+    mail = models.EmailField('32.2.5. Correo electrónico', blank = True)
+    paginaWeb = models.URLField('32.2.6. Página Web', blank = True)
+    twitter = CharField('32.2.7. Twitter',  blank = True)
+    nombreFacebook = CharField('32.2.8. Perfil Facebook',  blank = True)
+    blog = models.URLField('32.2.9. Blog', blank = True)
+    fecha = models.CharField('32.2.10. Fecha', blank = True, null= True, max_length=100)
+    verificado = models.BooleanField('32.2.3. Verificado en el campo')
 
     def __unicode__(self):
         return '' # '# ' + str(self.id)	
@@ -1932,50 +1875,22 @@ class ObtencionInfo (models.Model):
 class ObtInfoYac (ObtencionInfo):
 
     yacimiento = models.ForeignKey(Yacimiento, related_name='ObtInfoYac')
-    isinfo = models.BooleanField('32. Información obtenida por')
-    prospeccionY = models.BooleanField('32.1. Prospección sistemática')
-    comunicacionY = models.BooleanField('32.2. Comunicación personal')
-    nombreY = CharField('32.2.1. Nombre')
-    direccionY = CharField('32.2.2. Dirección', blank = True)
-    telefonoY = CharField('32.2.3. Telefono/Fax',  blank = True)
-    telefonoCelY = CharField('32.2.4. Telefono celular',  blank = True)
-    mailY = models.EmailField('32.2.5. Correo electrónico', blank = True)
-    paginaWebY = models.URLField('32.2.6. Página Web', blank = True)
-    twitterY = CharField('32.2.7. Twitter',  blank = True)
-    nombreFacebookY = CharField('32.2.8. Perfil Facebook',  blank = True)
-    blogY = models.URLField('32.2.9. Blog', blank = True)
-    fechaY = models.CharField('32.2.10. Fecha', blank = True, null= True, max_length=100)
-    verificadoY = models.BooleanField('32.2.3. Verificado en el campo')
     
     abbr = 'oiy'
     
     class Meta:
         verbose_name = 'Información obtenida por'
-        verbose_name_plural = ''
+        verbose_name_plural = '32. Información obtenida por'
 
 class ObtInfoPiedra (ObtencionInfo):
 
     piedra = models.ForeignKey(Piedra, related_name='ObtInfoPiedra')
-    isinfo = models.BooleanField('14. Información obtenida por')
-    prospeccionP = models.BooleanField('14.1. Prospección sistemática')
-    comunicacionP = models.BooleanField('14.2. Comunicación personal')
-    nombreP = CharField('14.2.1. Nombre')
-    direccionP = CharField('14.2.2. Dirección', blank = True)
-    telefonoP = CharField('14.2.3. Telefono/Fax',  blank = True)
-    telefonoCelP = CharField('14.2.4. Telefono celular',  blank = True)
-    mailP = models.EmailField('14.2.5. Correo electrónico', blank = True)
-    paginaWebP = models.URLField('14.2.6. Página Web', blank = True)
-    twitterP = CharField('14.2.7. Twitter',  blank = True)
-    nombreFacebookP = CharField('14.2.8. Perfil Facebook',  blank = True)
-    blogP = models.URLField('14.2.9. Blog', blank = True)
-    fechaP = models.CharField('14.2.10. Fecha', blank = True, null= True, max_length=100)
-    verificadoP = models.BooleanField('14.2.3. Verificado en el campo')
     
     abbr = 'oip'
 
     class Meta:
         verbose_name = 'Información obtenida por'
-        verbose_name_plural = ''
+        verbose_name_plural = '14. Información obtenida por'
     
         
 # Otros valores
@@ -2009,7 +1924,7 @@ class OtrosValPiedra(OtrosValores):
 
 class Observaciones(models.Model):
 
-    #texto = CharField('34.1. Observaciones',)
+    texto = CharField('34.1. Observaciones',)
 	
     def __unicode__(self):
         return '' # '# ' + str(self.id)	
@@ -2017,7 +1932,6 @@ class Observaciones(models.Model):
 class ObservacionesYac(Observaciones):
 
     yacimiento = models.ForeignKey(Yacimiento, related_name='ObservacionesYac')
-    textoY = CharField('34.1. Observaciones',)
     
     abbr = 'oya'
     
@@ -2028,7 +1942,6 @@ class ObservacionesYac(Observaciones):
 class ObservacPiedra(Observaciones):
 
     piedra = models.ForeignKey(Piedra, related_name='ObservacPiedra')
-    textoP = CharField('16.1. Observaciones',)
     
     abbr = 'opi'
     
@@ -2040,16 +1953,14 @@ class ObservacPiedra(Observaciones):
 
 class LlenadoPor(models.Model):
 
-    #nombre = CharField('35.1. Llenada por: ', blank = True)
-    #fecha = models.CharField('35.2. Fecha', blank = True, null= True, max_length=100)
+    nombre = CharField('35.1. Llenada por: ', blank = True)
+    fecha = models.CharField('35.2. Fecha', blank = True, null= True, max_length=100)
     def __unicode__(self):
         return '' # '# ' + str(self.id)	
 
 class LlenadoYac(LlenadoPor):    
 
     yacimiento = models.ForeignKey(Yacimiento, related_name='LlenadoYac')
-    nombreY = CharField('35.1. Llenada por: ', blank = True)
-    fechaY = models.CharField('35.2. Fecha', blank = True, null= True, max_length=100)
     
     abbr = 'ypy'
 
@@ -2060,8 +1971,6 @@ class LlenadoYac(LlenadoPor):
 class LlenadoPiedra(LlenadoPor):    
 
     piedra = models.ForeignKey(Piedra, related_name='LlenadoPiedra')
-    nombreP = CharField('17.1. Llenada por: ', blank = True)
-    fechaP = models.CharField('17.2. Fecha', blank = True, null= True, max_length=100)
     
     abbr = 'ypp'
     
@@ -2073,8 +1982,8 @@ class LlenadoPiedra(LlenadoPor):
 
 class SupervisadoPor(models.Model):
 
-    #nombre = CharField('36.1. Supervisada por: ', blank = True)
-    #fecha = models.CharField('36.2. Fecha', blank = True, null= True, max_length=100)
+    nombre = CharField('36.1. Supervisada por: ', blank = True)
+    fecha = models.CharField('36.2. Fecha', blank = True, null= True, max_length=100)
 	
     def __unicode__(self):
         return '' # '# ' + str(self.id)	
@@ -2082,9 +1991,7 @@ class SupervisadoPor(models.Model):
 class SupervisadoYac(SupervisadoPor):
     
     yacimiento = models.ForeignKey(Yacimiento, related_name='SupervisadoYac')
-    nombreY = CharField('36.1. Supervisada por: ', blank = True)
-    fechaY = models.CharField('36.2. Fecha', blank = True, null= True, max_length=100)
-
+    
     abbr = 'spy'
     
     class Meta:
@@ -2094,8 +2001,6 @@ class SupervisadoYac(SupervisadoPor):
 class SupervisadoPiedra(SupervisadoPor):
     
     piedra = models.ForeignKey(Piedra, related_name='SupervisadoPiedra')
-    nombreP = CharField('18.1. Supervisada por: ', blank = True)
-    fechaP = models.CharField('18.2. Fecha', blank = True, null= True, max_length=100)
     
     abbr = 'spp'    
 
