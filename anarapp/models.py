@@ -1535,17 +1535,21 @@ class Foto (models.Model):
         (3, 'Satelital'),
     )
 
-    negativo =  CharField('0a. Negativo', )
-    tipoFotografia = models.IntegerField('0b. Tipo fotografia', choices = TIPO_FOTOGRAFIA)
-    fecha = models.CharField('1. Fecha', blank = True, null= True, max_length=100)
-    fotografo  = CharField('2. Fotógrafo')
-    institucion  = CharField('3. Institucion ')
-    numReferencia = CharField('4. Nro de referencia')
-    numRollo = CharField('5. Nro de rollo')
-    numFoto = CharField('6. Nro de foto')
-    numMarcaNegativo = CharField('7. Nro marca en negativo')
-    esDeAnar = models.BooleanField('8. ¿Es de Anar?')
-    numCopiaAnar = models.IntegerField('8.1. Num Copia ANAR')
+    esfoto = models.BooleanField('13.1 Fotográfico')
+    negativo =  CharField('13.1.0. Negativo', )
+    #tipoFotografia = models.IntegerField('13.1.0.1. Tipo fotografia', choices = TIPO_FOTOGRAFIA)
+    tipoFotoA  = models.BooleanField('13.1.0.1. Aerea')
+    tipoFotoNA = models.BooleanField('13.1.0.2. No Aerea')
+    tipoFotoS  = models.BooleanField('13.1.0.3. Satelital')
+    fecha = models.CharField('13.1.1. Fecha', blank = True, null= True, max_length=100)
+    fotografo  = CharField('13.1.2. Fotógrafo')
+    institucion  = CharField('13.1.3. Institucion ')
+    numReferencia = CharField('13.1.4. Nro de referencia')
+    numRollo = CharField('13.1.5. Nro de rollo')
+    numFoto = CharField('13.1.6. Nro de foto')
+    numMarcaNegativo = CharField('13.1.7. Nro marca en negativo')
+    esDeAnar = models.BooleanField('13.1.8. ¿Es de Anar?')
+    numCopiaAnar = models.IntegerField('13.1.8.1. Num Copia ANAR')
 
     def __unicode__(self):
         return '' # '# ' + str(self.id)
@@ -1558,8 +1562,8 @@ class FotoPiedra (Foto):
     abbr = 'fop'
     
     class Meta:
-        verbose_name =  '13.1 Mat. de apoyo fotográfico'
-        verbose_name_plural = '13.1 Mat. de apoyo fotográfico'
+        verbose_name =  ''
+        verbose_name_plural = '13.1 Apoyo'
 
 # Representación gráfica de la piedra
 
@@ -1569,7 +1573,7 @@ class RepGrafPiedra (models.Model):
     de reproducciones gráficas a escala natural y reducida"""
 
     piedra = models.ForeignKey(Piedra, related_name='RepGrafPiedra')
-    
+
     numPiezas = models.IntegerField('a. Número de piezas')
     instituto  = CharField('b. Institución ', )
     persona  = CharField('c. Persona ', )
@@ -1640,13 +1644,45 @@ class BibYacimiento(Bibliografia):
     ano = CharField('31.1.4. Año', blank = True)
     institucion  = CharField('31.1.5. Institución', blank = True)
     conDibujo = models.BooleanField('31.1.6. Con dibujo',)
-    archivo = models.ImageField('31.1.6.1. Dibujo - Archivo', 
+    archivo = models.FileField('31.1.6.1.1. Dibujo - Archivo', 
                                  upload_to='bibliografia_yac/%Y_%m', 
                                  null=True, 
                                  blank=True)
-    
+    archivo1 = models.FileField('31.1.6.1.2. Dibujo - Archivo', 
+                                 upload_to='bibliografia_yac/%Y_%m', 
+                                 null=True, 
+                                 blank=True)
+    archivo2 = models.FileField('31.1.6.1.3. Dibujo - Archivo', 
+                                 upload_to='bibliografia_yac/%Y_%m', 
+                                 null=True, 
+                                 blank=True)
+    archivo3 = models.FileField('31.1.6.1.4. Dibujo - Archivo', 
+                                 upload_to='bibliografia_yac/%Y_%m', 
+                                 null=True, 
+                                 blank=True)
+    archivo4 = models.FileField('31.1.6.1.5. Dibujo - Archivo', 
+                                 upload_to='bibliografia_yac/%Y_%m', 
+                                 null=True, 
+                                 blank=True)
+
     esFotografia = models.BooleanField('31.1.7. Con fotografía')
-    tieneFotografia = models.ImageField('31.1.7.1. Fotografía - Archivo', 
+    tieneFotografia = models.FileField('31.1.7.1.1. Fotografía - Archivo', 
+                                 upload_to='bibliografia_yac/%Y_%m', 
+                                 null=True, 
+                                 blank=True)
+    tieneFotografia1 = models.FileField('31.1.7.1.2. Fotografía - Archivo', 
+                                 upload_to='bibliografia_yac/%Y_%m', 
+                                 null=True, 
+                                 blank=True)
+    tieneFotografia2 = models.FileField('31.1.7.1.3. Fotografía - Archivo', 
+                                 upload_to='bibliografia_yac/%Y_%m', 
+                                 null=True, 
+                                 blank=True)
+    tieneFotografia3 = models.FileField('31.1.7.1.4. Fotografía - Archivo', 
+                                 upload_to='bibliografia_yac/%Y_%m', 
+                                 null=True, 
+                                 blank=True)
+    tieneFotografia4 = models.FileField('31.1.7.1.5. Fotografía - Archivo', 
                                  upload_to='bibliografia_yac/%Y_%m', 
                                  null=True, 
                                  blank=True)
@@ -1672,15 +1708,54 @@ class BibYacimiento(Bibliografia):
 class BibPiedra(Bibliografia):
 
     piedra = models.ForeignKey(Piedra, related_name='BibPiedra')
+    esbilbio = models.BooleanField('13.4. Bibliografía')
     codigo = CharField('13.4.1. Código', blank = True)
     titulo = CharField('13.4.2. Título', blank = True)
     autor  = CharField('13.4.3. Autor ', blank = True)
     ano = CharField('13.4.4. Fecha', blank = True)	
     institucion  = CharField('13.4.5. Institución', blank = True)
     conDibujo = models.BooleanField('13.4.6. Con dibujo')
-    archivo = models.ImageField('13.4.6.1. Dibujo - Archivo', upload_to='bibliografia_pie/%Y_%m', null=True, blank=True)
-    
+    archivo = models.FileField('13.4.6.1.1. Dibujo - Archivo', 
+                                upload_to='bibliografia_pie/%Y_%m', 
+                                null=True, 
+                                blank=True)
+    archivo1 = models.FileField('13.4.6.1.2. Dibujo - Archivo', 
+                                upload_to='bibliografia_pie/%Y_%m', 
+                                null=True, 
+                                blank=True)
+    archivo2 = models.FileField('13.4.6.1.3. Dibujo - Archivo', 
+                                upload_to='bibliografia_pie/%Y_%m', 
+                                null=True, 
+                                blank=True)
+    archivo3 = models.FileField('13.4.6.1.4. Dibujo - Archivo', 
+                                upload_to='bibliografia_pie/%Y_%m', 
+                                null=True, 
+                                blank=True)
+    archivo4 = models.FileField('13.4.6.1.5. Dibujo - Archivo', 
+                                upload_to='bibliografia_pie/%Y_%m', 
+                                null=True, 
+                                blank=True)
     esFotografia = models.BooleanField('13.4.7. Con fotografía')
+    tieneFotografia = models.FileField('13.4.6.1.1. Fotografía - Archivo', 
+                                 upload_to='bibliografia_yac/%Y_%m', 
+                                 null=True, 
+                                 blank=True)
+    tieneFotografia1 = models.FileField('13.4.6.1.2. Fotografía - Archivo', 
+                                 upload_to='bibliografia_yac/%Y_%m', 
+                                 null=True, 
+                                 blank=True)
+    tieneFotografia2 = models.FileField('13.4.6.1.3. Fotografía - Archivo', 
+                                 upload_to='bibliografia_yac/%Y_%m', 
+                                 null=True, 
+                                 blank=True)
+    tieneFotografia3 = models.FileField('13.4.6.1.4. Fotografía - Archivo', 
+                                 upload_to='bibliografia_yac/%Y_%m', 
+                                 null=True, 
+                                 blank=True)
+    tieneFotografia4 = models.FileField('13.4.6.1.5. Fotografía - Archivo', 
+                                 upload_to='bibliografia_yac/%Y_%m', 
+                                 null=True, 
+                                 blank=True)
     escolor = models.BooleanField('13.4.7.1. Color')
     esBlancoYNegro = models.BooleanField('13.4.7.2. B/N')
     esDiapositiva = models.BooleanField('13.4..7.3. Diapositiva')
@@ -1693,8 +1768,8 @@ class BibPiedra(Bibliografia):
     abbr = 'bip'
     
     class Meta:
-        verbose_name = 'Bibliografía'
-        verbose_name_plural = '13.4. Bibliografía'
+        verbose_name = ''
+        verbose_name_plural = ''
 
 
 
@@ -1792,7 +1867,7 @@ class VideoPiedra (Video) :
     
     class Meta:
         verbose_name = 'Video'
-        verbose_name_plural = '13.6. Videos'
+        verbose_name_plural = ''
 
 # Película
 
@@ -1839,7 +1914,7 @@ class PeliculaPiedra (Pelicula):
     
     class Meta:
         verbose_name = 'Película'
-        verbose_name_plural = '13.7. Películas'
+        verbose_name_plural = ''
 
 # Página Web
 

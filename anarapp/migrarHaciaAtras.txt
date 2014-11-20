@@ -60,3 +60,5 @@ ObtInfoPiedra.nombreP -> ''
 Observaciones.texto -> ''
 ObservacionesYac.textoY -> ''
 ObservacPiedra.textoP -> ''
+
+Foto.tipoFotografia -> 0
