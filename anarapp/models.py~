@@ -201,8 +201,8 @@ class Indicaciones(models.Model):
     abbr = 'ind'
     
     class Meta:
-        verbose_name = '6. Indicaciones para llegar al Yacimiento'
-        verbose_name_plural = '6. Indicaciones para llegar al Yacimiento'
+        verbose_name = '6. Indicaciones para llegar al Yac' #aqui cambiar!!!!
+        verbose_name_plural = '6. Indicaciones para llegar al Yac'
 
     def __unicode__(self):
         return '' # '# ' + str(self.id)

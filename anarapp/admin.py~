@@ -693,7 +693,7 @@ class PiedraAdmin (admin.ModelAdmin):
 
     inlines = [
         FotografiaPiedraInline, CaraTrabajadaInline, DimensionPiedraInline, UbicacionCarasInline, FigurasPorTipoInline,
-        EsquemaPorCaraInline,ConexionFigurasInline, ManifestacionesInline, TratFotoInline, 		FotoDigPiedraInline,EscalaNatPiedraInline, EscalaRedPiedraInline, BibPiedraInline,
+        EsquemaPorCaraInline,ConexionFigurasInline ManifestacionesInline, TratFotoInline, 		FotoDigPiedraInline,EscalaNatPiedraInline, EscalaRedPiedraInline, BibPiedraInline,
         MatAudioVisualInline, VideoPiedraInline, PeliculaPiedraInline, PaginaWebPiedraInline,
         MultimediaPiedraInline, ObtInfoPiedraInline, OtrosValPiedraInline, ObservacionPiedraInline,
         LlenadaPorPiedraInline, SupervisadaPorPiedraInline
