@@ -1566,7 +1566,7 @@ class FotoPiedra (Foto):
     
     class Meta:
         verbose_name =  ''
-        verbose_name_plural = '13.1 Apoyo'
+        verbose_name_plural = '13 Apoyos'
 
 # Representación gráfica de la piedra
 
