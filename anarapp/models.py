@@ -1593,8 +1593,8 @@ class EscNatPiedra(RepGrafPiedra):
         (6, '6 - Yeso'),
         (7, '7 - Papel de arroz'),
     )
-    esEscNatPiedra = models.BooleanField('13.2.1.1. Reproducción gráfica escala natural')
-    tipoReproduccione = models.IntegerField('13.2.1. Reproducción gráfica', choices = TIPO_REPRODUCCION_NATURAL)
+    esEscNatPiedra = models.BooleanField('13.2.1. Reproducción gráfica escala natural')
+    tipoReproduccione = models.IntegerField('13.2.1.1. Reproducción gráfica', choices = TIPO_REPRODUCCION_NATURAL)
     numPiezasP = models.IntegerField('13.2.1.2. Número de piezas')
     institutoP  = CharField('13.2.1.3. Institución ', )
     personaP  = CharField('13.2.1.4. Persona ', )
@@ -1614,8 +1614,8 @@ class EscRedPiedra(RepGrafPiedra):
         (1, '1 - Dibujo'),
         (2, '2 - Matriz'),
     )
-    esEscNatPiedra = models.BooleanField('13.3.1.1. Reproducción gráfica escala reducida')
-    tipoReproduccion = models.IntegerField('13.3.1. Reproducción gráfica', choices = TIPO_REPRODUCCION_REDUCIDA)
+    esEscNatPiedra = models.BooleanField('13.3.1. Reproducción gráfica escala reducida')
+    tipoReproduccion = models.IntegerField('13.3.1.1. Reproducción gráfica', choices = TIPO_REPRODUCCION_REDUCIDA)
     numPiezasP = models.IntegerField('13.3.1.2. Número de piezas')
     institutoP  = CharField('13.3.1.3. Institución ', )
     personaP  = CharField('13.3.1.4. Persona ', )
