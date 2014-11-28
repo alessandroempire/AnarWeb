@@ -2081,8 +2081,8 @@ class ObservacPiedra(Observaciones):
     abbr = 'opi'
     
     class Meta:
-        verbose_name = 'Observaciones'
-        verbose_name_plural = '16. Observaciones'
+        verbose_name = '16. Observaciones'
+        verbose_name_plural = ''
 
 # Llenado de la ficha
 
@@ -2112,8 +2112,8 @@ class LlenadoPiedra(LlenadoPor):
     abbr = 'ypp'
     
     class Meta:
-        verbose_name = 'Ficha llenada por'
-        verbose_name_plural = '17. Ficha llenada por'
+        verbose_name = '17. Ficha llenada por'
+        verbose_name_plural = ''
 
 # Supervision de la ficha
 
@@ -2143,5 +2143,5 @@ class SupervisadoPiedra(SupervisadoPor):
     abbr = 'spp'    
 
     class Meta:
-        verbose_name = 'Ficha Supervisada Por'
-        verbose_name_plural = '18. Ficha Supervisada Por'
+        verbose_name = '18. Ficha Supervisada Por'
+        verbose_name_plural = ''
