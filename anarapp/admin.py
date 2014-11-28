@@ -632,6 +632,13 @@ class YacimientoAdmin(admin.ModelAdmin):
     def manifestaciones(self, object):
         return object.tipos_de_manifestaciones    
     manifestaciones.short_description = "13. Tipo de Manifestacion"
+
+    suit_form_includes = (
+        ('InlineTemplates/Glosario1.html', 'top', 'tecnicas'),
+        ('InlineTemplates/Glosario2.html', 'middle', 'tecnicas'),
+        ('InlineTemplates/Glosario3.html', 'middle', 'tecnicas'),
+        ('InlineTemplates/Glosario4.html', 'top', 'conservacion'),
+        ('InlineTemplates/Glosario5.html', 'top', 'manifestaciones'),)
 	
     inlines = [
         LocalidadYacInline,UsoActSueloYacInline,TenenciaYacInline,IndicacionesYacInline,CroquisYacInline,
@@ -689,7 +696,7 @@ class PiedraAdmin (admin.ModelAdmin):
      ]
 
     suit_form_includes = (
-        ('InlineTemplates/Glosario1.html', 'top', 'apoyos'),)
+        ('InlineTemplates/Glosario6.html', 'top', 'apoyos'),)
 
     inlines = [
         FotografiaPiedraInline, CaraTrabajadaInline, DimensionPiedraInline, UbicacionCarasInline, FigurasPorTipoInline,
