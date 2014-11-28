@@ -1506,11 +1506,11 @@ class TratFoto(models.Model):
 
     """Representa el tratamiento dado a las fotografias recopiladas"""
     
-    limpiezaCon = CharField('1. Limpieza con')
-    rellenoSurcos = CharField('2. Relleno de surcos con')
-    tratamientoDigital = CharField('3. Tratamiento digital')
-    programaVersion = CharField('4. Programa/versión')
-    otrosTratamientos = CharField('5. Otros tratamientos fotografía')
+    limpiezaCon = CharField('12.1. Limpieza con')
+    rellenoSurcos = CharField('12.2. Relleno de surcos con')
+    tratamientoDigital = CharField('12.3. Tratamiento digital')
+    programaVersion = CharField('12.4. Programa/versión')
+    otrosTratamientos = CharField('12.5. Otros tratamientos fotografía')
 
     def __unicode__(self):
         return '' # '# ' + str(self.id)
@@ -1525,7 +1525,7 @@ class TratFotoPiedra (TratFoto):
     abbr = 'tpp'
     
     class Meta:
-        verbose_name = 'Tratamiento para fotografías'
+        verbose_name = ''
         verbose_name_plural = '12. Tratamiento para fotografías'
 
 # Fotografia
@@ -1542,7 +1542,6 @@ class Foto (models.Model):
 
     esfoto = models.BooleanField('13.1 Fotográfico')
     negativo =  CharField('13.1.0. Negativo', )
-    #tipoFotografia = models.IntegerField('13.1.0.1. Tipo fotografia', choices = TIPO_FOTOGRAFIA)
     tipoFotoA  = models.BooleanField('13.1.0.1. Aerea')
     tipoFotoNA = models.BooleanField('13.1.0.2. No Aerea')
     tipoFotoS  = models.BooleanField('13.1.0.3. Satelital')
@@ -1568,7 +1567,7 @@ class FotoPiedra (Foto):
     
     class Meta:
         verbose_name =  ''
-        verbose_name_plural = '13.1 Apoyo'
+        verbose_name_plural = '13 Apoyos'
 
 # Representación gráfica de la piedra
 
@@ -1578,10 +1577,6 @@ class RepGrafPiedra (models.Model):
     de reproducciones gráficas a escala natural y reducida"""
 
     piedra = models.ForeignKey(Piedra, related_name='RepGrafPiedra')
-
-    numPiezas = models.IntegerField('a. Número de piezas')
-    instituto  = CharField('b. Institución ', )
-    persona  = CharField('c. Persona ', )
 	
     def __unicode__(self):
         return '' # '# ' + str(self.id)
@@ -1599,13 +1594,17 @@ class EscNatPiedra(RepGrafPiedra):
         (6, '6 - Yeso'),
         (7, '7 - Papel de arroz'),
     )
+    esEscNatPiedra = models.BooleanField('13.2.1.1. Reproducción gráfica escala natural')
     tipoReproduccione = models.IntegerField('13.2.1. Reproducción gráfica', choices = TIPO_REPRODUCCION_NATURAL)
+    numPiezasP = models.IntegerField('13.2.1.2. Número de piezas')
+    institutoP  = CharField('13.2.1.3. Institución ', )
+    personaP  = CharField('13.2.1.4. Persona ', )
 
     abbr = 'enp'
 
     class Meta:
-        verbose_name = 'Reproducción gráfica escala natural'
-        verbose_name_plural = '13.2. Reproducción gráf. escala natural'
+        verbose_name = ''
+        verbose_name_plural = ''
     
 class EscRedPiedra(RepGrafPiedra):
 
@@ -1616,13 +1615,17 @@ class EscRedPiedra(RepGrafPiedra):
         (1, '1 - Dibujo'),
         (2, '2 - Matriz'),
     )
+    esEscNatPiedra = models.BooleanField('13.3.1.1. Reproducción gráfica escala reducida')
     tipoReproduccion = models.IntegerField('13.3.1. Reproducción gráfica', choices = TIPO_REPRODUCCION_REDUCIDA)
+    numPiezasP = models.IntegerField('13.3.1.2. Número de piezas')
+    institutoP  = CharField('13.3.1.3. Institución ', )
+    personaP  = CharField('13.3.1.4. Persona ', )
     
     abbr = 'erp'
 
     class Meta:
-        verbose_name = 'Reproducción gráfica escala reducida'
-        verbose_name_plural = '13.3. Reproducción gráf. escala reducida'
+        verbose_name = ''
+        verbose_name_plural = ''
 
 # Bibliografia
 
@@ -1782,9 +1785,6 @@ class BibPiedra(Bibliografia):
 # Material audiovisual     
 
 class MatAudioVisual (models.Model):
-
-    #formato = CharField('1. Formato')
-    #archivo = models.FileField('2. Material AV - Archivo', upload_to='audiovisual/%Y_%m', null=True, blank=True)
 	
     def __unicode__(self):
         return '' # '# ' + str(self.id)	
@@ -1817,17 +1817,7 @@ class MatAVPiedra(MatAudioVisual):
     
 # Videos 
 
-class Video (models.Model):
-
-    #anio = models.IntegerField('0. Año')
-    #formato = CharField('1. Formato',)
-    #titulo = CharField('2. Titulo')
-    #autor = CharField('3. Autor')    
-    #institucion = CharField('4. Institucion',)
-    #numReferencia = models.IntegerField('5. Nro de referencia')
-    #isFromAnar = models.BooleanField('6. ¿Es de ANAR?')
-    #numCopia = models.IntegerField('6.1. Nro de copia')
-    #archivo = models.FileField('7. Video - Archivo', upload_to='video/%Y_%m', null=True, blank=True)
+class Video (models.Model):    
     
     def __unicode__(self):
         return '' # '# ' + str(self.id) 
@@ -1868,7 +1858,6 @@ class VideoPiedra (Video) :
 
     abbr = 'vdp'
     
-    abbr = 'vdp'
     
     class Meta:
         verbose_name = 'Video'
@@ -1924,8 +1913,6 @@ class PeliculaPiedra (Pelicula):
 # Página Web
 
 class PaginaWeb (models.Model):
-    
-    #direccionURL = models.URLField ('31.5.1. URL de página web')
 	
     def __unicode__(self):
         return '' # '# ' + str(self.id)	
@@ -1958,8 +1945,6 @@ class PaginaWebPiedra (PaginaWeb):
 
 class Multimedia (models.Model):
 
-    #tecnica = CharField('31.6.1. Técnica', )
-    #archivo = models.FileField('31.6.2. Multimedia - Archivo', upload_to='multimedia/%Y_%m', null=True, blank=True)
     def __unicode__(self):
         return '' # '# ' + str(self.id)	
 
@@ -1991,20 +1976,6 @@ class MultimediaPiedra (Multimedia):
 # Obtencion de informacion
 
 class ObtencionInfo (models.Model):
-
-    #prospeccion = models.BooleanField('32.1. Prospección sistemática')
-    #comunicacion = models.BooleanField('32.2. Comunicación personal')
-    #nombre = CharField('32.2.1. Nombre')
-    #direccion = CharField('32.2.2. Dirección', blank = True)
-    #telefono = CharField('32.2.3. Telefono/Fax',  blank = True)
-    #telefonoCel = CharField('32.2.4. Telefono celular',  blank = True)
-    #mail = models.EmailField('32.2.5. Correo electrónico', blank = True)
-    #paginaWeb = models.URLField('32.2.6. Página Web', blank = True)
-    #twitter = CharField('32.2.7. Twitter',  blank = True)
-    #nombreFacebook = CharField('32.2.8. Perfil Facebook',  blank = True)
-    #blog = models.URLField('32.2.9. Blog', blank = True)
-    #fecha = models.CharField('32.2.10. Fecha', blank = True, null= True, max_length=100)
-    #verificado = models.BooleanField('32.2.3. Verificado en el campo')
 
     def __unicode__(self):
         return '' # '# ' + str(self.id)	
@@ -2088,8 +2059,6 @@ class OtrosValPiedra(OtrosValores):
 # Observaciones
 
 class Observaciones(models.Model):
-
-    #texto = CharField('34.1. Observaciones',)
 	
     def __unicode__(self):
         return '' # '# ' + str(self.id)	
@@ -2113,15 +2082,13 @@ class ObservacPiedra(Observaciones):
     abbr = 'opi'
     
     class Meta:
-        verbose_name = 'Observaciones'
+        verbose_name = ''
         verbose_name_plural = '16. Observaciones'
 
 # Llenado de la ficha
 
 class LlenadoPor(models.Model):
 
-    #nombre = CharField('35.1. Llenada por: ', blank = True)
-    #fecha = models.CharField('35.2. Fecha', blank = True, null= True, max_length=100)
     def __unicode__(self):
         return '' # '# ' + str(self.id)	
 
@@ -2146,15 +2113,12 @@ class LlenadoPiedra(LlenadoPor):
     abbr = 'ypp'
     
     class Meta:
-        verbose_name = 'Ficha llenada por'
+        verbose_name = ''
         verbose_name_plural = '17. Ficha llenada por'
 
 # Supervision de la ficha
 
 class SupervisadoPor(models.Model):
-
-    #nombre = CharField('36.1. Supervisada por: ', blank = True)
-    #fecha = models.CharField('36.2. Fecha', blank = True, null= True, max_length=100)
 	
     def __unicode__(self):
         return '' # '# ' + str(self.id)	
@@ -2180,5 +2144,5 @@ class SupervisadoPiedra(SupervisadoPor):
     abbr = 'spp'    
 
     class Meta:
-        verbose_name = 'Ficha Supervisada Por'
+        verbose_name = ''
         verbose_name_plural = '18. Ficha Supervisada Por'

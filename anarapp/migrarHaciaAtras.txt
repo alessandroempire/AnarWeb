@@ -62,3 +62,15 @@ ObservacionesYac.textoY -> ''
 ObservacPiedra.textoP -> ''
 
 Foto.tipoFotografia -> 0
+
+EscRedPiedra.numPiezasP -> 0
+EscRedPiedra.institutoP -> ''
+EscRedPiedra.personaP -> ''
+
+EscNatPiedra.numPiezasP -> 0
+EscNatPiedra.institutoP -> ''
+EscNatPiedra.personaP -> ''
+
+RepGrafPiedra.numPiezasP -> 0
+RepGrafPiedra.institutoP -> ''
+RepGrafPiedra.personaP -> ''

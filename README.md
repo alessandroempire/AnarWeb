@@ -1,40 +1,57 @@
-1) Instalar postgresql
+###PASOS PARA INSTALAR EL SISTEMA ANAR DESDE CERO###
 
-2) convertirse en usuario postgres: sudo -i -u postgres
+1) Instalar postgresql (version actual para el sistema ANAR = 9.1.9)
 
-3) crear usuario anar: createuser -s -P anar
+2) convertirse en usuario postgres: <sudo -i -u postgres>
 
-4) introducir password anarpass
+3) crear usuario anar: <createuser -s -P anar>
 
-5) Crear base de datos: createdb anardb
+4) introducir password <anarpass>
 
-6) volver a ser superusuario
+5) Crear base de datos (como usuario postgres) : <createdb anardb>
+
+6) volver a ser superusuario: <logout>
 
 7) instalar libpq-dev
 
-8) instalar requirements.pip (sudo pip install -vr requirements.pip)
+8) instalar requirements.pip <sudo pip install -vr requirements.pip> (ojo con esto verificar bien que se instale todo lo necesario, si es necesario uno por uno.)
 
 9) En caso que psycopg2 no se instale correctamente haga lo siguiente:
 
-9.1) Es necesario instalar psycopg2 sin la herramienta pip, de la siguiente manera: sudo apt-get install python-psycopg2
+***9.1) Es necesario instalar psycopg2 sin la herramienta pip, de la siguiente manera: <sudo apt-get install python-psycopg2>
 
-9.2) Ejecutar de nuevo el comando sudo pip install -r requirements.pip para terminar de instalar los paquetes restantes
+***9.2) Ejecutar de nuevo el <sudo pip install -vr requirements.pip> para terminar de instalar los paquetes restantes
 
--- En caso que ejecute el comando y ya esten instalados todo los paquetes, saldra el mensaje "Requirement already satisfied)
+	OJO En caso que ejecute el comando y ya esten instalados todo los paquetes, saldra el mensaje "Requirement already satisfied"
 
-10) Instalar el modulo nested_inlines: pip install git+git://github.com/Soaa-/django-nested-inlines.git#egg=django-nested-inlines
-
--- A ese nivel, ya se deberia poder ver la interfaz del sistema. Probar con: python manage.py runserver y visitando: localhost:8000--
-(python manage.py runserver 0.0.0.0:8000)
-	(python manage.py runserver 0.0.0.0:80 &) para background
-
+10)A ese nivel, ya se deberia poder ver la interfaz del sistema. Probar con: python manage.py runserver y visitando: localhost:8000
 
 11) En la carpeta del proyecto sincronizar la base de datos python manage.py syncdb (si pide usuario y password, puede usar usuario: anar y password: anarpass, igual como esta estipulado en el settings.py)
 
 12) Migrar la base de datos python manage.py migrate
 
-13) Convertirse en usuario postgres, accesar a la base de datos asi: psql anardb y luego ejecutar inserts.sql asi: \i inserts.sql
+13) Como usuario postgres(punto 2), asegurarse de estar en la carpeta de respaldos </home/server/Anarweb/respaldos/> accesar a la base de datos asi: <psql anardb> y luego ejecutar BackupXXXX-XX-XX.backup asi: <\i BackupXXXX-XX-XX.backup>
+(ojo XXXX-XX-XX es la fecha mas recente del Respaldo)
 
-13) Reconstruir indice de busqueda python manage.py rebuild_index
+14)[NO OBLIGATORIO] Reconstruir indice de busqueda <python manage.py rebuild_index>  (Para las busquedas aun no implementadas completamente) 
 
-14) Ejecutar el siguiente caso de prueba: En la seccion de busqueda escribir la palabra Yacimiento y hacer click en el boton buscar. El sistema deberia mostrar varios elementos en la pagina de resultados
+15) Status del servidor Web Apache2 : <service apache2 status> en caso de NO estar corriendo activarlo con: <service apache2 start> con esto el sitio deberia estar disponible desde la direccion IP del servidor para cualquier IP externa.
+
+
+
+####INFO SERVIDOR###
+la carpeta de proyecto del sistema ANAR se encuentra en "/home/server/AnarWeb"
+###INFO CONFIG APACHE###
+lo archivos de configuracion para que el servidor web funcione correctamente son:
+<django.wsgi> (nexo entre apache y django-Python): "/home/server/AnarWeb/anar/django.wsgi"
+<apache2.conf> (archivo de configuracion general del apache): "/etc/apache2/apache2.conf"
+<default> (archivo del virtualhost por default usado por apache actualmente configurado para sistema ANAR) "/etc/apache2/sites-available/default"
+
+
+### INFO PARA RESPALDOS ###
+hacer respaldos: 
+1)Convertirse en usuario postgres: <sudo -i -u postgres>
+
+2)Para respaldar -> lanzar "pg_dump" : <pg_dump anardb> esto creara un archivo "BackupXXXX-XX-XX.backup" con un volcado en SQL del esquema + data, en caso de necesitar algo distindo revisar documentacion de "pg_dump" OJO importante esto no respaldara imagenes, la DB solo almacena rutas a estas imagenes en la carpeta "upload" dentro de la carpeta principal del sistema ANAR, para respaldarla es necesario copiarla.
+
+3)Para insertar respaldo repetir pasos 2 , 5 y 13 en ese orden.
