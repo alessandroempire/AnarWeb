@@ -510,7 +510,7 @@ class EsquemaPorCaraInline(admin.TabularInline):
     model =  EsquemaPorCara
     suit_classes = 'suit-tab suit-tab-figuras'
 	
-class EsquemaPorCaraInline(admin.StackedInline):
+class ConexionFigurasInline(admin.StackedInline):
     extra = 1
     max_num = 1
     model =  ConexionFiguras
@@ -687,10 +687,13 @@ class PiedraAdmin (admin.ModelAdmin):
             'fields': ['manifiestacionAsociada',]
         }),
      ]
+
+    suit_form_includes = (
+        ('InlineTemplates/Glosario1.html', 'top', 'apoyos'),)
+
     inlines = [
         FotografiaPiedraInline, CaraTrabajadaInline, DimensionPiedraInline, UbicacionCarasInline, FigurasPorTipoInline,
-        EsquemaPorCaraInline, ManifestacionesInline, TratFotoInline, FotoDigPiedraInline,
-        EscalaNatPiedraInline, EscalaRedPiedraInline, BibPiedraInline,
+        EsquemaPorCaraInline,ConexionFigurasInline, ManifestacionesInline, TratFotoInline, 		FotoDigPiedraInline,EscalaNatPiedraInline, EscalaRedPiedraInline, BibPiedraInline,
         MatAudioVisualInline, VideoPiedraInline, PeliculaPiedraInline, PaginaWebPiedraInline,
         MultimediaPiedraInline, ObtInfoPiedraInline, OtrosValPiedraInline, ObservacionPiedraInline,
         LlenadaPorPiedraInline, SupervisadaPorPiedraInline

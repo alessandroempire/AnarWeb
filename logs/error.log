@@ -1,0 +1,13 @@
+[Tue Nov 25 17:09:35 2014] [error] [client 66.249.88.221] File does not exist: /home/server/AnarWeb/public_html/favicon.ico
+[Wed Nov 26 04:17:49 2014] [error] [client 66.43.210.124] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /tmUnblock.cgi
+[Wed Nov 26 17:31:19 2014] [error] [client 66.249.88.221] File does not exist: /home/server/AnarWeb/public_html/favicon.ico
+[Wed Nov 26 19:15:55 2014] [error] [client 190.36.78.240] File does not exist: /home/server/AnarWeb/public_html/favicon.ico
+[Wed Nov 26 20:34:17 2014] [error] [client 200.44.243.230] File does not exist: /home/server/AnarWeb/public_html/favicon.ico
+[Thu Nov 27 08:46:55 2014] [error] [client 41.223.180.143] client sent HTTP/1.1 request without hostname (see RFC2616 section 14.23): /tmUnblock.cgi
+[Thu Nov 27 09:44:25 2014] [error] [client 159.90.10.56] File does not exist: /home/server/AnarWeb/public_html/favicon.ico
+[Thu Nov 27 11:31:59 2014] [error] [client 200.44.243.230] File does not exist: /home/server/AnarWeb/public_html/favicon.ico
+[Thu Nov 27 15:09:56 2014] [error] [client 190.36.78.240] File does not exist: /home/server/AnarWeb/public_html/favicon.ico
+[Thu Nov 27 15:13:28 2014] [error] [client 200.8.114.228] File does not exist: /home/server/AnarWeb/public_html/favicon.ico
+[Thu Nov 27 15:47:41 2014] [error] [client 200.8.114.228] mod_wsgi (pid=25022): Exception occurred processing WSGI script '/home/server/AnarWeb/anar/django.wsgi'., referer: http://159.90.9.166/admin/anarapp/yacimiento/
+[Thu Nov 27 15:47:41 2014] [error] [client 200.8.114.228] IOError: failed to write data, referer: http://159.90.9.166/admin/anarapp/yacimiento/
+[Thu Nov 27 15:48:01 2014] [error] [client 190.114.244.67] File does not exist: /home/server/AnarWeb/public_html/favicon.ico

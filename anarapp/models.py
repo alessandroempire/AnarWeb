@@ -201,8 +201,8 @@ class Indicaciones(models.Model):
     abbr = 'ind'
     
     class Meta:
-        verbose_name = '6. Indicaciones para llegar al Yac' #aqui cambiar!!!!
-        verbose_name_plural = '6. Indicaciones para llegar al Yac'
+        verbose_name = '6. Indicaciones para llegar al Yacimiento'
+        verbose_name_plural = '6. Indicaciones para llegar al Yacimiento'
 
     def __unicode__(self):
         return '' # '# ' + str(self.id)
@@ -1280,7 +1280,7 @@ class Piedra(models.Model):
     manifiestacionAsociada = CharField('1.1 Manifestaciones asociadas', blank = True )
     nombreFiguras = CharField('2- Nombre de las figuras',)    
     estado = models.ForeignKey(Estado, related_name='EstadoPied', verbose_name = '3- Estado/Provincia', blank = True, null = True)		
-    numeroCaras = models.IntegerField('4- Numero de Caras')
+    numeroCaras = models.IntegerField('4- Numero de Caras', help_text= mark_safe("<br><br> <a href='#' onclick='pop1()' >?</a> <script> function pop1() {window.open('/static/numeroCaras.html','name','height=500,width=500,scrollbars=yes');return false;} </script> </html>"))
     numeroCarasTrajabadas = models.IntegerField('5- Numero de caras trabajadas')
     
     def __unicode__(self):
@@ -1314,7 +1314,7 @@ class DimensionPiedra(models.Model):
     
     altoMaximo =  models.DecimalField('7.a. Alto Maximo', max_digits=12, decimal_places=6)
     largoMaximo = models.DecimalField('7.b. Largo Maximo',max_digits=12, decimal_places=6)
-    anchoMaximo = models.DecimalField('7.c. Ancho Maximo',max_digits=12, decimal_places=6)
+    anchoMaximo = models.DecimalField('7.c. Ancho Maximo',max_digits=12, decimal_places=6,help_text= mark_safe("<br><br> <a href='#' onclick='pop2()' >?</a> <script> function pop2() {window.open('/static/dimensiones.html','name','height=500,width=500,scrollbars=yes');return false;} </script> </html>"))
     
     abbr = 'dip'
     
@@ -1342,10 +1342,12 @@ class CaraTrabajada(models.Model):
         (9, '9 - Piso o plano inclinado'),
 		(10, 'n - Desconocida')
     )
+
+    AYUDA_OCT='En caso de no conocerse la orientación cardinal úsese la letra "n" (no conocido) en lugar del número respectivo. Para más de una cara trabajada sin orientación cardinal conocida, úsese n1, n2, n3 y así sucesivamente según el número de caras trabajadas, por roca. Usese estas mismas denominaciones en todos los casos en que se pida el número de la cara trabajada. (Punto 6, 7, 9 y 10).'
 	
     piedra = models.ForeignKey(Piedra, related_name='CaraTrabajada')
     numero =  CharField('6a. Número de cara trabajada' )
-    orientacion = models.IntegerField('6b. Orientación de la cara', choices = ORIENTACION_CARA_TRABAJADA)
+    orientacion = models.IntegerField('6b. Orientación de la cara', choices = ORIENTACION_CARA_TRABAJADA, help_text= AYUDA_OCT)
     alto = models.DecimalField('7.1. Alto',max_digits=6, decimal_places=3)
     ancho = models.DecimalField('7.2. Ancho',max_digits=6, decimal_places=3)
     largo = models.DecimalField('7.3. Largo',max_digits=6, decimal_places=3)
@@ -1390,8 +1392,8 @@ class UbicacionCaras(models.Model):
         return '' # '# ' + str(self.id)    
 	
     class Meta:
-        verbose_name = 'Ubic. cara trab. (cuevas/abrigos)'
-        verbose_name_plural = '8. Ubic. caras trab. (cuevas/abrigos)'
+        verbose_name = 'Ubicación cara trabajada (cuevas/abrigos)'
+        verbose_name_plural = '8. Ubicación caras trabajadas (cuevas/abrigos)'
         
 
 class FigurasPorTipo(models.Model):
@@ -1411,11 +1413,13 @@ class FigurasPorTipo(models.Model):
         (9, '9 - Amoladores'),
         (10, '10 - Bateas'),
     )
+
+    AYUDA_TIPO="Utilícese la letra 'i' (incompleto) delante del número para los casos en que la cantidad de figuras sea mayor que la expuesta, pero no se pueda cuantificar con exactitud, cuánto mayor por la altura de los grabados, por efectos de erosión u otros. Por ejemplo, en la cara 4 de una roca hay más de 25 puntos, sin poderse cuantificar con exactitud esa cifra. Se coloca entonces: i-25. Para aquellos casos en que se desconozcan las cantidades totalmente totalmente, se usará 'i' en lugar de números."
 	
     piedra = models.ForeignKey(Piedra, related_name='FigurasPorTipo')    
     numero =  CharField( '9.1. Número de cara trabajada (Punto 6)') 
     tipoFigura = models.IntegerField('9.2. Tipo de figura',choices = TIPO_FIGURA)	
-    cantidad = CharField('9.3. Cantidad')  
+    cantidad = CharField('9.3. Cantidad', help_text=AYUDA_TIPO)  
     esCantidadInexacta = models.BooleanField('9.4. Cantidad Inexacta O Desconocida')	
     descripcion = CharField('9.5. Descripcion',)
     abbr = 'fpt'    
@@ -1593,12 +1597,12 @@ class EscNatPiedra(RepGrafPiedra):
         (6, '6 - Yeso'),
         (7, '7 - Papel de arroz'),
     )
-    tipoReproduccion = models.IntegerField('13.2.1. Reproducción gráfica', choices = TIPO_REPRODUCCION_NATURAL)
+    tipoReproduccione = models.IntegerField('13.2.1. Reproducción gráfica', choices = TIPO_REPRODUCCION_NATURAL)
 
     abbr = 'enp'
 
     class Meta:
-        verbose_name = 'Reproducción gráf. escala natural'
+        verbose_name = 'Reproducción gráfica escala natural'
         verbose_name_plural = '13.2. Reproducción gráf. escala natural'
     
 class EscRedPiedra(RepGrafPiedra):
@@ -1615,7 +1619,7 @@ class EscRedPiedra(RepGrafPiedra):
     abbr = 'erp'
 
     class Meta:
-        verbose_name = 'Reproducción gráf. escala reducida'
+        verbose_name = 'Reproducción gráfica escala reducida'
         verbose_name_plural = '13.3. Reproducción gráf. escala reducida'
 
 # Bibliografia
