@@ -542,9 +542,9 @@ class EscalaNatPiedraInline(admin.StackedInline):
     suit_classes = 'suit-tab suit-tab-apoyos'
 
 class EscalaRedPiedraInline(admin.StackedInline):
-    extra = 1
     model =  EscRedPiedra
     form = forms.RepGrafPiedraForm
+    extra = 1
     suit_classes = 'suit-tab suit-tab-apoyos'
 
 class BibPiedraInline(admin.StackedInline):

@@ -1505,11 +1505,11 @@ class TratFoto(models.Model):
 
     """Representa el tratamiento dado a las fotografias recopiladas"""
     
-    limpiezaCon = CharField('1. Limpieza con')
-    rellenoSurcos = CharField('2. Relleno de surcos con')
-    tratamientoDigital = CharField('3. Tratamiento digital')
-    programaVersion = CharField('4. Programa/versión')
-    otrosTratamientos = CharField('5. Otros tratamientos fotografía')
+    limpiezaCon = CharField('12.1. Limpieza con')
+    rellenoSurcos = CharField('12.2. Relleno de surcos con')
+    tratamientoDigital = CharField('12.3. Tratamiento digital')
+    programaVersion = CharField('12.4. Programa/versión')
+    otrosTratamientos = CharField('12.5. Otros tratamientos fotografía')
 
     def __unicode__(self):
         return '' # '# ' + str(self.id)
@@ -1524,7 +1524,7 @@ class TratFotoPiedra (TratFoto):
     abbr = 'tpp'
     
     class Meta:
-        verbose_name = 'Tratamiento para fotografías'
+        verbose_name = ''
         verbose_name_plural = '12. Tratamiento para fotografías'
 
 # Fotografia
@@ -2081,8 +2081,8 @@ class ObservacPiedra(Observaciones):
     abbr = 'opi'
     
     class Meta:
-        verbose_name = '16. Observaciones'
-        verbose_name_plural = ''
+        verbose_name = ''
+        verbose_name_plural = '16. Observaciones'
 
 # Llenado de la ficha
 
@@ -2112,8 +2112,8 @@ class LlenadoPiedra(LlenadoPor):
     abbr = 'ypp'
     
     class Meta:
-        verbose_name = '17. Ficha llenada por'
-        verbose_name_plural = ''
+        verbose_name = ''
+        verbose_name_plural = '17. Ficha llenada por'
 
 # Supervision de la ficha
 
@@ -2143,5 +2143,5 @@ class SupervisadoPiedra(SupervisadoPor):
     abbr = 'spp'    
 
     class Meta:
-        verbose_name = '18. Ficha Supervisada Por'
-        verbose_name_plural = ''
+        verbose_name = ''
+        verbose_name_plural = '18. Ficha Supervisada Por'
