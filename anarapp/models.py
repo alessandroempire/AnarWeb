@@ -1576,10 +1576,6 @@ class RepGrafPiedra (models.Model):
     de reproducciones gráficas a escala natural y reducida"""
 
     piedra = models.ForeignKey(Piedra, related_name='RepGrafPiedra')
-
-    numPiezas = models.IntegerField('a. Número de piezas')
-    instituto  = CharField('b. Institución ', )
-    persona  = CharField('c. Persona ', )
 	
     def __unicode__(self):
         return '' # '# ' + str(self.id)
@@ -1597,13 +1593,17 @@ class EscNatPiedra(RepGrafPiedra):
         (6, '6 - Yeso'),
         (7, '7 - Papel de arroz'),
     )
+    esEscNatPiedra = models.BooleanField('13.2.1.1. Reproducción gráfica escala natural')
     tipoReproduccione = models.IntegerField('13.2.1. Reproducción gráfica', choices = TIPO_REPRODUCCION_NATURAL)
+    numPiezasP = models.IntegerField('13.2.1.2. Número de piezas')
+    institutoP  = CharField('13.2.1.3. Institución ', )
+    personaP  = CharField('13.2.1.4. Persona ', )
 
     abbr = 'enp'
 
     class Meta:
-        verbose_name = 'Reproducción gráfica escala natural'
-        verbose_name_plural = '13.2. Reproducción gráf. escala natural'
+        verbose_name = ''
+        verbose_name_plural = ''
     
 class EscRedPiedra(RepGrafPiedra):
 
@@ -1614,13 +1614,17 @@ class EscRedPiedra(RepGrafPiedra):
         (1, '1 - Dibujo'),
         (2, '2 - Matriz'),
     )
+    esEscNatPiedra = models.BooleanField('13.3.1.1. Reproducción gráfica escala reducida')
     tipoReproduccion = models.IntegerField('13.3.1. Reproducción gráfica', choices = TIPO_REPRODUCCION_REDUCIDA)
+    numPiezasP = models.IntegerField('13.3.1.2. Número de piezas')
+    institutoP  = CharField('13.3.1.3. Institución ', )
+    personaP  = CharField('13.3.1.4. Persona ', )
     
     abbr = 'erp'
 
     class Meta:
-        verbose_name = 'Reproducción gráfica escala reducida'
-        verbose_name_plural = '13.3. Reproducción gráf. escala reducida'
+        verbose_name = ''
+        verbose_name_plural = ''
 
 # Bibliografia
 

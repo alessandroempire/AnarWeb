@@ -535,13 +535,13 @@ class FotoDigPiedraInline(admin.StackedInline):
     form = forms.FotoForm
     suit_classes = 'suit-tab suit-tab-apoyos'
 
-class EscalaNatPiedraInline(admin.TabularInline):
+class EscalaNatPiedraInline(admin.StackedInline):
     extra = 1
     model =  EscNatPiedra
     form = forms.RepGrafPiedraForm
     suit_classes = 'suit-tab suit-tab-apoyos'
 
-class EscalaRedPiedraInline(admin.TabularInline):
+class EscalaRedPiedraInline(admin.StackedInline):
     extra = 1
     model =  EscRedPiedra
     form = forms.RepGrafPiedraForm
