@@ -202,7 +202,7 @@ class Indicaciones(models.Model):
     
     class Meta:
         verbose_name = ''
-        verbose_name_plural = '6. Indicaciones para llegar al Yac.'
+        verbose_name_plural = '6. Indicaciones para llegar al Yacimiento'
 
     def __unicode__(self):
         return '' # '# ' + str(self.id)
@@ -899,7 +899,7 @@ class CaracMonolitos(models.Model):
 
     class Meta:
         verbose_name = ''
-        verbose_name_plural = '26. Carac. Monumentos Megalíticos'
+        verbose_name_plural = '26. Características Monumentos Megalíticos'
         
     def __unicode__(self):
         return '' # '# ' + str(self.id)
@@ -1402,8 +1402,8 @@ class UbicacionCaras(models.Model):
         return '' # '# ' + str(self.id)    
 	
     class Meta:
-        verbose_name = 'Cuevas/Abrigos'
-        verbose_name_plural = '8. Ubicación caras trabajadas'
+        verbose_name = ''
+        verbose_name_plural = '8. Ubicación caras trabajadas (Cuevas/Abrigos)'
         
 
 class FigurasPorTipo(models.Model):
