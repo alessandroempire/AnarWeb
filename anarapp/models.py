@@ -1500,8 +1500,8 @@ class Manifestaciones(models.Model):
     abbr = 'man'
     
     class Meta:
-        verbose_name = 'Manifestaciones de la piedra'
-        verbose_name_plural = 'X. Manifestaciones de la piedra'
+        verbose_name = ''
+        verbose_name_plural = 'Manifestaciones de la piedra'
         
 
 ########################################################################################
@@ -2094,7 +2094,7 @@ class OtrosValYac(OtrosValores):
 class OtrosValPiedra(OtrosValores):
 
     piedra = models.ForeignKey(Piedra, related_name='OtrosValPiedra')
-    texto = CharField('0. Otros valores', blank = True)
+    texto = CharField('15.1. Otros valores', blank = True)
     abbr = 'ovp'
     
     class Meta:
