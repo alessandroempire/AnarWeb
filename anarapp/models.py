@@ -890,10 +890,10 @@ class CaracMonolitos(models.Model):
 
     yacimiento = models.OneToOneField(Yacimiento, related_name='CaracMonolitos')
     
-    esCarcaMonolitos = models.BooleanField('13.7.1. Monolitos')
-    cantidad = models.IntegerField('26.1. Cantidad ', blank = True, null = True, )
-    esPinturaRupestre = models.BooleanField('13.7.1.1 Con Grabados')
-    cantidadConGrabados = models.IntegerField('26.2. Cantidad con Grabados', blank = True, null = True, )
+    esCarcaMonolitos = models.BooleanField('13.7.1 Monolitos')
+    cantidad = models.IntegerField('26.1.. Cantidad ', blank = True, null = True, )
+    esPinturaRupestre = models.BooleanField('13.7.1.1. Con Grabados')
+    cantidadConGrabados = models.IntegerField('26.2.. Cantidad con Grabados', blank = True, null = True, )
     
     abbr = 'mon'
 
@@ -908,16 +908,16 @@ class CaracMenhires(models.Model):
     
     yacimiento = models.OneToOneField(Yacimiento, related_name='CaracMehnires')
     
-    esCaracMenhier = models.BooleanField('13.7.2. Menhires')
-    sonPiedrasVerticales = models.BooleanField('26.0. Piedras Verticales')
-    cantidadPiedrasVerticales = models.IntegerField('26.3. Cantidad', blank = True, null = True, )
-    conPuntosAcoplados = models.BooleanField('13.7.2.1 Con Puntos Acoplados')
-    cantidadConPuntosAcoplados = models.IntegerField('26.4. Cantidad', blank = True, null = True, )
-    ConPetroglifo = models.BooleanField('13.7.2.2 Con Petroglifo')
-    cantidadConPetroglifo = models.IntegerField('26.5. Cantidad', blank = True, null = True, )
-    conPinturas = models.BooleanField('13.7.2.3 Con Pinturas')
-    cantidadConPinturas = models.IntegerField('26.6. Cantidad', blank = True, null = True, )
-    distanciamiento = models.IntegerField('26.7. Distanciamiento (en cm)', blank = True, null = True, )
+    esCaracMenhier = models.BooleanField('13.7.2 Menhires')
+    sonPiedrasVerticales = models.BooleanField('26.0.. Piedras Verticales')
+    cantidadPiedrasVerticales = models.IntegerField('26.3.. Cantidad', blank = True, null = True, )
+    conPuntosAcoplados = models.BooleanField('13.7.2.1. Con Puntos Acoplados')
+    cantidadConPuntosAcoplados = models.IntegerField('26.4.. Cantidad', blank = True, null = True, )
+    ConPetroglifo = models.BooleanField('13.7.2.2. Con Petroglifo')
+    cantidadConPetroglifo = models.IntegerField('26.5.. Cantidad', blank = True, null = True, )
+    conPinturas = models.BooleanField('13.7.2.3. Con Pinturas')
+    cantidadConPinturas = models.IntegerField('26.6.. Cantidad', blank = True, null = True, )
+    distanciamiento = models.IntegerField('26.7.. Distanciamiento (en cm)', blank = True, null = True, )
     
     abbr = 'men'
 
@@ -932,11 +932,11 @@ class CaracDolmenArt(models.Model):
    
     yacimiento = models.OneToOneField(Yacimiento, related_name='CaracDolmenArt')
     
-    esCaracDolmen = models.BooleanField('13.7.3. Dolmen')
+    esCaracDolmen = models.BooleanField('13.7.3 Dolmen')
     ConPetroglifo = models.BooleanField('13.7.3.1. Con Petroglifo')
-    cantidadConPetroglifo = models.IntegerField('26.8. Cantidad', blank = True, null = True, )
+    cantidadConPetroglifo = models.IntegerField('26.8.. Cantidad', blank = True, null = True, )
     conPinturas = models.BooleanField('13.7.3.2. Con Pinturas')
-    cantidadConPinturas = models.IntegerField('26.9. Cantidad', blank = True, null = True, )
+    cantidadConPinturas = models.IntegerField('26.9.. Cantidad', blank = True, null = True, )
     
     abbr = 'dol'
 
