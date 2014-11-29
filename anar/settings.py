@@ -9,7 +9,7 @@ PROJECT_PATH = os.path.join(os.path.dirname(__file__), '..')
 ROOT_PATH = PROJECT_PATH
 
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (

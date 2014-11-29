@@ -20,6 +20,7 @@ def patrimonio(request):
 def yacimiento(request, pk):
     yacimiento = Yacimiento.objects.get(codigo = pk)
     piedras = Piedra.objects.filter(yacimiento = yacimiento.id)
+    print "HOLAAA"
     
     form = PiedraForm()
     
