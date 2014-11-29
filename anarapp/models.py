@@ -201,8 +201,8 @@ class Indicaciones(models.Model):
     abbr = 'ind'
     
     class Meta:
-        verbose_name = '6. Indicaciones para llegar al Yacimiento'
-        verbose_name_plural = '6. Indicaciones para llegar al Yacimiento'
+        verbose_name = ''
+        verbose_name_plural = '6. Indicaciones para llegar al Yac.'
 
     def __unicode__(self):
         return '' # '# ' + str(self.id)
@@ -899,7 +899,7 @@ class CaracMonolitos(models.Model):
 
     class Meta:
         verbose_name = ''
-        verbose_name_plural = '26. Caracteristicas Monumentos Megalíticos'
+        verbose_name_plural = '26. Carac. Monumentos Megalíticos'
         
     def __unicode__(self):
         return '' # '# ' + str(self.id)
@@ -1402,8 +1402,8 @@ class UbicacionCaras(models.Model):
         return '' # '# ' + str(self.id)    
 	
     class Meta:
-        verbose_name = 'Ubicación cara trabajada (cuevas/abrigos)'
-        verbose_name_plural = '8. Ubicación caras trabajadas (cuevas/abrigos)'
+        verbose_name = 'Cuevas/Abrigos'
+        verbose_name_plural = '8. Ubicación caras trabajadas'
         
 
 class FigurasPorTipo(models.Model):
@@ -1710,23 +1710,23 @@ class BibYacimiento(Bibliografia):
     esDigital = models.BooleanField('31.1.7.5. Digital')
     esNegativo = models.BooleanField('31.1.7.6. Negativo')
     description = models.BooleanField('31.1.8. Con mapa')
-    tieneMapa = models.ImageField('31.1.8.0.0. Mapa - Archivo', 
+    tieneMapa = models.FileField('31.1.8.0.0. Mapa - Archivo', 
                                  upload_to='bibliografia_yac/%Y_%m', 
                                  null=True, 
                                  blank=True)
-    tieneMapa1 = models.ImageField('31.1.8.0.1. Mapa - Archivo', 
+    tieneMapa1 = models.FileField('31.1.8.0.1. Mapa - Archivo', 
                                  upload_to='bibliografia_yac/%Y_%m', 
                                  null=True, 
                                  blank=True)
-    tieneMapa2 = models.ImageField('31.1.8.0.2. Mapa - Archivo', 
+    tieneMapa2 = models.FileField('31.1.8.0.2. Mapa - Archivo', 
                                  upload_to='bibliografia_yac/%Y_%m', 
                                  null=True, 
                                  blank=True)
-    tieneMapa3 = models.ImageField('31.1.8.0.3. Mapa - Archivo', 
+    tieneMapa3 = models.FileField('31.1.8.0.3. Mapa - Archivo', 
                                  upload_to='bibliografia_yac/%Y_%m', 
                                  null=True, 
                                  blank=True)
-    tieneMapa4 = models.ImageField('31.1.8.0.4. Mapa - Archivo', 
+    tieneMapa4 = models.FileField('31.1.8.0.4. Mapa - Archivo', 
                                  upload_to='bibliografia_yac/%Y_%m', 
                                  null=True, 
                                  blank=True)
@@ -1748,55 +1748,75 @@ class BibPiedra(Bibliografia):
     ano = CharField('13.4.4. Fecha', blank = True)	
     institucion  = CharField('13.4.5. Institución', blank = True)
     conDibujo = models.BooleanField('13.4.6. Con dibujo')
-    archivo = models.FileField('13.4.6.1.1. Dibujo - Archivo', 
+    archivo = models.FileField('13.4.6.1. Dibujo - Archivo', 
                                 upload_to='bibliografia_pie/%Y_%m', 
                                 null=True, 
                                 blank=True)
-    archivo1 = models.FileField('13.4.6.1.2. Dibujo - Archivo', 
+    archivo1 = models.FileField('13.4.6.2. Dibujo - Archivo', 
                                 upload_to='bibliografia_pie/%Y_%m', 
                                 null=True, 
                                 blank=True)
-    archivo2 = models.FileField('13.4.6.1.3. Dibujo - Archivo', 
+    archivo2 = models.FileField('13.4.6.3. Dibujo - Archivo', 
                                 upload_to='bibliografia_pie/%Y_%m', 
                                 null=True, 
                                 blank=True)
-    archivo3 = models.FileField('13.4.6.1.4. Dibujo - Archivo', 
+    archivo3 = models.FileField('13.4.6.4. Dibujo - Archivo', 
                                 upload_to='bibliografia_pie/%Y_%m', 
                                 null=True, 
                                 blank=True)
-    archivo4 = models.FileField('13.4.6.1.5. Dibujo - Archivo', 
+    archivo4 = models.FileField('13.4.6.5. Dibujo - Archivo', 
                                 upload_to='bibliografia_pie/%Y_%m', 
                                 null=True, 
                                 blank=True)
     esFotografia = models.BooleanField('13.4.7. Con fotografía')
-    tieneFotografia = models.FileField('13.4.6.1.1. Fotografía - Archivo', 
-                                 upload_to='bibliografia_yac/%Y_%m', 
+    tieneFotografia = models.FileField('13.4.7.0.0. Fotografía - Archivo', 
+                                 upload_to='bibliografia_pie/%Y_%m', 
                                  null=True, 
                                  blank=True)
-    tieneFotografia1 = models.FileField('13.4.6.1.2. Fotografía - Archivo', 
-                                 upload_to='bibliografia_yac/%Y_%m', 
+    tieneFotografia1 = models.FileField('13.4.7.0.1. Fotografía - Archivo', 
+                                 upload_to='bibliografia_pie/%Y_%m', 
                                  null=True, 
                                  blank=True)
-    tieneFotografia2 = models.FileField('13.4.6.1.3. Fotografía - Archivo', 
-                                 upload_to='bibliografia_yac/%Y_%m', 
+    tieneFotografia2 = models.FileField('13.4.7.0.2. Fotografía - Archivo', 
+                                 upload_to='bibliografia_pie/%Y_%m', 
                                  null=True, 
                                  blank=True)
-    tieneFotografia3 = models.FileField('13.4.6.1.4. Fotografía - Archivo', 
-                                 upload_to='bibliografia_yac/%Y_%m', 
+    tieneFotografia3 = models.FileField('13.4.7.0.3. Fotografía - Archivo', 
+                                 upload_to='bibliografia_pie/%Y_%m', 
                                  null=True, 
                                  blank=True)
-    tieneFotografia4 = models.FileField('13.4.6.1.5. Fotografía - Archivo', 
-                                 upload_to='bibliografia_yac/%Y_%m', 
+    tieneFotografia4 = models.FileField('13.4.7.0.4. Fotografía - Archivo', 
+                                 upload_to='bibliografia_pie/%Y_%m', 
                                  null=True, 
                                  blank=True)
     escolor = models.BooleanField('13.4.7.1. Color')
     esBlancoYNegro = models.BooleanField('13.4.7.2. B/N')
-    esDiapositiva = models.BooleanField('13.4..7.3. Diapositiva')
+    esDiapositiva = models.BooleanField('13.4.7.3. Diapositiva')
     esPapel = models.BooleanField('13.4.7.4. Papel')
     esDigital = models.BooleanField('13.4.7.5. Digital')
     esNegativo = models.BooleanField('13.4.7.6. Negativo')
-    descripcion  = CharField('13.4.7.7. Con mapa ', blank = True)
-    tipoMapa = models.IntegerField('13.4.7.8. Tipo de mapa', choices = Bibliografia.TIPO_MAPA,blank = True,null = True)
+    description  = models.BooleanField('13.4.8. Con mapa ')
+    tieneMapa = models.FileField('13.4.8.0.0. Mapa - Archivo', 
+                                 upload_to='bibliografia_pie/%Y_%m', 
+                                 null=True, 
+                                 blank=True)
+    tieneMapa1 = models.FileField('13.4.8.0.1. Mapa - Archivo', 
+                                 upload_to='bibliografia_pie/%Y_%m', 
+                                 null=True, 
+                                 blank=True)
+    tieneMapa2 = models.FileField('13.4.8.0.2. Mapa - Archivo', 
+                                 upload_to='bibliografia_pie/%Y_%m', 
+                                 null=True, 
+                                 blank=True)
+    tieneMapa3 = models.FileField('13.4.8.0.3. Mapa - Archivo', 
+                                 upload_to='bibliografia_pie/%Y_%m', 
+                                 null=True, 
+                                 blank=True)
+    tieneMapa4 = models.FileField('13.4.8.0.4. Mapa - Archivo', 
+                                 upload_to='bibliografia_pie/%Y_%m', 
+                                 null=True, 
+                                 blank=True)
+    tipoMapa = models.IntegerField('13.4.8.1. Tipo de mapa', choices = Bibliografia.TIPO_MAPA,blank = True,null = True)
 	
     abbr = 'bip'
     
@@ -2078,7 +2098,7 @@ class OtrosValPiedra(OtrosValores):
     abbr = 'ovp'
     
     class Meta:
-        verbose_name = 'Otros valores de la piedra'
+        verbose_name = ''
         verbose_name_plural = '15. Otros valores de la piedra'
 
 # Observaciones
@@ -2096,7 +2116,7 @@ class ObservacionesYac(Observaciones):
     abbr = 'oya'
     
     class Meta:
-        verbose_name = 'Observaciones'
+        verbose_name = ''
         verbose_name_plural = '34. Observaciones'
 
 class ObservacPiedra(Observaciones):
@@ -2126,7 +2146,7 @@ class LlenadoYac(LlenadoPor):
     abbr = 'ypy'
 
     class Meta:
-        verbose_name = 'Ficha llenada por'
+        verbose_name = ''
         verbose_name_plural = '35. Ficha llenada Por'
     
 class LlenadoPiedra(LlenadoPor):    
@@ -2157,7 +2177,7 @@ class SupervisadoYac(SupervisadoPor):
     abbr = 'spy'
     
     class Meta:
-        verbose_name = 'Ficha Supervisada Por'
+        verbose_name = ''
         verbose_name_plural = '36. Ficha Supervisada Por'
 
 class SupervisadoPiedra(SupervisadoPor):
