@@ -592,7 +592,7 @@ class TecnicaParaGeoglifo (models.Model):
     abbr = 'tge'
     
     class Meta:
-        verbose_name = '13.1. Geoflifo'
+        verbose_name = ''
         verbose_name_plural = '23. Técnicas'
         
     def __unicode__(self):
@@ -611,7 +611,7 @@ class TecnicaParaPintura (models.Model):
     abbr = 'tpi'
 
     class Meta:
-        verbose_name = '13.2. Pintura Rupestre'
+        verbose_name = ''
         verbose_name_plural = ''
         
     def __unicode__(self):
@@ -635,7 +635,7 @@ class TecnicaParaPetroglifo (models.Model):
     abbr = 'tpe'
 
     class Meta:
-        verbose_name = '13.3 Petroglifo'
+        verbose_name = ''
         verbose_name_plural = ''
         
     def __unicode__(self):
@@ -659,7 +659,7 @@ class TecnicaParaMicroPetro (models.Model):
     abbr = 'tmi'
 
     class Meta:
-        verbose_name = '13.4. Micro-Petroglifo'
+        verbose_name = ''
         verbose_name_plural = ''
         
     def __unicode__(self):
@@ -679,7 +679,7 @@ class TecnicaParaMonumentos (models.Model):
     abbr = 'tmo'
 
     class Meta:
-        verbose_name = '13.7. Monumentos Megalíticos'
+        verbose_name = ''
         verbose_name_plural = ''
         
     def __unicode__(self):
@@ -689,6 +689,7 @@ class CaracSurcoPetroglifo (models.Model):
     
     yacimiento = models.OneToOneField(Yacimiento, related_name='CaracSurcoPetroglifo')
     
+    esCaracSucorPetro = models.BooleanField('13.3. Petroglifo')
     anchoDe = CharField('24.1. Ancho desde (en cm)', blank = True)
     anchoA = CharField('24.1. Ancho hasta (en cm)', blank = True)
     produndidadDe = CharField('24.2. Profundidad desde (en cm)', blank = True)
@@ -711,7 +712,7 @@ class CaracSurcoPetroglifo (models.Model):
     abbr = 'cpe'
 
     class Meta:
-        verbose_name = '13.3. Petroglifo'
+        verbose_name = ''
         verbose_name_plural = '24. Características del surco grabado'
         
     def __unicode__(self):
@@ -721,6 +722,7 @@ class CaracSurcoAmoladores(models.Model):
 
     yacimiento = models.OneToOneField(Yacimiento, related_name='CaracSurcoAmoladores')
         
+    esCaracSurcoAmoladores = models.BooleanField('13.9. Amoladores')
     largo = CharField('24.9. Largo (en cm)', blank = True)
     ancho = CharField('24.10. Ancho (en cm)', blank = True)
     diametro = CharField('24.11. Diámetro (en cm)', blank = True)
@@ -728,7 +730,7 @@ class CaracSurcoAmoladores(models.Model):
     abbr = 'cam'
 
     class Meta:
-        verbose_name = '13.9. Amoladores'
+        verbose_name = ''
         verbose_name_plural = ''
         
     def __unicode__(self):
@@ -738,6 +740,7 @@ class CaracSurcoBateas(models.Model):
     
     yacimiento = models.OneToOneField(Yacimiento, related_name='CaracSurcoBateas')
     
+    esCaracSurcoBateas = models.BooleanField('13.10. Bateas')
     largo = CharField('24.12. Largo (en cm)', blank = True)
     ancho = CharField('24.13. Ancho (en cm)', blank = True)
     diametro = CharField('24.13a. Diametro (en cm)',  blank = True)
@@ -745,7 +748,7 @@ class CaracSurcoBateas(models.Model):
     abbr = 'cba'
 
     class Meta:
-        verbose_name = '13.10. Bateas'
+        verbose_name = ''
         verbose_name_plural = ''
         
     def __unicode__(self):
@@ -754,6 +757,7 @@ class CaracSurcoBateas(models.Model):
 
 class CaracSurcoPuntosAcopl (models.Model):
 
+    esCaracSurcPuntosAcopl = models.BooleanField('13.11. Puntos Acoplados')
     yacimiento = models.OneToOneField(Yacimiento, related_name='CaracSurcoPuntosAcopl')
     esPunteado= models.BooleanField('24.14. Punteado')
     diametro = CharField('24.14a. Diametro (en cm)',  blank = True)
@@ -763,7 +767,7 @@ class CaracSurcoPuntosAcopl (models.Model):
     abbr = 'cpa'
     
     class Meta:
-        verbose_name = '13.11. Puntos Acoplados'
+        verbose_name = ''
         verbose_name_plural = ''
         
     def __unicode__(self):
@@ -771,6 +775,7 @@ class CaracSurcoPuntosAcopl (models.Model):
 
 class CaracSurcoCupulas (models.Model):
     
+    esCaracSurcoCupulas = models.BooleanField('13.12. Cúpula')
     yacimiento = models.OneToOneField(Yacimiento, related_name='CaracSurcoCupulas')
     largo = CharField('24.15. Largo (en cm)', blank = True)
     ancho = CharField('24.16. Ancho (en cm)', blank = True)
@@ -781,7 +786,7 @@ class CaracSurcoCupulas (models.Model):
     abbr = 'ccu'
 
     class Meta:
-        verbose_name = '13.12. Cúpula'
+        verbose_name = ''
         verbose_name_plural = ''
         
     def __unicode__(self):
@@ -791,13 +796,14 @@ class CaracSurcoMortero (models.Model):
 
     yacimiento = models.OneToOneField(Yacimiento, related_name='CaracSurcoMortero')
     
+    esCaracSurcoMortero = models.BooleanField('13.13. Mortero o Metate')
     largo = CharField('24.9. Largo (en cm)', blank = True)
     ancho = CharField('24.10. Ancho (en cm)', blank = True)
     
     abbr = 'cmr'
 
     class Meta:
-        verbose_name = '13.13. Mortero o Metate'
+        verbose_name = ''
         verbose_name_plural = ''
         
     def __unicode__(self):
@@ -884,6 +890,7 @@ class CaracMonolitos(models.Model):
 
     yacimiento = models.OneToOneField(Yacimiento, related_name='CaracMonolitos')
     
+    esCarcaMonolitos = models.BooleanField('13.7.1. Monolitos')
     cantidad = models.IntegerField('26.1. Cantidad ', blank = True, null = True, )
     esPinturaRupestre = models.BooleanField('13.7.1.1 Con Grabados')
     cantidadConGrabados = models.IntegerField('26.2. Cantidad con Grabados', blank = True, null = True, )
@@ -891,7 +898,7 @@ class CaracMonolitos(models.Model):
     abbr = 'mon'
 
     class Meta:
-        verbose_name = '13.7.1. Monolitos'
+        verbose_name = ''
         verbose_name_plural = '26. Caracteristicas Monumentos Megalíticos'
         
     def __unicode__(self):
@@ -901,6 +908,7 @@ class CaracMenhires(models.Model):
     
     yacimiento = models.OneToOneField(Yacimiento, related_name='CaracMehnires')
     
+    esCaracMenhier = models.BooleanField('13.7.2. Menhires')
     sonPiedrasVerticales = models.BooleanField('26.0. Piedras Verticales')
     cantidadPiedrasVerticales = models.IntegerField('26.3. Cantidad', blank = True, null = True, )
     conPuntosAcoplados = models.BooleanField('13.7.2.1 Con Puntos Acoplados')
@@ -914,7 +922,7 @@ class CaracMenhires(models.Model):
     abbr = 'men'
 
     class Meta:
-        verbose_name = '13.7.2. Menhires'
+        verbose_name = ''
         verbose_name_plural = ''
         
     def __unicode__(self):
@@ -924,6 +932,7 @@ class CaracDolmenArt(models.Model):
    
     yacimiento = models.OneToOneField(Yacimiento, related_name='CaracDolmenArt')
     
+    esCaracDolmen = models.BooleanField('13.7.3. Dolmen')
     ConPetroglifo = models.BooleanField('13.7.3.1. Con Petroglifo')
     cantidadConPetroglifo = models.IntegerField('26.8. Cantidad', blank = True, null = True, )
     conPinturas = models.BooleanField('13.7.3.2. Con Pinturas')
@@ -932,7 +941,7 @@ class CaracDolmenArt(models.Model):
     abbr = 'dol'
 
     class Meta:
-        verbose_name = '13.7.3. Dolmen'
+        verbose_name = ''
         verbose_name_plural = ''
         
     def __unicode__(self):
@@ -992,7 +1001,7 @@ class EstadoConserYac(models.Model):
     enPorCausaHumanaLigera = models.BooleanField('27.3.2.1. Ligera')
     enPorCausaHumanaAguda = models.BooleanField('27.3.2.1. Aguda')
     especificar = CharField('27.4. Especificar Causa y Efecto', blank = True)
-    destruccionPotencial = models.BooleanField('27.5. Destrucción Potencial del Sitio')
+    destruccionPotencial = models.BooleanField('27.5. Destrucción Potencial del Sitio. Causas:')
     
     abbr = 'ecy'
 
@@ -1026,7 +1035,7 @@ class CausasDestruccionYac(models.Model):
 
     class Meta:
         verbose_name = '27.5.1. Causas'
-        verbose_name_plural = '27.5.1. Causas'
+        verbose_name_plural = 'Causas:'
         
     def __unicode__(self):
         return '' # '# ' + str(self.id)
@@ -1652,60 +1661,76 @@ class BibYacimiento(Bibliografia):
     ano = CharField('31.1.4. Año', blank = True)
     institucion  = CharField('31.1.5. Institución', blank = True)
     conDibujo = models.BooleanField('31.1.6. Con dibujo',)
-    archivo = models.FileField('31.1.6.1.1. Dibujo - Archivo', 
+    archivo = models.FileField('31.1.6.1. Dibujo - Archivo', 
                                  upload_to='bibliografia_yac/%Y_%m', 
                                  null=True, 
                                  blank=True)
-    archivo1 = models.FileField('31.1.6.1.2. Dibujo - Archivo', 
+    archivo1 = models.FileField('31.1.6.2. Dibujo - Archivo', 
                                  upload_to='bibliografia_yac/%Y_%m', 
                                  null=True, 
                                  blank=True)
-    archivo2 = models.FileField('31.1.6.1.3. Dibujo - Archivo', 
+    archivo2 = models.FileField('31.1.6.3. Dibujo - Archivo', 
                                  upload_to='bibliografia_yac/%Y_%m', 
                                  null=True, 
                                  blank=True)
-    archivo3 = models.FileField('31.1.6.1.4. Dibujo - Archivo', 
+    archivo3 = models.FileField('31.1.6.4. Dibujo - Archivo', 
                                  upload_to='bibliografia_yac/%Y_%m', 
                                  null=True, 
                                  blank=True)
-    archivo4 = models.FileField('31.1.6.1.5. Dibujo - Archivo', 
+    archivo4 = models.FileField('31.1.6.5. Dibujo - Archivo', 
                                  upload_to='bibliografia_yac/%Y_%m', 
                                  null=True, 
                                  blank=True)
 
     esFotografia = models.BooleanField('31.1.7. Con fotografía', help_text=mark_safe("<br><br> <a href='#' onclick='pop10()' >?</a> <script> function pop10() {window.open('/static/ayudas y glosarios/apoyosYac.html','name','height=500,width=500,scrollbars=yes');return false;} </script> </html>"))
-    tieneFotografia = models.FileField('31.1.7.1.1. Fotografía - Archivo', 
+    tieneFotografia = models.FileField('31.1.7.0.0. Fotografía - Archivo', 
                                  upload_to='bibliografia_yac/%Y_%m', 
                                  null=True, 
                                  blank=True)
-    tieneFotografia1 = models.FileField('31.1.7.1.2. Fotografía - Archivo', 
+    tieneFotografia1 = models.FileField('31.1.7.0.1. Fotografía - Archivo', 
                                  upload_to='bibliografia_yac/%Y_%m', 
                                  null=True, 
                                  blank=True)
-    tieneFotografia2 = models.FileField('31.1.7.1.3. Fotografía - Archivo', 
+    tieneFotografia2 = models.FileField('31.1.7.0.2. Fotografía - Archivo', 
                                  upload_to='bibliografia_yac/%Y_%m', 
                                  null=True, 
                                  blank=True)
-    tieneFotografia3 = models.FileField('31.1.7.1.4. Fotografía - Archivo', 
+    tieneFotografia3 = models.FileField('31.1.7.0.3. Fotografía - Archivo', 
                                  upload_to='bibliografia_yac/%Y_%m', 
                                  null=True, 
                                  blank=True)
-    tieneFotografia4 = models.FileField('31.1.7.1.5. Fotografía - Archivo', 
+    tieneFotografia4 = models.FileField('31.1.7.0.4. Fotografía - Archivo', 
                                  upload_to='bibliografia_yac/%Y_%m', 
                                  null=True, 
                                  blank=True)
-    escolor = models.BooleanField('31.1.7.1.1. Color')
-    esBlancoYNegro = models.BooleanField('31.1.7.1.2. B/N')
-    esDiapositiva = models.BooleanField('31.1.7.2. Diapositiva')
-    esPapel = models.BooleanField('31.1.7.3. Papel')
-    esDigital = models.BooleanField('31.1.7.4. Digital')
-    esNegativo = models.BooleanField('31.1.7.5. Negativo')
+    escolor = models.BooleanField('31.1.7.1. Color')
+    esBlancoYNegro = models.BooleanField('31.1.7.2. B/N')
+    esDiapositiva = models.BooleanField('31.1.7.3. Diapositiva')
+    esPapel = models.BooleanField('31.1.7.4. Papel')
+    esDigital = models.BooleanField('31.1.7.5. Digital')
+    esNegativo = models.BooleanField('31.1.7.6. Negativo')
     description = models.BooleanField('31.1.8. Con mapa')
-    tieneMapa = models.ImageField('31.1.8.1. Mapa - Archivo', 
+    tieneMapa = models.ImageField('31.1.8.0.0. Mapa - Archivo', 
                                  upload_to='bibliografia_yac/%Y_%m', 
                                  null=True, 
                                  blank=True)
-    tipoMapa = models.IntegerField('31.1.8.2. Tipo de mapa', choices = Bibliografia.TIPO_MAPA, blank = True,null = True)
+    tieneMapa1 = models.ImageField('31.1.8.0.1. Mapa - Archivo', 
+                                 upload_to='bibliografia_yac/%Y_%m', 
+                                 null=True, 
+                                 blank=True)
+    tieneMapa2 = models.ImageField('31.1.8.0.2. Mapa - Archivo', 
+                                 upload_to='bibliografia_yac/%Y_%m', 
+                                 null=True, 
+                                 blank=True)
+    tieneMapa3 = models.ImageField('31.1.8.0.3. Mapa - Archivo', 
+                                 upload_to='bibliografia_yac/%Y_%m', 
+                                 null=True, 
+                                 blank=True)
+    tieneMapa4 = models.ImageField('31.1.8.0.4. Mapa - Archivo', 
+                                 upload_to='bibliografia_yac/%Y_%m', 
+                                 null=True, 
+                                 blank=True)
+    tipoMapa = models.IntegerField('31.1.8.1. Tipo de mapa', choices = Bibliografia.TIPO_MAPA, blank = True,null = True)
 	
     abbr = 'biy'
     
