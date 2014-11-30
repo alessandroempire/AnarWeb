@@ -17,7 +17,7 @@ from anarapp.models import Yacimiento, LocalidadYacimiento, UsoActSuelo, Tenenci
 	ManifestacionesCementerio, ManifestacionesMonticulo, ManifestacionesOtros, \
     BibYacimiento, MatAVYacimiento, VideoYacimiento, PeliYacimiento , PaginaWebYac, \
     MultimediaYac , ObtInfoYac , OtrosValYac, ObservacionesYac, LlenadoYac, SupervisadoYac, \
-    Piedra, FotografiaPiedra, DimensionPiedra, CaraTrabajada, UbicacionCaras, FigurasPorTipo, EsquemaPorCara, ConexionFiguras, \
+    Piedra, Piedra2, FotografiaPiedra, DimensionPiedra, CaraTrabajada, UbicacionCaras, FigurasPorTipo, EsquemaPorCara, ConexionFiguras, \
     Manifestaciones, TratFotoPiedra, FotoPiedra, EscNatPiedra, EscRedPiedra, \
     BibPiedra, MatAVPiedra, VideoPiedra, PeliculaPiedra, PaginaWebPiedra, MultimediaPiedra, \
     ObtInfoPiedra, OtrosValPiedra, ObservacPiedra, LlenadoPiedra, SupervisadoPiedra
@@ -465,14 +465,20 @@ class SupervisadaPorYacInline(admin.TabularInline):
 # Declaracion de modelos inlines para piedra
 ########################################################################################
 
-class FotografiaPiedraInline(admin.TabularInline):
-    extra = 3   
-    model =  FotografiaPiedra    
+class Piedra2Inline(admin.StackedInline):
+    extra = 1
+    max_num = 1
+    model = Piedra2
     suit_classes = 'suit-tab suit-tab-generales'
 
-class DimensionPiedraInline(admin.StackedInline):
-    extra = 1
-    max_num = 1    
+class FotografiaPiedraInline(admin.TabularInline):
+    extra = 1 
+    model =  FotografiaPiedra 
+    suit_classes = 'suit-tab suit-tab-generales'
+
+class DimensionPiedraInline(admin.TabularInline):
+    extra = 2
+    max_num = 2
     model =  DimensionPiedra
     form = forms.DimensionPiedraForm
     suit_classes = 'suit-tab suit-tab-generales'
@@ -485,7 +491,6 @@ class ManifestacionesInline(admin.StackedInline):
 
 class CaraTrabajadaInline(admin.TabularInline):
     extra = 6
-    max_num = 6
     model = CaraTrabajada
     form = forms.CaraTrabajadaForm
     suit_classes = 'suit-tab suit-tab-generales'
@@ -680,14 +685,13 @@ class YacimientoAdmin(admin.ModelAdmin):
 class PiedraAdmin (admin.ModelAdmin):
     model = Piedra
     form = forms.PiedraForm
-    list_display = ('yacimiento', 'codigo', 'nombre', 'manifiestacionAsociada', 'estado')	 
-    list_filter = ('yacimiento', 'codigo', 'estado')
+    #list_display = ('yacimiento', 'codigo', 'nombre', 'manifiestacionAsociada', 'estado')	 
+    #list_filter = ('yacimiento', 'codigo', 'estado')
 
     fieldsets = [
         ('Datos generales de la Roca', {
             'classes': ('suit-tab suit-tab-generales',),
-            'fields': ['yacimiento', 'codigo', 'nombre', 'nombreFiguras', 'estado',
-                       'numeroCaras', 'numeroCarasTrajabadas']
+            'fields': ['yacimiento', 'codigo', 'nombre']
         }),
         ('Manifestaciones Asociadas', {
             'classes': ('suit-tab suit-tab-manifestaciones',),
@@ -699,7 +703,7 @@ class PiedraAdmin (admin.ModelAdmin):
         ('InlineTemplates/Glosario6.html', 'top', 'apoyos'),)
 
     inlines = [
-        FotografiaPiedraInline, CaraTrabajadaInline, DimensionPiedraInline, UbicacionCarasInline, FigurasPorTipoInline,
+        FotografiaPiedraInline, Piedra2Inline, CaraTrabajadaInline, DimensionPiedraInline, UbicacionCarasInline, FigurasPorTipoInline,
         EsquemaPorCaraInline,ConexionFigurasInline, ManifestacionesInline, TratFotoInline, 		FotoDigPiedraInline,EscalaNatPiedraInline, EscalaRedPiedraInline, BibPiedraInline,
         MatAudioVisualInline, VideoPiedraInline, PeliculaPiedraInline, PaginaWebPiedraInline,
         MultimediaPiedraInline, ObtInfoPiedraInline, OtrosValPiedraInline, ObservacionPiedraInline,
@@ -707,7 +711,7 @@ class PiedraAdmin (admin.ModelAdmin):
     ] 
     suit_form_tabs = (('generales', 'Datos Generales de la Roca'),
                       ('figuras', 'Figuras'),
-                      ('tratamientos', 'Tratamiento de la Roca'),
+                      ('tratamientos', 'Tratamiento para fotografia'),
                       ('manifestaciones', 'Manifestaciones Asociadas'),
                       ('apoyos', 'Apoyos'),
                       ('observaciones', 'Observaciones')                        

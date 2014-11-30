@@ -1285,13 +1285,9 @@ class Piedra(models.Model):
 
     yacimiento = models.ForeignKey(Yacimiento, related_name='Yacimiento')
     
-    codigo = models.CharField('0- Codigo de la roca', unique = True, max_length=20)#, primary_key=True)        
-    nombre = CharField('1- Nombre de la piedra', )
+    codigo = models.CharField('0. Codigo de la roca', unique = True, max_length=20)#, primary_key=True)        
+    nombre = CharField('1- Nombre de la roca', )
     manifiestacionAsociada = CharField('1.1 Manifestaciones asociadas', blank = True )
-    nombreFiguras = CharField('2- Nombre de las figuras',)    
-    estado = models.ForeignKey(Estado, related_name='EstadoPied', verbose_name = '3- Estado/Provincia', blank = True, null = True)		
-    numeroCaras = models.IntegerField('4- Numero de Caras', help_text= mark_safe("<br><br> <a href='#' onclick='pop1()' >?</a> <script> function pop1() {window.open('/static/ayudas y glosarios/numeroCaras.html','name','height=500,width=500,scrollbars=yes');return false;} </script> </html>"))
-    numeroCarasTrajabadas = models.IntegerField('5- Numero de caras trabajadas')
     
     def __unicode__(self):
         return short_text('Pa-' + self.codigo + '-' + self.nombre)
@@ -1305,16 +1301,43 @@ class Piedra(models.Model):
 class FotografiaPiedra (models.Model):
     
     piedra = models.ForeignKey(Piedra, related_name='FotografiaPiedra')
-    archivo = models.ImageField('1.1. Fotografía - Archivo', upload_to='piedra/%Y_%m', null=True, blank=True)
+    aerea = models.BooleanField('1.2.1. Aerea')
+    noEsAerea = models.BooleanField('1.2.2. No Aerea')
+    satelital = models.BooleanField('1.2.1. Aerea')
+    fecha = models.CharField('1.2.4. Fecha', blank = True, null= True, max_length=100)
+    archivo = models.ImageField('1.2.5. Fotografía - Archivo', 
+                                upload_to='piedra/%Y_%m', 
+                                null=True, 
+                                blank=True)
     
     abbr = 'ftp'  
 
     class Meta:
-        verbose_name = '1.1. Fotografia'
-        verbose_name_plural = '1.1. Fotografias'
+        verbose_name = ''
+        verbose_name_plural = '1.2. Fotografias'
 		
     def __unicode__(self):
         return '' # '# ' + str(self.id)		
+
+class Piedra2(models.Model):
+    """Continuacion de informacion de piedras """
+
+    yacimiento = models.ForeignKey(Piedra, related_name='Piedra2')
+
+    nombreFiguras = CharField('2- Nombre de las figuras',)    
+    estado = models.ForeignKey(Estado, related_name='EstadoPied', verbose_name = '3- Estado/Provincia', blank = True, null = True)     
+    numeroCaras = models.IntegerField('4- Numero de Caras', help_text= mark_safe("<br><br> <a href='#' onclick='pop1()' >?</a> <script> function pop1() {window.open('/static/ayudas y glosarios/numeroCaras.html','name','height=500,width=500,scrollbars=yes');return false;} </script> </html>"))
+    numeroCarasTrajabadas = models.IntegerField('5- Numero de caras trabajadas')
+
+    abbr = 'pd2'  
+
+    class Meta:
+        verbose_name = ''
+        verbose_name_plural = ''
+        
+    def __unicode__(self):
+        return '' # '# ' + str(self.id) 
+
 
 class DimensionPiedra(models.Model):
 
@@ -1322,17 +1345,18 @@ class DimensionPiedra(models.Model):
 
     piedra = models.OneToOneField(Piedra, related_name='DimensionPiedra')
     
-    altoMaximo =  models.DecimalField('7.a. Alto Maximo', max_digits=12, decimal_places=6)
-    largoMaximo = models.DecimalField('7.b. Largo Maximo',max_digits=12, decimal_places=6)
-    anchoMaximo = models.DecimalField('7.c. Ancho Maximo',max_digits=12, decimal_places=6,help_text= mark_safe("<br><br> <a href='#' onclick='pop2()' >?</a> <script> function pop2() {window.open('/static/ayudas y glosarios/dimensiones.html','name','height=500,width=500,scrollbars=yes');return false;} </script> </html>"))
-    
+    dimensiones = CharField('6a. Número de cara trabajada')
+    alto =  models.DecimalField('7.1. Alto ', max_digits=12, decimal_places=6)
+    largo = models.DecimalField('7.2. Largo ',max_digits=12, decimal_places=6)
+    ancho = models.DecimalField('7.3. Ancho ',max_digits=12, decimal_places=6)
+                                        
     abbr = 'dip'
     
     def __unicode__(self):
         return '' # '# ' + str(self.id)
 		
     class Meta:
-        verbose_name = 'Dimensiones de la piedra'
+        verbose_name = ''
         verbose_name_plural = '7. Dimensiones de la piedra'
 
 class CaraTrabajada(models.Model):
@@ -1358,9 +1382,6 @@ class CaraTrabajada(models.Model):
     piedra = models.ForeignKey(Piedra, related_name='CaraTrabajada')
     numero =  CharField('6a. Número de cara trabajada' )
     orientacion = models.IntegerField('6b. Orientación de la cara', choices = ORIENTACION_CARA_TRABAJADA, help_text= AYUDA_OCT)
-    alto = models.DecimalField('7.1. Alto',max_digits=6, decimal_places=3)
-    ancho = models.DecimalField('7.2. Ancho',max_digits=6, decimal_places=3)
-    largo = models.DecimalField('7.3. Largo',max_digits=6, decimal_places=3)
     
     abbr = 'cat'
 
@@ -1368,8 +1389,8 @@ class CaraTrabajada(models.Model):
         return '' # '# ' + str(self.id)
 	
     class Meta:
-        verbose_name = 'Cara trabajada'
-        verbose_name_plural = '6-7. Caras trabajadas'
+        verbose_name = ''
+        verbose_name_plural = '6. Caras trabajadas'
 
 class UbicacionCaras(models.Model):
 
@@ -1412,34 +1433,34 @@ class FigurasPorTipo(models.Model):
     figuras por tipo presentes en cada cara"""
 
     TIPO_FIGURA = (
-        (1, '1 - Antropomorfas'),
-        (2, '2 - Zoomorfas'),
-        (3, '3 - Geométricas'),
-        (4, '4 - Puntos Acoplados'),
-        (5, '5 - Cupulas'),
-        (6, '6 - Zoo-antropomorfas'),
-        (7, '7 - Antropo-geométricas'),
-        (8, '8 - Zoo-geométricas'),
-        (9, '9 - Amoladores'),
-        (10, '10 - Bateas'),
+        (1, '9.1 - Antropomorfas'),
+        (2, '9.2 - Zoomorfas'),
+        (3, '9.3 - Geométricas'),
+        (4, '9.4 - Puntos Acoplados'),
+        (5, '9.5 - Cupulas'),
+        (6, '9.6 - Zoo-antropomorfas'),
+        (7, '9.7 - Antropo-geométricas'),
+        (8, '9.8 - Zoo-geométricas'),
+        (9, '9.9 - Amoladores'),
+        (10, '9.10 - Bateas'),
     )
 
     AYUDA_TIPO="Utilícese la letra 'i' (incompleto) delante del número para los casos en que la cantidad de figuras sea mayor que la expuesta, pero no se pueda cuantificar con exactitud, cuánto mayor por la altura de los grabados, por efectos de erosión u otros. Por ejemplo, en la cara 4 de una roca hay más de 25 puntos, sin poderse cuantificar con exactitud esa cifra. Se coloca entonces: i-25. Para aquellos casos en que se desconozcan las cantidades totalmente totalmente, se usará 'i' en lugar de números."
 	
     piedra = models.ForeignKey(Piedra, related_name='FigurasPorTipo')    
-    numero =  CharField( '9.1. Número de cara trabajada (Punto 6)') 
-    tipoFigura = models.IntegerField('9.2. Tipo de figura',choices = TIPO_FIGURA)	
-    cantidad = CharField('9.3. Cantidad', help_text=AYUDA_TIPO)  
-    esCantidadInexacta = models.BooleanField('9.4. Cantidad Inexacta O Desconocida')	
-    descripcion = CharField('9.5. Descripcion',)
+    numero =  CharField( '6.a. Número de cara trabajada') 
+    tipoFigura = models.IntegerField('9. Figuras',choices = TIPO_FIGURA)	
+    cantidad = CharField('9.a. Cantidad', help_text=AYUDA_TIPO)  
+    esCantidadInexacta = models.BooleanField('9.b. Cantidad Inexacta O Desconocida')	
+    descripcion = CharField('9.c. Descripcion',)
     abbr = 'fpt'    
     
     def __unicode__(self):
         return '' # '# ' + str(self.id)
 		
     class Meta:
-        verbose_name = 'Conjunto de figuras por Tipo'
-        verbose_name_plural = '9. Conjuntos de figuras por tipo'
+        verbose_name = ''
+        verbose_name_plural = '9. Figuras'
 
 class EsquemaPorCara(models.Model):
 
@@ -1447,9 +1468,9 @@ class EsquemaPorCara(models.Model):
     de la cara de la piedra"""
 
     piedra = models.ForeignKey(Piedra, related_name='EsquemaPorCara')    
-    numero =  CharField( '10.1. Número de cara trabajada (Punto 6)')  
-    textoCara = CharField('10.2. Cara del Volumen') 
-    posicion = CharField('10.3. Posicion de las figuras') 
+    numero =  CharField( '6.a. Número de cara trabajada ')  
+    textoCara = CharField('10.1. Cara') 
+    posicion = CharField('10.2. Posicion de las figuras en la cara') 
     
     def __unicode__(self):
         return '' # '# ' + str(self.id)
@@ -1479,8 +1500,8 @@ class ConexionFiguras(models.Model):
     abbr = 'cnx'
     
     class Meta:
-        verbose_name = 'Conexion de figuras'
-        verbose_name_plural = '11. Conexion de figuras'
+        verbose_name = ''
+        verbose_name_plural = ''
 
 class Manifestaciones(models.Model):
 
@@ -1519,7 +1540,7 @@ class TratFoto(models.Model):
     rellenoSurcos = CharField('12.2. Relleno de surcos con')
     tratamientoDigital = CharField('12.3. Tratamiento digital')
     programaVersion = CharField('12.4. Programa/versión')
-    otrosTratamientos = CharField('12.5. Otros tratamientos fotografía')
+    otrosTratamientos = CharField('12.5. Otros')
 
     def __unicode__(self):
         return '' # '# ' + str(self.id)
@@ -1655,6 +1676,29 @@ class BibYacimiento(Bibliografia):
     yacimiento = models.ForeignKey(Yacimiento, related_name='BibYacimiento')
     
     esBibliografia = models.BooleanField('31.1 Bibliografía', default = True)
+    conPdf = models.BooleanField('31.1.0 PDF')
+    tienePDF = models.FileField('31.1.0.0. Archivo - PDF', 
+                                 upload_to='bibliografia_yac/%Y_%m', 
+                                 null=True, 
+                                 blank=True)
+    tienePDF1 = models.FileField('31.1.0.2. Archivo - PDF', 
+                                 upload_to='bibliografia_yac/%Y_%m', 
+                                 null=True, 
+                                 blank=True)
+    tienePDF2 = models.FileField('31.1.0.3. Archivo - PDF', 
+                                 upload_to='bibliografia_yac/%Y_%m', 
+                                 null=True, 
+                                 blank=True)
+    conWord = models.BooleanField('31.1.0.0. Documento Word')
+    tieneWord = models.FileField('31.1.0.0.1. Archivo - Word', 
+                                 upload_to='bibliografia_yac/%Y_%m', 
+                                 null=True, 
+                                 blank=True)
+    tieneWord1 = models.FileField('31.1.0.0.2. Archivo - Word', 
+                                 upload_to='bibliografia_yac/%Y_%m', 
+                                 null=True, 
+                                 blank=True)
+
     codigo = CharField('31.1.1. Código', blank = True)
     titulo = CharField('31.1.2. Título', blank = True)
     autor  = CharField('31.1.3. Autor ', blank = True)
@@ -1742,6 +1786,28 @@ class BibPiedra(Bibliografia):
 
     piedra = models.ForeignKey(Piedra, related_name='BibPiedra')
     esbilbio = models.BooleanField('13.4. Bibliografía')
+    tienePDF = models.BooleanField('13.4.0. PDF')
+    pdfarchivo = models.FileField('13.4.0.1. Archivo - PDF',
+                            upload_to='bibliografia_pie/%Y_%m', 
+                            null=True, 
+                            blank=True)
+    pdfarchivo1 = models.FileField('13.4.0.2. Archivo - PDF',
+                            upload_to='bibliografia_pie/%Y_%m', 
+                            null=True, 
+                            blank=True)
+    pdfarchivo2 = models.FileField('13.4.0.3. Archivo - PDF',
+                            upload_to='bibliografia_pie/%Y_%m', 
+                            null=True, 
+                            blank=True)
+    tieneWord = models.BooleanField('13.4.0. Word')
+    wordarchivo = models.FileField('13.4.0.1. Archivo - Word',
+                            upload_to='bibliografia_pie/%Y_%m', 
+                            null=True, 
+                            blank=True)
+    wordarchivo1 = models.FileField('13.4.0.2. Archivo - Word',
+                            upload_to='bibliografia_pie/%Y_%m', 
+                            null=True, 
+                            blank=True)        
     codigo = CharField('13.4.1. Código', blank = True)
     titulo = CharField('13.4.2. Título', blank = True)
     autor  = CharField('13.4.3. Autor ', blank = True)
@@ -1898,7 +1964,7 @@ class VideoPiedra (Video) :
     instituciony = CharField('13.6.4. Institucion',)
     numReferenciay = models.IntegerField('13.6.5. Nro de referencia')
     isFromAnary = models.BooleanField('13.6.6. ¿Es de ANAR?')
-    numCopiay = models.IntegerField('13.6.1. Nro de copia')
+    numCopiay = models.IntegerField('13.6.6.1. Nro de copia')
     archivoy = models.FileField('13.6.7. Video - Archivo', upload_to='video/%Y_%m', null=True, blank=True)
 
     abbr = 'vdp'
@@ -1946,7 +2012,7 @@ class PeliculaPiedra (Pelicula):
     instituciony = CharField('13.7.4. Institucion',)
     numReferenciay = models.IntegerField('13.7.5. Nro de referencia')
     isFromAnary = models.BooleanField('13.7.6. ¿Es de ANAR?')
-    numCopiay = models.IntegerField('13.7.1. Nro de copia')
+    numCopiay = models.IntegerField('13.7.6.1. Nro de copia')
     archivoy = models.FileField('13.7.7. Video - Archivo', upload_to='video/%Y_%m', null=True, blank=True)
     
     abbr = 'plp'

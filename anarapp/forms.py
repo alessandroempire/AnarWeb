@@ -1168,10 +1168,11 @@ class TratFotoPiedraForm(ModelForm) :
 class DimensionPiedraForm(ModelForm) :
 
     class Meta:
-        widgets = {                
-                'altoMaximo':  TextInput(attrs=regularTextField),
-                'largoMaximo': TextInput(attrs=regularTextField),
-                'anchoMaximo': TextInput(attrs=regularTextField),                    
+        widgets = {
+        		'dimensiones': TextInput(attrs={'class': 'input-medium'}),            
+                'alto': TextInput(attrs={'class': 'input-small'}),
+                'largo': TextInput(attrs={'class': 'input-small'}),
+            	'ancho': TextInput(attrs={'class': 'input-small'}),
         }
         
 class UbicacionCarasForm(ModelForm) :
@@ -1191,16 +1192,13 @@ class FigurasPorTipoForm (ModelForm):
             'tipoFigura': Select(attrs={'class': 'input-medium'}),
             'numero': TextInput(attrs={'class': 'input-small'}),
             'descripcion' : AutosizedTextarea(attrs={'rows': 2})
-        }
+        }			
 	
 class CaraTrabajadaForm (ModelForm):
     class Meta:
         widgets = {
             'numero': TextInput(attrs={'class': 'input-medium'}),
-            'orientacion': Select(attrs={'class': 'input-medium'}),
-            'alto': TextInput(attrs={'class': 'input-small'}),
-            'ancho': TextInput(attrs={'class': 'input-small'}),
-            'largo': TextInput(attrs={'class': 'input-small'}),			
+            'orientacion': Select(attrs={'class': 'input-medium'})
         }
 		
 class PiedraForm(ModelForm) :
@@ -1210,10 +1208,7 @@ class PiedraForm(ModelForm) :
                 'yacimiento': LinkedSelect,
                 'manifiestacionAsociada' :  AutosizedTextarea(attrs=regularTextArea),		             
                 'codigo': TextInput(attrs=regularTextField),
-                'nombreFiguras':  AutosizedTextarea(attrs=regularTextArea),
                 'nombre': TextInput(attrs=regularTextField),
-                'numeroCaras': TextInput(attrs=regularTextField),
-                'numeroCarasTrajabadas': TextInput(attrs=regularTextField),                     
         }
 
 
