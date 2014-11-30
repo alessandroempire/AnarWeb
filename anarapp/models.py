@@ -1324,7 +1324,7 @@ class Piedra2(models.Model):
 
     yacimiento = models.ForeignKey(Piedra, related_name='Piedra2')
 
-    nombreFiguras = CharField('2- Nombre de las figuras',)    
+    nombreFiguras = CharField('2- Nombre de las figuras', null=True, blank=True)    
     estado = models.ForeignKey(Estado, related_name='EstadoPied', verbose_name = '3- Estado/Provincia', blank = True, null = True)     
     numeroCaras = models.IntegerField('4- Numero de Caras', help_text= mark_safe("<br><br> <a href='#' onclick='pop1()' >?</a> <script> function pop1() {window.open('/static/ayudas y glosarios/numeroCaras.html','name','height=500,width=500,scrollbars=yes');return false;} </script> </html>"))
     numeroCarasTrajabadas = models.IntegerField('5- Numero de caras trabajadas')
