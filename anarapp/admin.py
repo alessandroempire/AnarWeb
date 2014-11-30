@@ -477,8 +477,7 @@ class FotografiaPiedraInline(admin.TabularInline):
     suit_classes = 'suit-tab suit-tab-generales'
 
 class DimensionPiedraInline(admin.TabularInline):
-    extra = 2
-    max_num = 2
+    extra = 4
     model =  DimensionPiedra
     form = forms.DimensionPiedraForm
     suit_classes = 'suit-tab suit-tab-generales'

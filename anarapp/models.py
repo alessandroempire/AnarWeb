@@ -1343,7 +1343,7 @@ class DimensionPiedra(models.Model):
 
     """Representa la información de las dimensiones de la piedra"""
 
-    piedra = models.OneToOneField(Piedra, related_name='DimensionPiedra')
+    piedra = models.ForeignKey(Piedra, related_name='DimensionPiedra')
     
     dimensiones = CharField('6a. Número de cara trabajada')
     alto =  models.DecimalField('7.1. Alto ', max_digits=12, decimal_places=6)
