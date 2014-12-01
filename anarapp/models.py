@@ -1035,7 +1035,7 @@ class CausasDestruccionYac(models.Model):
 
     class Meta:
         verbose_name = '27.5.1. Causas'
-        verbose_name_plural = 'Causas:'
+        verbose_name_plural = ''
         
     def __unicode__(self):
         return '' # '# ' + str(self.id)
@@ -1509,11 +1509,13 @@ class Manifestaciones(models.Model):
 
     piedra = models.OneToOneField(Piedra, related_name='Manifestaciones')
     
-    tienePetroglifo = models.BooleanField('¿Tiene Petroglifos?')
-    tienePinturaRupestre = models.BooleanField('¿Tiene Pintura Rupestre?')
-    tieneAmoladores = models.BooleanField('¿Tiene Amoladores?')
-    tienePuntosAcoplados = models.BooleanField('¿Tiene Puntos Acoplados?')
-    tieneCupulas = models.BooleanField('¿Tiene Cupulas?')
+    hasPetroglifo = CharField('1.2.1. Petroglifos')
+    hasPinturaRupestre = CharField('1.2.2. Pintura Rupestre')
+    hasAmoladores = CharField('1.2.3. Amoladores')
+    hasPuntosAcoplados = CharField('1.2.4. Puntos Acoplados')
+    hasCupulas = CharField('1.2.5. Cupulas')
+    hasMitos = CharField('1.2.6. Mitos') 
+    hasOtros = CharField('1.2.7. Otros')
     
     def __unicode__(self):
         return '' # '# ' + str(self.id)
@@ -1522,7 +1524,7 @@ class Manifestaciones(models.Model):
     
     class Meta:
         verbose_name = ''
-        verbose_name_plural = 'Manifestaciones de la piedra'
+        verbose_name_plural = '1.2 Manifestaciones Asociadas'
         
 
 ########################################################################################
@@ -2160,12 +2162,12 @@ class OtrosValYac(OtrosValores):
 class OtrosValPiedra(OtrosValores):
 
     piedra = models.ForeignKey(Piedra, related_name='OtrosValPiedra')
-    texto = CharField('15.1. Otros valores', blank = True)
+    texto = CharField('15.1. Otros valores de la roca', blank = True)
     abbr = 'ovp'
     
     class Meta:
         verbose_name = ''
-        verbose_name_plural = '15. Otros valores de la piedra'
+        verbose_name_plural = ''
 
 # Observaciones
 
