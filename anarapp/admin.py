@@ -472,7 +472,7 @@ class Piedra2Inline(admin.StackedInline):
     extra = 1
     max_num = 1
     model = Piedra2
-    suit_classes = 'suit-tab suit-tab-generales'
+    template = 'InlineTemplates/ContinuacionPiedra.html'
 
 class FotografiaPiedraInline(admin.TabularInline):
     extra = 1 
@@ -490,7 +490,7 @@ class ManifestacionesInline(admin.StackedInline):
     extra = 1
     max_num = 1
     model =  Manifestaciones
-    suit_classes = 'suit-tab suit-tab-manifestaciones'
+    template = 'InlineTemplates/ManifestacionesPiedra.html'
 
 class CaraTrabajadaInline(admin.TabularInline):
     extra = 6

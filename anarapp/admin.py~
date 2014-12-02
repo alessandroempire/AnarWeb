@@ -80,7 +80,6 @@ class DatumYacInline(admin.StackedInline):
     extra = 1
     max_num = 1
     template = 'InlineTemplates/DatumGPS.html'
-    #verbose_name_plural='9. Datum GPS'
     suit_classes = 'suit-tab suit-tab-generales'
 
 class AltitudYacInline(admin.StackedInline):
@@ -473,7 +472,7 @@ class Piedra2Inline(admin.StackedInline):
     extra = 1
     max_num = 1
     model = Piedra2
-    suit_classes = 'suit-tab suit-tab-generales'
+    template = 'InlineTemplates/ContinuacionPiedra.html'
 
 class FotografiaPiedraInline(admin.TabularInline):
     extra = 1 
