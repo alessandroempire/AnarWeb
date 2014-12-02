@@ -55,3 +55,6 @@ hacer respaldos:
 2)Para respaldar -> lanzar "pg_dump" : <pg_dump anardb> esto creara un archivo "BackupXXXX-XX-XX.backup" con un volcado en SQL del esquema + data, en caso de necesitar algo distindo revisar documentacion de "pg_dump" OJO importante esto no respaldara imagenes, la DB solo almacena rutas a estas imagenes en la carpeta "upload" dentro de la carpeta principal del sistema ANAR, para respaldarla es necesario copiarla.
 
 3)Para insertar respaldo repetir pasos 2 , 5 y 13 en ese orden.
+
+### INFO GIT ###
+tener cuidado al actualizar el servidor con GIT ya que este cambia los permisos de acceso a las carpetas lo que impide agregar archivos. en caso de que esto ocurra cambiar los permisos para la carpeta "upload" para permitir la lectura y escritura de archivos de otros usuarios.

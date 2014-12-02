@@ -120,7 +120,17 @@ CREATE TABLE anarapp_bibpiedra (
     "esDigital" boolean NOT NULL,
     "esNegativo" boolean NOT NULL,
     descripcion text NOT NULL,
-    "tipoMapa" integer
+    "tipoMapa" integer,
+    archivo1 character varying(100),
+    archivo2 character varying(100),
+    archivo3 character varying(100),
+    archivo4 character varying(100),
+    "tieneFotografia" character varying(100),
+    "tieneFotografia1" character varying(100),
+    "tieneFotografia2" character varying(100),
+    "tieneFotografia3" character varying(100),
+    "tieneFotografia4" character varying(100),
+    esbilbio boolean NOT NULL
 );
 
 
@@ -147,8 +157,19 @@ CREATE TABLE anarapp_bibyacimiento (
     "esPapel" boolean NOT NULL,
     "esDigital" boolean NOT NULL,
     "esNegativo" boolean NOT NULL,
-    descripcion text NOT NULL,
-    "tipoMapa" integer
+    "tipoMapa" integer,
+    "esBibliografia" boolean NOT NULL,
+    "tieneFotografia" character varying(100),
+    "tieneMapa" character varying(100),
+    description boolean NOT NULL,
+    archivo1 character varying(100),
+    archivo2 character varying(100),
+    archivo3 character varying(100),
+    archivo4 character varying(100),
+    "tieneFotografia1" character varying(100),
+    "tieneFotografia2" character varying(100),
+    "tieneFotografia3" character varying(100),
+    "tieneFotografia4" character varying(100)
 );
 
 
@@ -1025,7 +1046,7 @@ ALTER SEQUENCE anarapp_dimensionpiedra_id_seq OWNED BY anarapp_dimensionpiedra.i
 
 CREATE TABLE anarapp_escnatpiedra (
     repgrafpiedra_ptr_id integer NOT NULL,
-    "tipoReproduccion" integer NOT NULL
+    "tipoReproduccione" integer NOT NULL
 );
 
 
@@ -1286,7 +1307,6 @@ ALTER SEQUENCE anarapp_florayacimiento_id_seq OWNED BY anarapp_florayacimiento.i
 CREATE TABLE anarapp_foto (
     id integer NOT NULL,
     negativo text NOT NULL,
-    "tipoFotografia" integer NOT NULL,
     fecha character varying(100),
     fotografo text NOT NULL,
     institucion text NOT NULL,
@@ -1295,7 +1315,11 @@ CREATE TABLE anarapp_foto (
     "numFoto" text NOT NULL,
     "numMarcaNegativo" text NOT NULL,
     "esDeAnar" boolean NOT NULL,
-    "numCopiaAnar" integer NOT NULL
+    "numCopiaAnar" integer NOT NULL,
+    esfoto boolean NOT NULL,
+    "tipoFotoA" boolean NOT NULL,
+    "tipoFotoNA" boolean NOT NULL,
+    "tipoFotoS" boolean NOT NULL
 );
 
 
@@ -1532,7 +1556,9 @@ ALTER SEQUENCE anarapp_intensidaddestruccionyac_id_seq OWNED BY anarapp_intensid
 
 CREATE TABLE anarapp_llenadopiedra (
     llenadopor_ptr_id integer NOT NULL,
-    piedra_id integer NOT NULL
+    piedra_id integer NOT NULL,
+    "nombreP" text NOT NULL,
+    "fechaP" character varying(100)
 );
 
 
@@ -1543,9 +1569,7 @@ ALTER TABLE public.anarapp_llenadopiedra OWNER TO postgres;
 --
 
 CREATE TABLE anarapp_llenadopor (
-    id integer NOT NULL,
-    nombre text NOT NULL,
-    fecha character varying(100)
+    id integer NOT NULL
 );
 
 
@@ -1578,7 +1602,9 @@ ALTER SEQUENCE anarapp_llenadopor_id_seq OWNED BY anarapp_llenadopor.id;
 
 CREATE TABLE anarapp_llenadoyac (
     llenadopor_ptr_id integer NOT NULL,
-    yacimiento_id integer NOT NULL
+    yacimiento_id integer NOT NULL,
+    "nombreY" text NOT NULL,
+    "fechaY" character varying(100)
 );
 
 
@@ -2086,9 +2112,7 @@ ALTER SEQUENCE anarapp_manifestacionyacimiento_id_seq OWNED BY anarapp_manifesta
 --
 
 CREATE TABLE anarapp_mataudiovisual (
-    id integer NOT NULL,
-    formato text NOT NULL,
-    archivo character varying(100)
+    id integer NOT NULL
 );
 
 
@@ -2121,7 +2145,10 @@ ALTER SEQUENCE anarapp_mataudiovisual_id_seq OWNED BY anarapp_mataudiovisual.id;
 
 CREATE TABLE anarapp_matavpiedra (
     mataudiovisual_ptr_id integer NOT NULL,
-    piedra_id integer NOT NULL
+    piedra_id integer NOT NULL,
+    ismatavy boolean NOT NULL,
+    format text NOT NULL,
+    archive character varying(100)
 );
 
 
@@ -2133,7 +2160,10 @@ ALTER TABLE public.anarapp_matavpiedra OWNER TO postgres;
 
 CREATE TABLE anarapp_matavyacimiento (
     mataudiovisual_ptr_id integer NOT NULL,
-    yacimiento_id integer NOT NULL
+    yacimiento_id integer NOT NULL,
+    ismatavy boolean NOT NULL,
+    format text NOT NULL,
+    archive character varying(100)
 );
 
 
@@ -2187,9 +2217,7 @@ ALTER SEQUENCE anarapp_materialyacimiento_id_seq OWNED BY anarapp_materialyacimi
 --
 
 CREATE TABLE anarapp_multimedia (
-    id integer NOT NULL,
-    tecnica text NOT NULL,
-    archivo character varying(100)
+    id integer NOT NULL
 );
 
 
@@ -2222,7 +2250,10 @@ ALTER SEQUENCE anarapp_multimedia_id_seq OWNED BY anarapp_multimedia.id;
 
 CREATE TABLE anarapp_multimediapiedra (
     multimedia_ptr_id integer NOT NULL,
-    piedra_id integer NOT NULL
+    piedra_id integer NOT NULL,
+    ismult boolean NOT NULL,
+    "tecnicaP" text NOT NULL,
+    "archivoP" character varying(100)
 );
 
 
@@ -2234,7 +2265,10 @@ ALTER TABLE public.anarapp_multimediapiedra OWNER TO postgres;
 
 CREATE TABLE anarapp_multimediayac (
     multimedia_ptr_id integer NOT NULL,
-    yacimiento_id integer NOT NULL
+    yacimiento_id integer NOT NULL,
+    ismult boolean NOT NULL,
+    "tecnicaY" text NOT NULL,
+    "archivoY" character varying(100)
 );
 
 
@@ -2314,8 +2348,7 @@ ALTER SEQUENCE anarapp_notasyacimiento_id_seq OWNED BY anarapp_notasyacimiento.i
 --
 
 CREATE TABLE anarapp_observaciones (
-    id integer NOT NULL,
-    texto text NOT NULL
+    id integer NOT NULL
 );
 
 
@@ -2348,7 +2381,8 @@ ALTER SEQUENCE anarapp_observaciones_id_seq OWNED BY anarapp_observaciones.id;
 
 CREATE TABLE anarapp_observacionesyac (
     observaciones_ptr_id integer NOT NULL,
-    yacimiento_id integer NOT NULL
+    yacimiento_id integer NOT NULL,
+    "textoY" text NOT NULL
 );
 
 
@@ -2360,7 +2394,8 @@ ALTER TABLE public.anarapp_observacionesyac OWNER TO postgres;
 
 CREATE TABLE anarapp_observacpiedra (
     observaciones_ptr_id integer NOT NULL,
-    piedra_id integer NOT NULL
+    piedra_id integer NOT NULL,
+    "textoP" text NOT NULL
 );
 
 
@@ -2371,20 +2406,7 @@ ALTER TABLE public.anarapp_observacpiedra OWNER TO postgres;
 --
 
 CREATE TABLE anarapp_obtencioninfo (
-    id integer NOT NULL,
-    prospeccion boolean NOT NULL,
-    comunicacion boolean NOT NULL,
-    nombre text NOT NULL,
-    direccion text NOT NULL,
-    telefono text NOT NULL,
-    "telefonoCel" text NOT NULL,
-    mail character varying(75) NOT NULL,
-    "paginaWeb" character varying(200) NOT NULL,
-    twitter text NOT NULL,
-    "nombreFacebook" text NOT NULL,
-    blog character varying(200) NOT NULL,
-    fecha character varying(100),
-    verificado boolean NOT NULL
+    id integer NOT NULL
 );
 
 
@@ -2417,7 +2439,21 @@ ALTER SEQUENCE anarapp_obtencioninfo_id_seq OWNED BY anarapp_obtencioninfo.id;
 
 CREATE TABLE anarapp_obtinfopiedra (
     obtencioninfo_ptr_id integer NOT NULL,
-    piedra_id integer NOT NULL
+    piedra_id integer NOT NULL,
+    isinfo boolean NOT NULL,
+    "prospeccionP" boolean NOT NULL,
+    "comunicacionP" boolean NOT NULL,
+    "nombreP" text NOT NULL,
+    "direccionP" text NOT NULL,
+    "telefonoP" text NOT NULL,
+    "telefonoCelP" text NOT NULL,
+    "mailP" character varying(75) NOT NULL,
+    "paginaWebP" character varying(200) NOT NULL,
+    "twitterP" text NOT NULL,
+    "nombreFacebookP" text NOT NULL,
+    "blogP" character varying(200) NOT NULL,
+    "fechaP" character varying(100),
+    "verificadoP" boolean NOT NULL
 );
 
 
@@ -2429,7 +2465,21 @@ ALTER TABLE public.anarapp_obtinfopiedra OWNER TO postgres;
 
 CREATE TABLE anarapp_obtinfoyac (
     obtencioninfo_ptr_id integer NOT NULL,
-    yacimiento_id integer NOT NULL
+    yacimiento_id integer NOT NULL,
+    isinfo boolean NOT NULL,
+    "prospeccionY" boolean NOT NULL,
+    "comunicacionY" boolean NOT NULL,
+    "nombreY" text NOT NULL,
+    "direccionY" text NOT NULL,
+    "telefonoY" text NOT NULL,
+    "telefonoCelY" text NOT NULL,
+    "mailY" character varying(75) NOT NULL,
+    "paginaWebY" character varying(200) NOT NULL,
+    "twitterY" text NOT NULL,
+    "nombreFacebookY" text NOT NULL,
+    "blogY" character varying(200) NOT NULL,
+    "fechaY" character varying(100),
+    "verificadoY" boolean NOT NULL
 );
 
 
@@ -2538,8 +2588,7 @@ ALTER TABLE public.anarapp_otrosvalyac OWNER TO postgres;
 --
 
 CREATE TABLE anarapp_paginaweb (
-    id integer NOT NULL,
-    "direccionURL" character varying(200) NOT NULL
+    id integer NOT NULL
 );
 
 
@@ -2572,7 +2621,9 @@ ALTER SEQUENCE anarapp_paginaweb_id_seq OWNED BY anarapp_paginaweb.id;
 
 CREATE TABLE anarapp_paginawebpiedra (
     paginaweb_ptr_id integer NOT NULL,
-    piedra_id integer NOT NULL
+    piedra_id integer NOT NULL,
+    "tieneWb" boolean NOT NULL,
+    "direccionURLP" character varying(200) NOT NULL
 );
 
 
@@ -2584,7 +2635,9 @@ ALTER TABLE public.anarapp_paginawebpiedra OWNER TO postgres;
 
 CREATE TABLE anarapp_paginawebyac (
     paginaweb_ptr_id integer NOT NULL,
-    yacimiento_id integer NOT NULL
+    yacimiento_id integer NOT NULL,
+    "tieneWb" boolean NOT NULL,
+    "direccionURLy" character varying(200) NOT NULL
 );
 
 
@@ -2607,7 +2660,17 @@ ALTER TABLE public.anarapp_pelicula OWNER TO postgres;
 
 CREATE TABLE anarapp_peliculapiedra (
     pelicula_ptr_id integer NOT NULL,
-    piedra_id integer NOT NULL
+    piedra_id integer NOT NULL,
+    isvidyac boolean NOT NULL,
+    anioy integer NOT NULL,
+    formatoy text NOT NULL,
+    tituloy text NOT NULL,
+    autory text NOT NULL,
+    instituciony text NOT NULL,
+    "numReferenciay" integer NOT NULL,
+    "isFromAnary" boolean NOT NULL,
+    "numCopiay" integer NOT NULL,
+    archivoy character varying(100)
 );
 
 
@@ -2619,7 +2682,17 @@ ALTER TABLE public.anarapp_peliculapiedra OWNER TO postgres;
 
 CREATE TABLE anarapp_peliyacimiento (
     pelicula_ptr_id integer NOT NULL,
-    yacimiento_id integer NOT NULL
+    yacimiento_id integer NOT NULL,
+    isvidyac boolean NOT NULL,
+    anioy integer NOT NULL,
+    formatoy text NOT NULL,
+    tituloy text NOT NULL,
+    autory text NOT NULL,
+    instituciony text NOT NULL,
+    "numReferenciay" integer NOT NULL,
+    "isFromAnary" boolean NOT NULL,
+    "numCopiay" integer NOT NULL,
+    archivoy character varying(100)
 );
 
 
@@ -2741,7 +2814,9 @@ ALTER SEQUENCE anarapp_repgrafpiedra_id_seq OWNED BY anarapp_repgrafpiedra.id;
 
 CREATE TABLE anarapp_supervisadopiedra (
     supervisadopor_ptr_id integer NOT NULL,
-    piedra_id integer NOT NULL
+    piedra_id integer NOT NULL,
+    "nombreP" text NOT NULL,
+    "fechaP" character varying(100)
 );
 
 
@@ -2752,9 +2827,7 @@ ALTER TABLE public.anarapp_supervisadopiedra OWNER TO postgres;
 --
 
 CREATE TABLE anarapp_supervisadopor (
-    id integer NOT NULL,
-    nombre text NOT NULL,
-    fecha character varying(100)
+    id integer NOT NULL
 );
 
 
@@ -2787,7 +2860,9 @@ ALTER SEQUENCE anarapp_supervisadopor_id_seq OWNED BY anarapp_supervisadopor.id;
 
 CREATE TABLE anarapp_supervisadoyac (
     supervisadopor_ptr_id integer NOT NULL,
-    yacimiento_id integer NOT NULL
+    yacimiento_id integer NOT NULL,
+    "nombreY" text NOT NULL,
+    "fechaY" character varying(100)
 );
 
 
@@ -2800,7 +2875,8 @@ ALTER TABLE public.anarapp_supervisadoyac OWNER TO postgres;
 CREATE TABLE anarapp_tecnicaparageoglifo (
     id integer NOT NULL,
     tecnicas text NOT NULL,
-    yacimiento_id integer NOT NULL
+    yacimiento_id integer NOT NULL,
+    "esGeoflifo" boolean NOT NULL
 );
 
 
@@ -2842,7 +2918,8 @@ CREATE TABLE anarapp_tecnicaparamicropetro (
     "esAbrasion" boolean NOT NULL,
     otros text NOT NULL,
     yacimiento_id integer NOT NULL,
-    "esConcha" boolean NOT NULL
+    "esConcha" boolean NOT NULL,
+    "esMicro" boolean NOT NULL
 );
 
 
@@ -2880,7 +2957,8 @@ CREATE TABLE anarapp_tecnicaparamonumentos (
     "esDolmen" boolean NOT NULL,
     tecnicas text NOT NULL,
     otros text NOT NULL,
-    yacimiento_id integer NOT NULL
+    yacimiento_id integer NOT NULL,
+    "esMonumento" boolean NOT NULL
 );
 
 
@@ -2922,7 +3000,8 @@ CREATE TABLE anarapp_tecnicaparapetroglifo (
     "esAbrasion" boolean NOT NULL,
     otros text NOT NULL,
     yacimiento_id integer NOT NULL,
-    "esConcha" boolean NOT NULL
+    "esConcha" boolean NOT NULL,
+    "esPetroglifo" boolean NOT NULL
 );
 
 
@@ -2959,7 +3038,8 @@ CREATE TABLE anarapp_tecnicaparapintura (
     fibra boolean NOT NULL,
     soplado boolean NOT NULL,
     otros text NOT NULL,
-    yacimiento_id integer NOT NULL
+    yacimiento_id integer NOT NULL,
+    "esPintura" boolean NOT NULL
 );
 
 
@@ -3326,16 +3406,7 @@ ALTER SEQUENCE anarapp_usoactsuelo_id_seq OWNED BY anarapp_usoactsuelo.id;
 --
 
 CREATE TABLE anarapp_video (
-    id integer NOT NULL,
-    anio integer NOT NULL,
-    formato text NOT NULL,
-    titulo text NOT NULL,
-    autor text NOT NULL,
-    institucion text NOT NULL,
-    "numReferencia" integer NOT NULL,
-    "isFromAnar" boolean NOT NULL,
-    "numCopia" integer NOT NULL,
-    archivo character varying(100)
+    id integer NOT NULL
 );
 
 
@@ -3368,7 +3439,17 @@ ALTER SEQUENCE anarapp_video_id_seq OWNED BY anarapp_video.id;
 
 CREATE TABLE anarapp_videopiedra (
     video_ptr_id integer NOT NULL,
-    piedra_id integer NOT NULL
+    piedra_id integer NOT NULL,
+    isvidyac boolean NOT NULL,
+    anioy integer NOT NULL,
+    formatoy text NOT NULL,
+    tituloy text NOT NULL,
+    autory text NOT NULL,
+    instituciony text NOT NULL,
+    "numReferenciay" integer NOT NULL,
+    "isFromAnary" boolean NOT NULL,
+    "numCopiay" integer NOT NULL,
+    archivoy character varying(100)
 );
 
 
@@ -3380,7 +3461,17 @@ ALTER TABLE public.anarapp_videopiedra OWNER TO postgres;
 
 CREATE TABLE anarapp_videoyacimiento (
     video_ptr_id integer NOT NULL,
-    yacimiento_id integer NOT NULL
+    yacimiento_id integer NOT NULL,
+    isvidyac boolean NOT NULL,
+    anioy integer NOT NULL,
+    formatoy text NOT NULL,
+    tituloy text NOT NULL,
+    autory text NOT NULL,
+    instituciony text NOT NULL,
+    "numReferenciay" integer NOT NULL,
+    "isFromAnary" boolean NOT NULL,
+    "numCopiay" integer NOT NULL,
+    archivoy character varying(100)
 );
 
 
@@ -4474,7 +4565,7 @@ SELECT pg_catalog.setval('anarapp_bibliografia_id_seq', 21, true);
 -- Data for Name: anarapp_bibpiedra; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY anarapp_bibpiedra (bibliografia_ptr_id, piedra_id, codigo, titulo, autor, ano, institucion, "conDibujo", archivo, "esFotografia", escolor, "esBlancoYNegro", "esDiapositiva", "esPapel", "esDigital", "esNegativo", descripcion, "tipoMapa") FROM stdin;
+COPY anarapp_bibpiedra (bibliografia_ptr_id, piedra_id, codigo, titulo, autor, ano, institucion, "conDibujo", archivo, "esFotografia", escolor, "esBlancoYNegro", "esDiapositiva", "esPapel", "esDigital", "esNegativo", descripcion, "tipoMapa", archivo1, archivo2, archivo3, archivo4, "tieneFotografia", "tieneFotografia1", "tieneFotografia2", "tieneFotografia3", "tieneFotografia4", esbilbio) FROM stdin;
 \.
 
 
@@ -4482,28 +4573,28 @@ COPY anarapp_bibpiedra (bibliografia_ptr_id, piedra_id, codigo, titulo, autor, a
 -- Data for Name: anarapp_bibyacimiento; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY anarapp_bibyacimiento (bibliografia_ptr_id, yacimiento_id, codigo, titulo, autor, ano, institucion, "conDibujo", archivo, "esFotografia", escolor, "esBlancoYNegro", "esDiapositiva", "esPapel", "esDigital", "esNegativo", descripcion, "tipoMapa") FROM stdin;
-2	4		Pictografías y Cerámica de dos localidades hipogeas, en la Plenillanura del norte, Territorio Federal Amazonas, y Distrito Cedeño del Estado Bolívar. En B SVE (21): 21-32	Perera, M.A & H. Moreno	1984	SVE (Sociedad Venezolana de Espeleología)	f		t	f	t	f	f	f	f		\N
-1	4	C-255	4) Bo. 55 CUEVA SUSUDE INAVA  en : Las Pinturas Rupestres del Parguaza: Mito y Representación (Trabajo final de grado), pags 137-138	Franz Scaramelli	Caracas, Marzo 1992	Universidad Central de Venezuela - FACES- Escuela de Antropología	t	bibliografia_yac/2014_05/50_PR_4_SUSUDE_INAVA-Casa_de_Piedra_--Scaramelli_edo_Bolívar.jpg	f	f	f	f	f	f	f		\N
-3	4	C-500	El Diseño en los Petroglifos Venezolanos, pag 248	De Valencia. R & J, Sujo Volsky	1987	ANAR	f		t	f	t	f	f	f	f		\N
-4	4		JG -02- Cerro Iguanitas 2, en : Rock Art Chronology in the Orinoco Basin of Southwestern Venezuela (Dissertation presented to the Faculty of the Graduate School University of Missouri-Columbia), pags   354 a 365	John William Greer	1995	University of Missouri-Columbia	t	bibliografia_yac/2014_05/50_PR_SUSUDE_INAVA-Casa_de_Piedra_-1-_edo_Bolívar.jpg	f	f	f	f	f	f	f		\N
-5	5	C-3, C-56  (págs. 5 a 57)	Proyecto Orinoco. LA  CUEVA  DEL ELEFANTE                                       	Mario Sanoja e Iraida Vargas	1970	UCV, en ANAR	t		t	f	t	f	f	f	f	x	\N
-6	5	C - 500     (págs. 246 - 247)	3 Pintura Rupestre Cueva del Elefante (en:  El Diseño en los Petroglifos Venezolanos) 	Ruby De Valencia & Jeannine Sujo 	1987	ANAR	f		t	f	t	f	t	t	t		\N
-7	5	C – 125 (pags 39-40)	Petroglifos Venezolanos	Rafael Delgado  	1976	en ANAR	f		f	f	f	f	f	f	f		\N
-8	5	C – 540	Catalogo  Digital-GAN. Fundación Museos Nacionales . (Anexos 18 a 27)  	Roberto Colantoni 	2005	en: ANAR	f		t	t	f	f	f	t	f		\N
-9	6	C-255, (pags 150 a 152)	22) Bo. Cueva Caño Ore, en : Las Pinturas Rupestres del Parguaza: Mito y Representación (Trabajo final de grado)	Franz Scaramelli	Caracas, Marzo 1992	Universidad Central de Venezuela - FACES- Escuela de Antropología	t	bibliografia_yac/2014_05/Planta_vistas_y_corte-_Cueva_Caño_Ore_edo_Bolívar.jpg	f	f	f	f	f	f	f		\N
-10	6		JG-12 Cueva del Caño Ore, en : Rock Art Chronology in the Orinoco Basin of Southwestern Venezuela (Dissertation presented to the Faculty of the Graduate School University of Missouri-Columbia), pags: 383-384	John William Greer	1995	University of Missouri-Columbia	t	bibliografia_yac/2014_05/JG_Cueva_Caño_Ore.jpg	f	f	f	f	f	f	f		\N
-11	6	C – 540	Catalogo  Digital-GAN. Fundación Museos Nacionales	Roberto Colantoni	2005	en: ANAR	f		t	t	f	f	f	f	f		\N
-12	7	C- 500	El Geoglifo, en : El Diseño en los Petroglifos venezolanos, pags 92-93 y 274 y 275	De Valencia, Ruby & Jeannine Sujo	Caracas, 1987	ANAR	f		t	f	t	f	f	f	f		\N
-13	7		El Geoglifo de la Fila de Olivita en: Memorias de la Sociedad de Ciencias Naturales de la Salle., pp. 27-49	Cruxent, José María 	Año IX No. 23 enero abril Caracas ,1949		t		f	f	f	f	f	f	f		\N
-14	7		Los Petroglifos Venezolanos.  Revista A. No. 2	Cruxent, José María 	Septiembre. Caracas 1955		f		f	f	f	f	f	f	f		\N
-15	7		The Earthgliph of Chirgua ,Venezuela. Review of Ethnology pp. 126-127	Straka, Hellmuth 	Austria, 1972 		f		f	f	f	f	f	f	f		\N
-16	7		El dibujo más grande de Venezuela, en :Mecánica Nacional p.48	Straka, Hellmuth	Caracas 1978	ANAR	f		t	f	t	f	f	f	f		\N
-17	7		Los petroglifos en Venezuela, en :Separata del Boletín de la Sociedad Venezolana de Ciencias Naturales No. 130/131 p151	Straka, Hellmuth	Caracas, 1976	Sociedad Venezolana de Ciencias Naturales	f		f	f	f	f	f	f	f		\N
-18	7		El Estudio del Arte Rupestre en Venezuela. 	Sujo Volsky, Jeannine.		Universidad Católica Andrés Bello. Instituto de Investigaciones Históricas. Centro de Lenguas Indígena	t		f	f	f	f	f	f	f		\N
-19	7		Nuevas consideraciones metodológicas para el estudio del arte rupestre venezolano,p 247  	Sujo Volsky, Jeannine.	París, 1976	Actes du XLIIe. Congres International des Americaniste.Vol IXB. Fondation Singer Polignac.	t		f	f	f	f	f	f	f		\N
-20	7		Informe sobre el Geoglifo "La Rueda del Indio" Chirgua Venezuela. Boletín El Guácharo No. 44	Urbani, Bernardo & Franco, Urbani 	Diciembre, 1998	Sociedad Venezolana de Espeleología	t		f	f	t	f	f	f	f		\N
-21	7		El geoglifo de Chirgua (Carabobo, Venezuela). 	Salamanca, Miguel Ángel	2001	En Rupestreweb,http://www.rupestreweb.info/chirgua.html	t		t	f	t	f	f	f	f		\N
+COPY anarapp_bibyacimiento (bibliografia_ptr_id, yacimiento_id, codigo, titulo, autor, ano, institucion, "conDibujo", archivo, "esFotografia", escolor, "esBlancoYNegro", "esDiapositiva", "esPapel", "esDigital", "esNegativo", "tipoMapa", "esBibliografia", "tieneFotografia", "tieneMapa", description, archivo1, archivo2, archivo3, archivo4, "tieneFotografia1", "tieneFotografia2", "tieneFotografia3", "tieneFotografia4") FROM stdin;
+2	4		Pictografías y Cerámica de dos localidades hipogeas, en la Plenillanura del norte, Territorio Federal Amazonas, y Distrito Cedeño del Estado Bolívar. En B SVE (21): 21-32	Perera, M.A & H. Moreno	1984	SVE (Sociedad Venezolana de Espeleología)	f		t	f	t	f	f	f	f	\N	t	\N	\N	f	\N	\N	\N	\N	\N	\N	\N	\N
+1	4	C-255	4) Bo. 55 CUEVA SUSUDE INAVA  en : Las Pinturas Rupestres del Parguaza: Mito y Representación (Trabajo final de grado), pags 137-138	Franz Scaramelli	Caracas, Marzo 1992	Universidad Central de Venezuela - FACES- Escuela de Antropología	t	bibliografia_yac/2014_05/50_PR_4_SUSUDE_INAVA-Casa_de_Piedra_--Scaramelli_edo_Bolívar.jpg	f	f	f	f	f	f	f	\N	t	\N	\N	f	\N	\N	\N	\N	\N	\N	\N	\N
+3	4	C-500	El Diseño en los Petroglifos Venezolanos, pag 248	De Valencia. R & J, Sujo Volsky	1987	ANAR	f		t	f	t	f	f	f	f	\N	t	\N	\N	f	\N	\N	\N	\N	\N	\N	\N	\N
+4	4		JG -02- Cerro Iguanitas 2, en : Rock Art Chronology in the Orinoco Basin of Southwestern Venezuela (Dissertation presented to the Faculty of the Graduate School University of Missouri-Columbia), pags   354 a 365	John William Greer	1995	University of Missouri-Columbia	t	bibliografia_yac/2014_05/50_PR_SUSUDE_INAVA-Casa_de_Piedra_-1-_edo_Bolívar.jpg	f	f	f	f	f	f	f	\N	t	\N	\N	f	\N	\N	\N	\N	\N	\N	\N	\N
+5	5	C-3, C-56  (págs. 5 a 57)	Proyecto Orinoco. LA  CUEVA  DEL ELEFANTE                                       	Mario Sanoja e Iraida Vargas	1970	UCV, en ANAR	t		t	f	t	f	f	f	f	\N	t	\N	\N	f	\N	\N	\N	\N	\N	\N	\N	\N
+6	5	C - 500     (págs. 246 - 247)	3 Pintura Rupestre Cueva del Elefante (en:  El Diseño en los Petroglifos Venezolanos) 	Ruby De Valencia & Jeannine Sujo 	1987	ANAR	f		t	f	t	f	t	t	t	\N	t	\N	\N	f	\N	\N	\N	\N	\N	\N	\N	\N
+7	5	C – 125 (pags 39-40)	Petroglifos Venezolanos	Rafael Delgado  	1976	en ANAR	f		f	f	f	f	f	f	f	\N	t	\N	\N	f	\N	\N	\N	\N	\N	\N	\N	\N
+8	5	C – 540	Catalogo  Digital-GAN. Fundación Museos Nacionales . (Anexos 18 a 27)  	Roberto Colantoni 	2005	en: ANAR	f		t	t	f	f	f	t	f	\N	t	\N	\N	f	\N	\N	\N	\N	\N	\N	\N	\N
+9	6	C-255, (pags 150 a 152)	22) Bo. Cueva Caño Ore, en : Las Pinturas Rupestres del Parguaza: Mito y Representación (Trabajo final de grado)	Franz Scaramelli	Caracas, Marzo 1992	Universidad Central de Venezuela - FACES- Escuela de Antropología	t	bibliografia_yac/2014_05/Planta_vistas_y_corte-_Cueva_Caño_Ore_edo_Bolívar.jpg	f	f	f	f	f	f	f	\N	t	\N	\N	f	\N	\N	\N	\N	\N	\N	\N	\N
+10	6		JG-12 Cueva del Caño Ore, en : Rock Art Chronology in the Orinoco Basin of Southwestern Venezuela (Dissertation presented to the Faculty of the Graduate School University of Missouri-Columbia), pags: 383-384	John William Greer	1995	University of Missouri-Columbia	t	bibliografia_yac/2014_05/JG_Cueva_Caño_Ore.jpg	f	f	f	f	f	f	f	\N	t	\N	\N	f	\N	\N	\N	\N	\N	\N	\N	\N
+11	6	C – 540	Catalogo  Digital-GAN. Fundación Museos Nacionales	Roberto Colantoni	2005	en: ANAR	f		t	t	f	f	f	f	f	\N	t	\N	\N	f	\N	\N	\N	\N	\N	\N	\N	\N
+12	7	C- 500	El Geoglifo, en : El Diseño en los Petroglifos venezolanos, pags 92-93 y 274 y 275	De Valencia, Ruby & Jeannine Sujo	Caracas, 1987	ANAR	f		t	f	t	f	f	f	f	\N	t	\N	\N	f	\N	\N	\N	\N	\N	\N	\N	\N
+13	7		El Geoglifo de la Fila de Olivita en: Memorias de la Sociedad de Ciencias Naturales de la Salle., pp. 27-49	Cruxent, José María 	Año IX No. 23 enero abril Caracas ,1949		t		f	f	f	f	f	f	f	\N	t	\N	\N	f	\N	\N	\N	\N	\N	\N	\N	\N
+14	7		Los Petroglifos Venezolanos.  Revista A. No. 2	Cruxent, José María 	Septiembre. Caracas 1955		f		f	f	f	f	f	f	f	\N	t	\N	\N	f	\N	\N	\N	\N	\N	\N	\N	\N
+15	7		The Earthgliph of Chirgua ,Venezuela. Review of Ethnology pp. 126-127	Straka, Hellmuth 	Austria, 1972 		f		f	f	f	f	f	f	f	\N	t	\N	\N	f	\N	\N	\N	\N	\N	\N	\N	\N
+16	7		El dibujo más grande de Venezuela, en :Mecánica Nacional p.48	Straka, Hellmuth	Caracas 1978	ANAR	f		t	f	t	f	f	f	f	\N	t	\N	\N	f	\N	\N	\N	\N	\N	\N	\N	\N
+17	7		Los petroglifos en Venezuela, en :Separata del Boletín de la Sociedad Venezolana de Ciencias Naturales No. 130/131 p151	Straka, Hellmuth	Caracas, 1976	Sociedad Venezolana de Ciencias Naturales	f		f	f	f	f	f	f	f	\N	t	\N	\N	f	\N	\N	\N	\N	\N	\N	\N	\N
+18	7		El Estudio del Arte Rupestre en Venezuela. 	Sujo Volsky, Jeannine.		Universidad Católica Andrés Bello. Instituto de Investigaciones Históricas. Centro de Lenguas Indígena	t		f	f	f	f	f	f	f	\N	t	\N	\N	f	\N	\N	\N	\N	\N	\N	\N	\N
+19	7		Nuevas consideraciones metodológicas para el estudio del arte rupestre venezolano,p 247  	Sujo Volsky, Jeannine.	París, 1976	Actes du XLIIe. Congres International des Americaniste.Vol IXB. Fondation Singer Polignac.	t		f	f	f	f	f	f	f	\N	t	\N	\N	f	\N	\N	\N	\N	\N	\N	\N	\N
+20	7		Informe sobre el Geoglifo "La Rueda del Indio" Chirgua Venezuela. Boletín El Guácharo No. 44	Urbani, Bernardo & Franco, Urbani 	Diciembre, 1998	Sociedad Venezolana de Espeleología	t		f	f	t	f	f	f	f	\N	t	\N	\N	f	\N	\N	\N	\N	\N	\N	\N	\N
+21	7		El geoglifo de Chirgua (Carabobo, Venezuela). 	Salamanca, Miguel Ángel	2001	En Rupestreweb,http://www.rupestreweb.info/chirgua.html	t		t	f	t	f	f	f	f	\N	t	\N	\N	f	\N	\N	\N	\N	\N	\N	\N	\N
 \.
 
 
@@ -4815,7 +4906,7 @@ COPY anarapp_croquis (id, yacimiento_id, archivo) FROM stdin;
 -- Name: anarapp_croquis_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('anarapp_croquis_id_seq', 10, true);
+SELECT pg_catalog.setval('anarapp_croquis_id_seq', 11, true);
 
 
 --
@@ -4875,7 +4966,7 @@ SELECT pg_catalog.setval('anarapp_dimensionpiedra_id_seq', 1, false);
 -- Data for Name: anarapp_escnatpiedra; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY anarapp_escnatpiedra (repgrafpiedra_ptr_id, "tipoReproduccion") FROM stdin;
+COPY anarapp_escnatpiedra (repgrafpiedra_ptr_id, "tipoReproduccione") FROM stdin;
 \.
 
 
@@ -4907,31 +4998,31 @@ SELECT pg_catalog.setval('anarapp_esquemaporcara_id_seq', 1, false);
 --
 
 COPY anarapp_estado (id, nombre, activo) FROM stdin;
-1	AMAZONAS	1
-2	ANZOÁTEGUI	1
-3	APURE	1
-4	ARAGUA	1
-5	BARINAS	1
-6	BOLÍVAR	1
-7	CARABOBO	1
-8	COJEDES	1
-9	DELTA AMACURO	1
-25	DEPENDENCIAS FEDERALES	1
-24	DISTRITO CAPITAL	1
-10	FALCÓN	1
-11	GUÁRICO	1
-12	LARA	1
-13	MÉRIDA	1
-14	MIRANDA	1
-15	MONAGAS	1
-16	NUEVA ESPARTA	1
-17	PORTUGUESA	1
-18	SUCRE	1
-19	TÁCHIRA	1
-20	TRUJILLO	1
-21	VARGAS	1
-22	YARACUY	1
-23	ZULIA	1
+1	Amazonas	1
+2	Anzoátegui	1
+3	Apure	1
+4	Aragua	1
+5	Barinas	1
+6	Bolívar	1
+7	Carabobo	1
+8	Cojedes	1
+9	Delta Amacuro	1
+25	Dependencias Federales	1
+24	Distrito Capital	1
+10	Falcón	1
+11	Guárico	1
+12	Lara	1
+13	Mérida	1
+14	Miranda	1
+15	Monagas	1
+16	Nueva Esparta	1
+17	Portuguesa	1
+18	Sucre	1
+19	Táchira	1
+20	Trujillo	1
+21	Vargas	1
+22	Yaracuy	1
+23	Zulia	1
 \.
 
 
@@ -5015,7 +5106,7 @@ SELECT pg_catalog.setval('anarapp_florayacimiento_id_seq', 2, true);
 -- Data for Name: anarapp_foto; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY anarapp_foto (id, negativo, "tipoFotografia", fecha, fotografo, institucion, "numReferencia", "numRollo", "numFoto", "numMarcaNegativo", "esDeAnar", "numCopiaAnar") FROM stdin;
+COPY anarapp_foto (id, negativo, fecha, fotografo, institucion, "numReferencia", "numRollo", "numFoto", "numMarcaNegativo", "esDeAnar", "numCopiaAnar", esfoto, "tipoFotoA", "tipoFotoNA", "tipoFotoS") FROM stdin;
 \.
 
 
@@ -5038,7 +5129,7 @@ COPY anarapp_fotografiapiedra (id, piedra_id, archivo) FROM stdin;
 -- Name: anarapp_fotografiapiedra_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('anarapp_fotografiapiedra_id_seq', 1, false);
+SELECT pg_catalog.setval('anarapp_fotografiapiedra_id_seq', 1, true);
 
 
 --
@@ -5098,7 +5189,7 @@ COPY anarapp_fotografiayac (id, "esAerea", "noEsAerea", "esSatelital", fecha, ya
 -- Name: anarapp_fotografiayac_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('anarapp_fotografiayac_id_seq', 62, true);
+SELECT pg_catalog.setval('anarapp_fotografiayac_id_seq', 63, true);
 
 
 --
@@ -5169,7 +5260,7 @@ SELECT pg_catalog.setval('anarapp_intensidaddestruccionyac_id_seq', 2, true);
 -- Data for Name: anarapp_llenadopiedra; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY anarapp_llenadopiedra (llenadopor_ptr_id, piedra_id) FROM stdin;
+COPY anarapp_llenadopiedra (llenadopor_ptr_id, piedra_id, "nombreP", "fechaP") FROM stdin;
 \.
 
 
@@ -5177,13 +5268,13 @@ COPY anarapp_llenadopiedra (llenadopor_ptr_id, piedra_id) FROM stdin;
 -- Data for Name: anarapp_llenadopor; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY anarapp_llenadopor (id, nombre, fecha) FROM stdin;
-1	Corinna Ott Wber	21 / 4 / 1986
-2	Ruby De Valencia	1 / 5 / 2014
-3	Corinna Ott Weber  	14 /7/1986
-4	Ruby De Valencia	1/5/2014
-5	Ruby De Valencia	1/5/2014
-6	Ruby De Valencia	16 / 5 /2014
+COPY anarapp_llenadopor (id) FROM stdin;
+1
+2
+3
+4
+5
+6
 \.
 
 
@@ -5198,13 +5289,13 @@ SELECT pg_catalog.setval('anarapp_llenadopor_id_seq', 6, true);
 -- Data for Name: anarapp_llenadoyac; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY anarapp_llenadoyac (llenadopor_ptr_id, yacimiento_id) FROM stdin;
-1	4
-2	4
-3	5
-4	5
-5	6
-6	7
+COPY anarapp_llenadoyac (llenadopor_ptr_id, yacimiento_id, "nombreY", "fechaY") FROM stdin;
+1	4		\N
+2	4		\N
+3	5		\N
+4	5		\N
+5	6		\N
+6	7		\N
 \.
 
 
@@ -5436,7 +5527,7 @@ SELECT pg_catalog.setval('anarapp_manifestacionyacimiento_id_seq', 5, true);
 -- Data for Name: anarapp_mataudiovisual; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY anarapp_mataudiovisual (id, formato, archivo) FROM stdin;
+COPY anarapp_mataudiovisual (id) FROM stdin;
 \.
 
 
@@ -5451,7 +5542,7 @@ SELECT pg_catalog.setval('anarapp_mataudiovisual_id_seq', 1, false);
 -- Data for Name: anarapp_matavpiedra; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY anarapp_matavpiedra (mataudiovisual_ptr_id, piedra_id) FROM stdin;
+COPY anarapp_matavpiedra (mataudiovisual_ptr_id, piedra_id, ismatavy, format, archive) FROM stdin;
 \.
 
 
@@ -5459,7 +5550,7 @@ COPY anarapp_matavpiedra (mataudiovisual_ptr_id, piedra_id) FROM stdin;
 -- Data for Name: anarapp_matavyacimiento; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY anarapp_matavyacimiento (mataudiovisual_ptr_id, yacimiento_id) FROM stdin;
+COPY anarapp_matavyacimiento (mataudiovisual_ptr_id, yacimiento_id, ismatavy, format, archive) FROM stdin;
 \.
 
 
@@ -5487,7 +5578,7 @@ SELECT pg_catalog.setval('anarapp_materialyacimiento_id_seq', 5, true);
 -- Data for Name: anarapp_multimedia; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY anarapp_multimedia (id, tecnica, archivo) FROM stdin;
+COPY anarapp_multimedia (id) FROM stdin;
 \.
 
 
@@ -5502,7 +5593,7 @@ SELECT pg_catalog.setval('anarapp_multimedia_id_seq', 1, false);
 -- Data for Name: anarapp_multimediapiedra; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY anarapp_multimediapiedra (multimedia_ptr_id, piedra_id) FROM stdin;
+COPY anarapp_multimediapiedra (multimedia_ptr_id, piedra_id, ismult, "tecnicaP", "archivoP") FROM stdin;
 \.
 
 
@@ -5510,7 +5601,7 @@ COPY anarapp_multimediapiedra (multimedia_ptr_id, piedra_id) FROM stdin;
 -- Data for Name: anarapp_multimediayac; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY anarapp_multimediayac (multimedia_ptr_id, yacimiento_id) FROM stdin;
+COPY anarapp_multimediayac (multimedia_ptr_id, yacimiento_id, ismult, "tecnicaY", "archivoY") FROM stdin;
 \.
 
 
@@ -5519,341 +5610,341 @@ COPY anarapp_multimediayac (multimedia_ptr_id, yacimiento_id) FROM stdin;
 --
 
 COPY anarapp_municipio (id, nombre, estado_id, activo) FROM stdin;
-1	ALTO ORINOCO	1	1
-2	ATABAPO	1	1
-3	ATURES	1	1
-4	AUTANA	1	1
-5	MANAPIARE	1	1
-6	MAROA	1	1
-7	RÍO NEGRO	1	1
-8	ANACO	2	1
-9	ARAGUA	2	1
-10	DIEGO BAUTISTA URBANEJA	2	1
-11	FERNANDO DE PEÑALVER	2	1
-12	FRANCISCO DE CARMEN CARVAJAL	2	1
-13	FRANCISCO DE MIRANDA	2	1
-14	GUANTA	2	1
-15	INDEPENDENCIA	2	1
-16	JOSÉ GREGORIO MONAGAS	2	1
-17	JUAN ANTONIO SOTILLO	2	1
-18	JUAN MANUEL CAJIGAL	2	1
-19	LIBERTAD	2	1
-20	MANUEL EZEQUIEL BRUZUAL	2	1
-21	PEDRO MARÍA FREITES	2	1
-22	PÍRITU	2	1
-23	SAN JOSÉ DE GUANIPA	2	1
-24	SAN JUAN DE CAPISTRANO	2	1
-25	SANTA ANA	2	1
-26	SIMÓN BOLÍVAR	2	1
-27	SIMÓN RODRÍGUEZ	2	1
-28	SIR ARTUR MCGREGOR	2	1
-29	ACHAGUAS	3	1
-30	BIRUACA	3	1
-31	MUÑOZ	3	1
-32	PÁEZ	3	1
-33	PEDRO CAMEJO	3	1
-34	RÓMULO GALLEGOS	3	1
-35	SAN FERNANDO	3	1
-36	BOLÍVAR	4	1
-37	CAMATAGUA	4	1
-38	FRANCISCO LINARES ALCÁNTARA	4	1
-39	GIRARDOT	4	1
-40	MUNICIPIO JOSÉ ÁNGEL LAMAS	4	1
-41	JOSÉ FÉLIX RIBAS	4	1
-42	MUNICIPIO JOSÉ RAFAEL REVENGA	4	1
-43	LIBERTADOR	4	1
-44	MARIO BRICEÑO IRAGORRY	4	1
-45	MUNICIPIO OCUMARE DE LA COSTA DE ORO	4	1
-46	SAN CASIMIRO	4	1
-47	SAN SEBASTIÁN	4	1
-48	SANTIAGO MARIÑO	4	1
-49	SANTOS MICHELENA	4	1
-50	SUCRE	4	1
-51	TOVAR	4	1
-52	URDANETA	4	1
-53	ZAMORA	4	1
-54	ALBERTO ARVELO TORREALBA	5	1
-55	ANDRÉS ELOY BLANCO	5	1
-56	ANTONIO JOSÉ DE SUCRE	5	1
-57	ARISMENDI	5	1
-58	BARINAS	5	1
-59	BOLÍVAR	5	1
-60	CRUZ PAREDES	5	1
-61	EZEQUIEL ZAMORA	5	1
-62	OBISPOS	5	1
-63	PEDRAZA	5	1
-64	ROJAS	5	1
-65	SOSA	5	1
-66	MUNICIPIO CARONÍ	6	1
-67	MUNICIPIO CEDEÑO	6	1
-68	MUNICIPIO EL CALLAO	6	1
-69	MUNICIPIO GRAN SABANA	6	1
-70	MUNICIPIO HERES	6	1
-71	MUNICIPIO PADRE PEDRO CHIEN	6	1
-72	MUNICIPIO PIAR	6	1
-73	MUNICIPIO RAÚL LEONI	6	1
-74	MUNICIPIO ROSCIO	6	1
-75	MUNICIPIO SIFONTES	6	1
-76	MUNICIPIO SUCRE	6	1
-77	MUNICIPIO BEJUMA	7	1
-78	MUNICIPIO CARLOS ARVELO	7	1
-79	MUNICIPIO DIEGO IBARRA	7	1
-80	MUNICIPIO GUACARA	7	1
-81	MUNICIPIO JUAN JOSÉ MORA	7	1
-82	MUNICIPIO LIBERTADOR	7	1
-83	MUNICIPIO LOS GUAYOS	7	1
-84	MUNICIPIO MIRANDA	7	1
-85	MUNICIPIO MONTALBÁN	7	1
-86	MUNICIPIO NAGUANAGUA	7	1
-87	MUNICIPIO PUERTO CABELLO	7	1
-88	MUNICIPIO SAN DIEGO	7	1
-89	MUNICIPIO SAN JOAQUÍN	7	1
-90	MUNICIPIO VALENCIA	7	1
-91	MUNICIPIO ANZOÁTEGUI	8	1
-92	MUNICIPIO EL PAO DE SAN JUAN BAUTISTA	8	1
-93	MUNICIPIO FALCÓN	8	1
-94	MUNICIPIO GIRARDOT	8	1
-95	MUNICIPIO LIMA BLANCO	8	1
-96	MUNICIPIO RICAURTE	8	1
-97	MUNICIPIO RÓMULO GALLEGOS	8	1
-98	MUNICIPIO SAN CARLOS DE AUSTRIA	8	1
-99	MUNICIPIO TINACO	8	1
-100	MUNICIPIO ANTONIO DÍAZ	9	1
-101	MUNICIPIO CASACOIMA	9	1
-102	MUNICIPIO PEDERNALES	9	1
-103	MUNICIPIO TUCUPITA	9	1
-104	MUNICIPIO ACOSTA	10	1
-105	MUNICIPIO BOLÍVAR	10	1
-106	MUNICIPIO BUCHIVACOA	10	1
-107	MUNICIPIO CACIQUE MANAURE	10	1
-108	MUNICIPIO CARIRUBANA	10	1
-109	MUNICIPIO COLINA	10	1
-110	MUNICIPIO DABAJURO	10	1
-111	MUNICIPIO DEMOCRACIA	10	1
-112	MUNICIPIO FALCÓN	10	1
-113	MUNICIPIO FEDERACIÓN	10	1
-114	MUNICIPIO JACURA	10	1
-115	MUNICIPIO LOS TAQUES	10	1
-116	MUNICIPIO MAUROA	10	1
-117	MUNICIPIO MIRANDA	10	1
-118	MUNICIPIO MONSEÑOR ITURRIZA	10	1
-119	MUNICIPIO PALMASOLA	10	1
-120	MUNICIPIO PETIT	10	1
-121	MUNICIPIO PÍRITU	10	1
-122	MUNICIPIO SAN FRANCISCO	10	1
-123	MUNICIPIO SILVA	10	1
-124	MUNICIPIO SUCRE	10	1
-125	MUNICIPIO TOCÓPERO	10	1
-126	MUNICIPIO UNIÓN	10	1
-127	MUNICIPIO URUMACO	10	1
-128	MUNICIPIO ZAMORA	10	1
-129	MUNICIPIO CAMAGUÁN	11	1
-130	MUNICIPIO CHAGUARAMAS	11	1
-131	MUNICIPIO EL SOCORRO	11	1
-132	MUNICIPIO FRANCISCO DE MIRANDA	11	1
-133	MUNICIPIO JOSÉ FÉLIX RIBAS	11	1
-134	MUNICIPIO JOSÉ TADEO MONAGAS	11	1
-135	MUNICIPIO JUAN GERMÁN ROSCIO	11	1
-136	MUNICIPIO JULIÁN MELLADO	11	1
-137	MUNICIPIO LAS MERCEDES	11	1
-138	MUNICIPIO LEONARDO INFANTE	11	1
-139	MUNICIPIO ORTIZ	11	1
-140	MUNICIPIO PEDRO ZARAZA	11	1
-141	MUNICIPIO SAN GERÓNIMO DE GUAYABAL	11	1
-142	MUNICIPIO SAN JOSÉ DE GUARIBE	11	1
-143	MUNICIPIO SANTA MARÍA DE IPIRE	11	1
-144	ANDRÉS ELOY BLANCO	12	1
-145	CRESPO	12	1
-146	IRIBARREN	12	1
-147	JIMÉNEZ	12	1
-148	MORÁN	12	1
-149	PALAVECINO	12	1
-150	SIMÓN PLANAS	12	1
-151	TORRES	12	1
-152	URDANETA	12	1
-153	ALBERTO ADRIANI	13	1
-154	ANDRÉS BELLO	13	1
-155	ANTONIO PINTO SALINAS	13	1
-156	ARICAGUA	13	1
-157	ARZOBISPO CHACÓN	13	1
-158	CAMPO ELÍAS	13	1
-159	CARACCIOLO PARRA OLMEDO	13	1
-160	CARDENAL QUINTERO	13	1
-161	GUARAQUE	13	1
-162	JULIO CÉSAR SALAS	13	1
-163	JUSTO BRICEÑO	13	1
-164	LIBERTADOR	13	1
-165	MIRANDA	13	1
-166	OBISPO RAMOS DE LORA	13	1
-167	PADRE NOGUERA	13	1
-168	PUEBLO LLANO	13	1
-169	RANGEL	13	1
-170	RIVAS DÁVILA	13	1
-171	SANTOS MARQUINA	13	1
-172	SUCRE	13	1
-173	TOVAR	13	1
-174	TULIO FEBRES CORDERO	13	1
-175	ZEA	13	1
-176	ACEVEDO	14	1
-177	ANDRÉS BELLO	14	1
-178	BARUTA	14	1
-179	BRIÓN	14	1
-180	BUROZ	14	1
-181	CARRIZAL	14	1
-182	CHACAO	14	1
-183	CRISTÓBAL ROJAS	14	1
-184	EL HATILLO	14	1
-185	GUAICAIPURO	14	1
-186	INDEPENDENCIA	14	1
-187	LANDER	14	1
-188	LOS SALIAS	14	1
-189	PÁEZ	14	1
-190	PAZ CASTILLO	14	1
-191	PEDRO GUAL	14	1
-192	PLAZA	14	1
-193	SIMÓN BOLÍVAR	14	1
-194	SUCRE	14	1
-195	URDANETA	14	1
-196	ZAMORA	14	1
-197	ACOSTA	15	1
-198	AGUASAY	15	1
-199	BOLÍVAR	15	1
-200	CARIPE	15	1
-201	CEDEÑO	15	1
-202	EZEQUIEL ZAMORA	15	1
-203	LIBERTADOR	15	1
-204	MATURÍN	15	1
-205	MUNICIPIO PIAR	15	1
-206	PUNCERES	15	1
-207	SANTA BÁRBARA	15	1
-208	SOTILLO	15	1
-209	URACOA	15	1
-210	MUNICIPIO ANTOLÍN DEL CAMPO	16	1
-211	MUNICIPIO ARISMENDI	16	1
-212	MUNICIPIO DÍAZ	16	1
-213	MUNICIPIO GARCÍA	16	1
-214	MUNICIPIO GÓMEZ	16	1
-215	MUNICIPIO MANEIRO	16	1
-216	MUNICIPIO MARCANO	16	1
-217	MUNICIPIO MARIÑO	16	1
-218	MUNICIPIO PENÍNSULA DE MACANAO	16	1
-219	MUNICIPIO TUBORES	16	1
-220	MUNICIPIO VILLALBA	16	1
-221	MUNICIPIO AGUA BLANCA	17	1
-222	MUNICIPIO ARAURE	17	1
-223	MUNICIPIO ESTELLER	17	1
-224	MUNICIPIO GUANARE	17	1
-225	MUNICIPIO GUANARITO	17	1
-226	MUNICIPIO MONSEÑOR JOSÉ VICENTE DE UNDA	17	1
-227	MUNICIPIO OSPINO	17	1
-228	VMUNICIPIO PÁEZ	17	1
-229	MUNICIPIO PAPELÓN	17	1
-230	MUNICIPIO SAN GENARO DE BOCONOITO	17	1
-231	MUNICIPIO SAN RAFAEL DE ONOTO	17	1
-232	MUNICIPIO SANTA ROSALÍA	17	1
-233	MUNICIPIO SUCRE	17	1
-234	MUNICIPIO TURÉN	17	1
-235	MUNICIPIO ANDRÉS ELOY BLANCO	18	1
-236	MUNICIPIO ANDRÉS MATA	18	1
-237	MUNICIPIO ARISMENDI	18	1
-238	MUNICIPIO BENÍTEZ	18	1
-239	MUNICIPIO BERMÚDEZ	18	1
-240	MUNICIPIO BOLÍVAR	18	1
-241	VMUNICIPIO CAJIGAL	18	1
-242	MUNICIPIO CRUZ SALMERÓN ACOSTA	18	1
-243	MUNICIPIO LIBERTADOR	18	1
-244	MUNICIPIO MARIÑO	18	1
-245	MUNICIPIO MEJÍA	18	1
-246	MUNICIPIO MONTES	18	1
-247	MUNICIPIO RIBERO	18	1
-248	MUNICIPIO SUCRE	18	1
-249	MUNICIPIO VALDEZ	18	1
-250	MUNICIPIO ANDRÉS BELLO	19	1
-251	MUNICIPIO ANTONIO RÓMULO COSTA	19	1
-252	MUNICIPIO AYACUCHO	19	1
-253	MUNICIPIO BOLÍVAR	19	1
-254	MUNICIPIO CÁRDENAS	19	1
-255	MUNICIPIO CÓRDOBA	19	1
-256	MUNICIPIO FERNÁNDEZ FEO	19	1
-257	MUNICIPIO FRANCISCO DE MIRANDA	19	1
-258	MUNICIPIO GARCÍA DE HEVIA	19	1
-259	MUNICIPIO GUASIMOS	19	1
-260	MUNICIPIO INDEPENDENCIA	19	1
-261	MUNICIPIO JÁUREGUI	19	1
-262	MUNICIPIO JOSE MARÍA VARGAS	19	1
-263	MUNICIPIO JUNÍN	19	1
-264	MUNICIPIO LIBERTAD	19	1
-265	MUNICIPIO LIBERTADOR	19	1
-266	MUNICIPIO LOBATERA	19	1
-267	MUNICIPIO MICHELENA	19	1
-268	MUNICIPIO PANAMERICANO	19	1
-269	MUNICIPIO PEDRO MARÍA UREÑA	19	1
-270	MUNICIPIO RAFAEL URDANETA	19	1
-271	MUNICIPIO SAMUEL DARÍO MALDONADO	19	1
-272	MUNICIPIO SAN CRISTÓBAL	19	1
-273	MUNICIPIO SAN JUDAS TADEO	19	1
-274	MUNICIPIO SEBORUCO	19	1
-275	MUNICIPIO SIMÓN RODRÍGUEZ	19	1
-276	MUNICIPIO SUCRE	19	1
-277	MUNICIPIO TORBES	19	1
-278	MUNICIPIO URIBANTE	19	1
-279	MUNICIPIO ANDRÉS BELLO	20	1
-280	MUNICIPIO BOCONÓ	20	1
-281	MUNICIPIO BOLÍVAR	20	1
-282	MUNICIPIO CANDELARIA	20	1
-283	MUNICIPIO CARACHE	20	1
-284	MUNICIPIO ESCUQUE	20	1
-285	MUNICIPIO JOSÉ FELIPE MÁRQUEZ CAÑIZALES	20	1
-286	MUNICIPIO JOSÉ VICENTE CAMPO ELÍAS	20	1
-287	MUNICIPIO LA CEIBA	20	1
-288	MUNICIPIO MIRANDA	20	1
-289	MUNICIPIO MONTE CARMELO	20	1
-290	MUNICIPIO MOTATÁN	20	1
-291	MUNICIPIO PAMPÁN	20	1
-292	MUNICIPIO PAMPANITO	20	1
-293	MUNICIPIO RAFAEL RANGEL	20	1
-294	MUNICIPIO SAN RAFAEL DE CARVAJAL	20	1
-295	MUNICIPIO SUCRE	20	1
-296	MUNICIPIO TRUJILLO	20	1
-297	MUNICIPIO URDANETA	20	1
-298	MUNICIPIO VALERA	20	1
-299	MUNICIPIO VARGAS	21	1
-300	MUNICIPIO ARÍSTIDES BASTIDAS	22	1
-301	MUNICIPIO BOLÍVAR	22	1
-302	MUNICIPIO BRUZUAL	22	1
-303	MUNICIPIO COCOROTE	22	1
-304	MUNICIPIO INDEPENDENCIA	22	1
-305	MUNICIPIO JOSE ANTONIO PÁEZ	22	1
-306	MUNICIPIO LA TRINIDAD	22	1
-307	MUNICIPIO MANUEL MONGE	22	1
-308	MUNICIPIO NIRGUA	22	1
-309	MUNICIPIO PEÑA	22	1
-310	MUNICIPIO SAN FELIPE	22	1
-311	MUNICIPIO SUCRE	22	1
-312	MUNICIPIO URACHICHE	22	1
-313	MUNICIPIO VEROES	22	1
-314	ALMIRANTE PADILLA	23	1
-315	BARALT	23	1
-316	CABIMAS	23	1
-317	CATATUMBO	23	1
-318	COLÓN	23	1
-319	FRANCISCO JAVIER PULGAR	23	1
-320	JESÚS ENRIQUE LOSADA	23	1
-321	JESÚS MARÍA SEMPRÚN	23	1
-322	LA CAÑADA DE URDANETA	23	1
-323	LAGUNILLAS	23	1
-324	MACHIQUES DE PERIJÁ	23	1
-325	MARA	23	1
-326	MARACAIBO	23	1
-327	MIRANDA	23	1
-328	PÁEZ	23	1
-329	ROSARIO DE PERIJÁ	23	1
-330	SAN FRANCISCO	23	1
-331	SANTA RITA	23	1
-332	SIMÓN BOLÍVAR	23	1
-333	SUCRE	23	1
-334	VALMORE RODRÍGUEZ	23	1
-335	LIBERTADOR	24	1
+2	Atabapo	1	1
+3	Atures	1	1
+4	Autana	1	1
+5	Manapiare	1	1
+6	Maroa	1	1
+7	Río Negro	1	1
+8	Anaco	2	1
+9	Aragua	2	1
+11	Fernando de Peñalver	2	1
+12	Francisco de Carmen Carvajal	2	1
+13	Francisco de Miranda	2	1
+14	Guanta	2	1
+15	Independencia	2	1
+16	José Gregorio Monagas	2	1
+17	Juan Antonio Sotillo	2	1
+18	Juan Manuel Cajigal	2	1
+19	Libertad	2	1
+20	Manuel Ezequiel Bruzual	2	1
+21	Pedro María Freites	2	1
+22	Píritu	2	1
+23	San José de Guanipa	2	1
+24	San Juan de Capistrano	2	1
+25	Santa Ana	2	1
+26	Simón Bolívar	2	1
+28	Sir Artur Mcgregor	2	1
+29	Achaguas	3	1
+30	Biruaca	3	1
+31	Muñoz	3	1
+32	Páez	3	1
+33	Pedro Camejo	3	1
+34	Rómulo Gallegos	3	1
+35	San Fernando	3	1
+36	Bolívar	4	1
+37	Camatagua	4	1
+39	Girardot	4	1
+40	José Ángel Lamas	4	1
+41	José Félix Ribas	4	1
+42	José Rafael Revenga	4	1
+43	Libertador	4	1
+44	Mario Briceño Iragorry	4	1
+45	Ocumare de la Costa de Oro	4	1
+46	San Casimiro	4	1
+47	San Sebastián	4	1
+48	Santiago Mariño	4	1
+49	Santos Michelena	4	1
+50	Sucre	4	1
+51	Tovar	4	1
+52	Urdaneta	4	1
+53	Zamora	4	1
+54	Alberto Arvelo Torrealba	5	1
+55	Andrés Eloy Blanco	5	1
+56	Antonio José de Sucre	5	1
+57	Arismendi	5	1
+58	Barinas	5	1
+59	Bolívar	5	1
+60	Cruz Paredes	5	1
+61	Ezequiel Zamora	5	1
+62	Obispos	5	1
+63	Pedraza	5	1
+64	Rojas	5	1
+65	Sosa	5	1
+66	Caroní	6	1
+67	Cedeño	6	1
+68	El Callao	6	1
+69	Gran Sabana	6	1
+70	Heres	6	1
+71	Padre Pedro Chien	6	1
+72	Piar	6	1
+73	Raúl Leoni	6	1
+74	Roscio	6	1
+75	Sifontes	6	1
+76	Sucre	6	1
+77	Bejuma	7	1
+78	Carlos Arvelo	7	1
+79	Diego Ibarra	7	1
+80	Guacara	7	1
+81	Juan José Mora	7	1
+82	Libertador	7	1
+83	Los Guayos	7	1
+84	Miranda	7	1
+85	Montalbán	7	1
+86	Naguanagua	7	1
+87	Puerto Cabello	7	1
+88	San Diego	7	1
+89	San Joaquín	7	1
+90	Valencia	7	1
+91	Anzoátegui	8	1
+92	El Pao de San Juan Bautista	8	1
+93	Falcón	8	1
+94	Girardot	8	1
+95	Lima Blanco	8	1
+96	Ricaurte	8	1
+97	Rómulo Gallegos	8	1
+98	San Carlos de Austria	8	1
+99	Tinaco	8	1
+100	Antonio Díaz	9	1
+101	Casacoima	9	1
+102	Pedernales	9	1
+103	Tucupita	9	1
+104	Acosta	10	1
+105	Bolívar	10	1
+106	Buchivacoa	10	1
+107	Cacique Manaure	10	1
+108	Carirubana	10	1
+109	Colina	10	1
+110	Dabajuro	10	1
+111	Democracia	10	1
+112	Falcón	10	1
+113	Federación	10	1
+114	Jacura	10	1
+115	Los Taques	10	1
+116	Mauroa	10	1
+117	Miranda	10	1
+118	Monseñor Iturriza	10	1
+119	Palmasola	10	1
+120	Petit	10	1
+121	Píritu	10	1
+122	San Francisco	10	1
+123	Silva	10	1
+124	Sucre	10	1
+125	Tocópero	10	1
+126	Unión	10	1
+127	Urumaco	10	1
+128	Zamora	10	1
+129	Camaguán	11	1
+130	Chaguaramas	11	1
+131	El Socorro	11	1
+132	Francisco de Miranda	11	1
+134	José Tadeo Monagas	11	1
+135	Juan Germán Roscio	11	1
+136	Julián Mellado	11	1
+137	Las Mercedes	11	1
+138	Leonardo Infante	11	1
+139	Ortiz	11	1
+140	Pedro Zaraza	11	1
+141	San Gerónimo de Guayabal	11	1
+142	San José de Guaribe	11	1
+143	Santa María de Ipire	11	1
+144	Andrés Eloy Blanco	12	1
+145	Crespo	12	1
+146	Iribarren	12	1
+147	Jiménez	12	1
+148	Morán	12	1
+149	Palavecino	12	1
+150	Simón Planas	12	1
+151	Torres	12	1
+152	Urdaneta	12	1
+153	Alberto Adriani	13	1
+154	Andrés Bello	13	1
+155	Antonio Pinto Salinas	13	1
+156	Aricagua	13	1
+157	Arzobispo chacón	13	1
+158	Campo Elías	13	1
+159	Caracciolo Parra Olmedo	13	1
+160	Cardenal Quintero	13	1
+161	Guaraque	13	1
+162	Julio César Salas	13	1
+164	Libertador	13	1
+165	Miranda	13	1
+166	Obispo Ramos de Lora	13	1
+167	Padre Noguera	13	1
+168	Pueblo Llano	13	1
+169	Rangel	13	1
+170	Rivas Dávila	13	1
+171	Santos Marquina	13	1
+172	Sucre	13	1
+173	Tovar	13	1
+174	Tulio Febres Cordero	13	1
+175	Zea	13	1
+176	Acevedo	14	1
+177	Andrés Bello	14	1
+178	Baruta	14	1
+179	Brión	14	1
+181	Carrizal	14	1
+182	Chacao	14	1
+183	Cristóbal Rojas	14	1
+184	El Hatillo	14	1
+185	Guaicaipuro	14	1
+186	Independencia	14	1
+187	Lander	14	1
+188	Los Salias	14	1
+189	Páez	14	1
+190	Paz Castillo	14	1
+191	Pedro Gual	14	1
+192	Plaza	14	1
+194	Sucre	14	1
+195	Urdaneta	14	1
+196	Zamora	14	1
+197	Acosta	15	1
+198	Aguasay	15	1
+199	Bolívar	15	1
+200	Caripe	15	1
+201	Cedeño	15	1
+202	Ezequiel Zamora	15	1
+203	Libertador	15	1
+204	Maturín	15	1
+205	Piar	15	1
+206	Punceres	15	1
+207	Santa Bárbara	15	1
+208	Sotillo	15	1
+209	Uracoa	15	1
+211	Arismendi	16	1
+212	Díaz	16	1
+213	García	16	1
+214	Gómez	16	1
+215	Maneiro	16	1
+216	Marcano	16	1
+217	Mariño	16	1
+218	Península de Macanao	16	1
+219	Tubores	16	1
+220	Villalba	16	1
+221	Agua Blanca	17	1
+222	Araure	17	1
+223	Esteller	17	1
+224	Guanare	17	1
+225	Guanarito	17	1
+226	Monseñor José Vicente de Unda	17	1
+227	Ospino	17	1
+228	Páez	17	1
+229	Papelón	17	1
+230	San Genaro de Boconoito	17	1
+231	San Rafael de Onoto	17	1
+232	Santa Rosalía	17	1
+233	Sucre	17	1
+234	Turén	17	1
+235	Andrés Eloy Blanco	18	1
+236	Andrés Mata	18	1
+237	Arismendi	18	1
+238	Benítez	18	1
+239	Bermúdez	18	1
+240	Bolívar	18	1
+241	Cajigal	18	1
+242	Cruz Salmerón Acosta	18	1
+243	Libertador	18	1
+244	Mariño	18	1
+245	Mejía	18	1
+246	Montes	18	1
+247	Ribero	18	1
+248	Sucre	18	1
+249	Valdez	18	1
+250	Andrés Bello	19	1
+251	Antonio Rómulo Costa	19	1
+252	Ayacucho	19	1
+253	Bolívar	19	1
+254	Cárdenas	19	1
+255	Córdoba	19	1
+256	Fernández Feo	19	1
+257	Francisco de Miranda	19	1
+258	García de Hevia	19	1
+259	Guasimos	19	1
+260	Independencia	19	1
+261	Jáuregui	19	1
+262	Jose María Vargas	19	1
+263	Junín	19	1
+264	Libertad	19	1
+265	Libertador	19	1
+266	Lobatera	19	1
+267	Michelena	19	1
+1	Alto Orinoco	1	1
+10	Diego Bautista Urbaneja	2	1
+27	Simón Rodríguez	2	1
+38	Francisco Linares Alcántara	4	1
+133	José Félix Ribas	11	1
+163	Justo Briceño	13	1
+180	Buroz	14	1
+193	Simón Bolívar	14	1
+210	Antolín del Campo	16	1
+268	Panamericano	19	1
+269	Pedro María Ureña	19	1
+270	Rafael Urdaneta	19	1
+271	Samuel Darío Maldonado	19	1
+272	San Cristóbal	19	1
+273	San Judas Tadeo	19	1
+274	Seboruco	19	1
+275	Simón Rodríguez	19	1
+276	Sucre	19	1
+277	Torbes	19	1
+278	Uribante	19	1
+279	Andrés Bello	20	1
+280	Boconó	20	1
+281	Bolívar	20	1
+282	Candelaria	20	1
+283	Carache	20	1
+284	Escuque	20	1
+285	José Felipe Márquez Cañizales	20	1
+286	José Vicente campo Elías	20	1
+287	La Ceiba	20	1
+288	miranda	20	1
+289	Monte Carmelo	20	1
+290	Motatán	20	1
+291	Pampán	20	1
+292	Pampanito	20	1
+293	Rafael Rangel	20	1
+294	San Rafael de Carvajal	20	1
+295	Sucre	20	1
+296	Trujillo	20	1
+297	Urdaneta	20	1
+298	Valera	20	1
+299	Vargas	21	1
+300	Arístides Bastidas	22	1
+301	Bolívar	22	1
+302	Bruzual	22	1
+303	Cocorote	22	1
+304	Independencia	22	1
+305	Jose Antonio Páez	22	1
+306	La Trinidad	22	1
+307	Manuel Monge	22	1
+308	Nirgua	22	1
+309	Peña	22	1
+310	San Felipe	22	1
+311	Sucre	22	1
+312	Urachiche	22	1
+313	Veroes	22	1
+314	Almirante Padilla	23	1
+315	Baralt	23	1
+316	Cabimas	23	1
+317	Catatumbo	23	1
+318	Colón	23	1
+319	Francisco Javier Pulgar	23	1
+320	Jesús Enrique Lossada	23	1
+321	Jesús María Semprún	23	1
+322	La Cañada de Urdaneta	23	1
+323	Lagunillas	23	1
+324	Machiques de Perijá	23	1
+325	Mara	23	1
+326	Maracaibo	23	1
+327	Miranda	23	1
+328	Páez	23	1
+329	Rosario de Perijá	23	1
+330	San Francisco	23	1
+331	Santa Rita	23	1
+332	Simón Bolívar	23	1
+333	Sucre	23	1
+334	Valmore Rodríguez	23	1
+335	Libertador	24	1
 \.
 
 
@@ -5883,10 +5974,10 @@ SELECT pg_catalog.setval('anarapp_notasyacimiento_id_seq', 1, false);
 -- Data for Name: anarapp_observaciones; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY anarapp_observaciones (id, texto) FROM stdin;
-1	* La mayoría de las pinturas son esquemáticas . Algunas parecen representar figuras humanas y formas de animales muy simplificadas, posiblemente lagartos, venados, pájaros..ect. Se hallaron también símbolos y emblemas muy simples: puntos y círculos, combinaciones de líneas rectas, onduladas, figuras en forma de peine, estrellas o soles y manos humanas impresas o dibujadas sobre la pared de la roca…ect     \r\n                                                                                                                                                    * Se supone que las pinturas rupestres de la Cueva de El Elefante, tuvieron una finalidad mágico-religiosa.                                                                                   La entrada a la cueva está orientada de norte a sur, de modo que el sol, entre 4 y 5 de la tarde incide directamente sobre el área donde se hallan las pinturas, iluminándolas completamente.                                                                        Es en este momento , cuando la luz difusa y pálida del sol que decae, confiere a la piedra su matiz de oro viejo, destacándose en el área iluminada, las estrellas, soles, laberintos, figuras de animales y de seres humanos creados por la mano de artista aborigen. Esta es la única hora en que se pueden apreciar completamente los motivos pintados sin la ayuda de iluminación artificial.\r\nDada la importancia que los astros han tenido en las religiones aborígenes venezolanas, no es descartable el que la disposición de los dibujos y su relación con el tránsito del sol, constituye la expresión de una forma de culto, en las que se hallan implícitas elementos cosmogónicos.\r\n
-2	El lugar resulta llamativo por su elevada ubicación dominando la llanura y por sus características.                                                                                                                                         La cueva es de ambiente seco, fresco y protegido, excavada en roca compacta de tonos claros, blancos y rosados, que contrastan con los colores negros de la roca exterior y su ambiente tórrido  por su exposición al sol.
-3	Servicio Autónomo de Geografía y Cartografía Nacional Ministerio del Ambiente y los Recursos Naturales Renovables. Republica de Venezuela. Gaceta Oficial No. 5.299 / 29 de Enero 1999 RESOLUCIÓN No. 009-98 / 06 DE NOVIEMBRE 1998 Instituto de Patrimonio Cultural, Consejo Nacional de la Cultura, Ministerio Secretaría de la Presidencia.\r\n\r\nANEXO:\r\n\r\nREPÚBLICA DE VENEZUELA MINISTERIO DE LA SECRETARÍA DE LA PRESIDENCIA CONSEJO NACIONAL DE LA CULTURA INSTITUTO DEL PATRIMONIO CULTURAL RESOLUCIÓN No. 009-98 6 DE NOVIEMBRE 1998 188° Y 139°\r\n\r\nEl Presidente del Instituto del Patrimonio Cultural, en uso de las atribuciones conferidas en el numeral 1° del artículo 10 de la Ley de Protección y Defensa del Patrimonio Cultural y del numeral 2° del artículo 11 del Reglamento Parcial N° 1 de dicha Ley.\r\n\r\nCONSIDERANDO: Que la llamada "Rueda del Indio", también llamada "Rueda de Los Indios", "Geoglifo de la Fila de Olivita", "Geoglifo de Bejuma" o "Geoglifo de Chirgua" es una manifestación de carácter singular, œnica en Venezuela y en el resto de América.\r\n\r\nCONSIDERANDO: Que la Fila de Olivita, sitio en donde se encuentra la "Rueda del Indio" constituye un paraje importante en la historia del poblamiento local y dentro del conjunto de recursos ambientales de la región;\r\n\r\nCONSIDERANDO: Que por su carácter singular la "Rueda del Indio" es la manifestación arqueológica por la cual es mejor conocida esa región del Estado Carabobo y constituye un símbolo por el cual se reconocen las localidades cercanas;\r\n\r\nCONSIDERANDO: Que la llamada "Rueda del Indio" mantiene nexos entrañables con otras manifestaciones arqueológicas del Estado Carabobo y del resto del país, y que por lo tanto su conservación debe ser asegurada, para garantizar el conocimiento cabal de todas esas manifestaciones;\r\n\r\nCONSIDERANDO: Que desde los inicios de las investigaciones antropológicas sistemáticas en Venezuela, la "Rueda del Indio", por su extraordinario valor científico ha atraído el interés de investigadores venezolanos y extranjeros, demostrando así su carácter peculiar dentro del conjunto de las manifestaciones arqueológicas conocidas en el país;\r\n\r\nCONSIDERANDO: Que la protección de la "Rueda del Indio" y de sus áreas inmediatas es esencial para mantener la memoria histórica sobre las comunidades indígenas de la región, en la presente y futura colectividad del Estado Carabobo y del resto del país;\r\n\r\nCONSIDERANDO: Que por su antigüedad, diseño y dimensiones, la "Rueda del Indio" constituye simultáneamente un recurso cultural, histórico y escénico, de importancia y relevancia nacional e internacional;\r\n\r\nRESUELVE:\r\n\r\nArtículo 1°.- De conformidad con lo establecido en los artículos 10 numeral 1° y 13 de la Ley de Protección y Defensa del Patrimonio Cultural se declara Bien de Interés Cultural de la Nación al geoglifo conocido con el nombre de "Geoglifo Rueda del Indio", tambén llamado "Rueda de Los Indios", ""Geoglifo de la Fila de Olivita", "Geoglifo de Bejuma" o "Geoglifo de Chirgua", ubicado a 1.134.452,0 Norte y 5.909.910,0 Este. Según coordenadas U.T.M. a 10° 15’ 44,4” Latitud Norte y a 68° 10’ 9.3” Longitud Oeste. Localizado a 60° al Noreste del patio de la Hacienda Cariaprima, y a 45° al Sureste del Pico del Cerro de Paja., así como a toda la porción del territorio nacional incluida dentro de los siguientes linderos definidos por accidentes físico-naturales y punto en coordenada U.T.M. (Universal Transversa de Mercator), los cuales se describen a continuación: Partiendo desde el Punto Datum ubicado a 1.134.452,0 Norte y 5.909.910,0 Este, ubicado en la sección media o tronco del geoglifo, intermedia entre los círculos concéntricos y el vértice en donde confluyen los dos apéndices inferiores, hacia el Norte Franco hasta alcanzar la fila del cerro, también conocida como Fila Olivita, en su punto más alto, denominado Punto No. 1, y siguiendo luego por la fila del cerro rumbo Este, hasta el Punto No. 2, situado en la sección de la fila justamente arriba de las cabeceras del ramal extremo Sur de la Quebrada del Puente Los Árboles, después descendiendo y continuando por el cauce o canal de dicha quebrada hasta el Punto No. 3, situado en el sitio en el cual dicha quebrada confluye con el cauce o canal del río Chirgua después de atravesar la cota de los 725 metros sobre el nivel del mar, prosiguiendo rumbo norte a lo largo del cauce o canal del río Chirgua hasta el Punto No. 4, al Oeste franco del Punto No. 5 situado en el punto extremo Oeste de la fila Olivita correspondiente a la cota de los 750 metros sobre el nivel del mar, y continuando luego rumbo Este a lo largo de la fila del cerro hasta alcanzar el Punto No. 1.\r\n\r\nArtículo 2°.- Se declara Área de Protección el conjunto paisajístico y ambiental asociado al "Geoglifo de Chirgua" a la sección del valle del río Chirgua incluida dentro de los siguientes linderos definidos por accidentes físico-naturales: Por el Oeste: fila del Cerro El Picacho que asciende desde el sector Hacienda Monte Sacro, a partir de un punto inicial en el extremo Sur de la cota de los 725 metros sobre el nivel del mar, hasta alcanzar la cota de los 1.200 metros, y luego continuando a lo largo de esta cota hacia el Norte y luego hacia el Este y hacia el Sur, incluyendo las secciones de la serranía correspondientes a las cabeceras del río Chirgua y la vertiente Oeste de la Fila El Aguacatal hasta el punto en donde dicha cota intercepta el cauce o canal de la quebrada que desemboca en el sector conocido como Hacienda La Emilia. Continuando aguas abajo por dicha quebrada se sigue su confluencia con el río Chirgua y de alí hasta su punto inicial.\r\n\r\nArtículo 3°.- Se prohibe la realización de excavaciones, el levantamiento de edificaciones, estructuras o construcciones, o la ejecución de movimientos de tierras dentro del per’metro considerado Bien de Interés Cultural en la presente declaratoria, así como la aplicación de pigmentos en los surcos o cara del geoglifo, la modificación de las secciones del suelo en donde fue excavado, o el traslado del material arqueológico asociado afuera de los linderos del área demarcada, sin autorización expresa y asesoría técnica especializada del Instituto del Patrimonio Cultural. Asimismo se prohibe la colocación de artefacto, construcciones o estructuras que afecten su visibilidad o el aspecto natural de su entorno ambiental y paisajístico inmediato.\r\n\r\nArtículo 4°.- Se recomienda evitar la colocación de artefactos, construcciones o estructuras que afecten el aspecto natural del entorno ambiental y paisajístico inmediato considerado dentro de los linderos del Área de Resguardo y Protección, especialmente en cuanto a elementos tales como la vegetación, las aguas, las formaciones orogénicas o las edificaciones de interés histórico relacionadas con la práctica de actividades agropecuarias. Para la realización de las actividades antes seáaladas se requerirá la autorización y asesoría técnica especializada del Ministerio del Ambiente y los Recursos Naturales Renovables y del Instituto del Patrimonio Cultural.\r\n\r\nArtículo 5.- Notifíquese de la presente resolución a los propietarios de los terrenos donde se encuentra ubicado el "Geoglifo de Chirgua", también llamado "Rueda del Indio", "Rueda de Los Indios", "Geoglifo de la Fila de Olivita", o "Geoglifo de Bejuma", al Alcalde del Municipio Bejuma, a los Miembros de la Cámara Municipal del Municipio Bejuma; al Gobernador del Estado Carabobo; a los Miembros de la Asamblea Legislativa del Estado Carabobo; a los Ministerios del Ambiente y de los Recursos Naturales Renovables, Energía y Minas y de la Secretaría de la Presidencia; al Presidente del Instituto Agrario Nacional (IAN) y al Presidente del Instituto Nacional de Parques (INPARQUES).\r\n\r\nComuníquese, notifíquese y Publíquese.\r\n\r\nGIAN PIETRO POSANI CONTESI— Presidente del Instituto del Patrimonio Cultural\r\n\r\n 
+COPY anarapp_observaciones (id) FROM stdin;
+1
+2
+3
 \.
 
 
@@ -5901,10 +5992,10 @@ SELECT pg_catalog.setval('anarapp_observaciones_id_seq', 3, true);
 -- Data for Name: anarapp_observacionesyac; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY anarapp_observacionesyac (observaciones_ptr_id, yacimiento_id) FROM stdin;
-1	5
-2	6
-3	7
+COPY anarapp_observacionesyac (observaciones_ptr_id, yacimiento_id, "textoY") FROM stdin;
+1	5	
+2	6	
+3	7	
 \.
 
 
@@ -5912,7 +6003,7 @@ COPY anarapp_observacionesyac (observaciones_ptr_id, yacimiento_id) FROM stdin;
 -- Data for Name: anarapp_observacpiedra; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY anarapp_observacpiedra (observaciones_ptr_id, piedra_id) FROM stdin;
+COPY anarapp_observacpiedra (observaciones_ptr_id, piedra_id, "textoP") FROM stdin;
 \.
 
 
@@ -5920,10 +6011,10 @@ COPY anarapp_observacpiedra (observaciones_ptr_id, piedra_id) FROM stdin;
 -- Data for Name: anarapp_obtencioninfo; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY anarapp_obtencioninfo (id, prospeccion, comunicacion, nombre, direccion, telefono, "telefonoCel", mail, "paginaWeb", twitter, "nombreFacebook", blog, fecha, verificado) FROM stdin;
-1	t	t	Miguelñ Angel Perera										t
-2	f	t	Mario Sanoja										t
-3	t	f	Franz Scaramelli										t
+COPY anarapp_obtencioninfo (id) FROM stdin;
+1
+2
+3
 \.
 
 
@@ -5938,7 +6029,7 @@ SELECT pg_catalog.setval('anarapp_obtencioninfo_id_seq', 3, true);
 -- Data for Name: anarapp_obtinfopiedra; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY anarapp_obtinfopiedra (obtencioninfo_ptr_id, piedra_id) FROM stdin;
+COPY anarapp_obtinfopiedra (obtencioninfo_ptr_id, piedra_id, isinfo, "prospeccionP", "comunicacionP", "nombreP", "direccionP", "telefonoP", "telefonoCelP", "mailP", "paginaWebP", "twitterP", "nombreFacebookP", "blogP", "fechaP", "verificadoP") FROM stdin;
 \.
 
 
@@ -5946,10 +6037,10 @@ COPY anarapp_obtinfopiedra (obtencioninfo_ptr_id, piedra_id) FROM stdin;
 -- Data for Name: anarapp_obtinfoyac; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY anarapp_obtinfoyac (obtencioninfo_ptr_id, yacimiento_id) FROM stdin;
-1	4
-2	5
-3	6
+COPY anarapp_obtinfoyac (obtencioninfo_ptr_id, yacimiento_id, isinfo, "prospeccionY", "comunicacionY", "nombreY", "direccionY", "telefonoY", "telefonoCelY", "mailY", "paginaWebY", "twitterY", "nombreFacebookY", "blogY", "fechaY", "verificadoY") FROM stdin;
+1	4	f	f	f										\N	f
+2	5	f	f	f										\N	f
+3	6	f	f	f										\N	f
 \.
 
 
@@ -6012,7 +6103,7 @@ COPY anarapp_otrosvalyac (otrosvalores_ptr_id, yacimiento_id, texto) FROM stdin;
 -- Data for Name: anarapp_paginaweb; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY anarapp_paginaweb (id, "direccionURL") FROM stdin;
+COPY anarapp_paginaweb (id) FROM stdin;
 \.
 
 
@@ -6027,7 +6118,7 @@ SELECT pg_catalog.setval('anarapp_paginaweb_id_seq', 1, false);
 -- Data for Name: anarapp_paginawebpiedra; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY anarapp_paginawebpiedra (paginaweb_ptr_id, piedra_id) FROM stdin;
+COPY anarapp_paginawebpiedra (paginaweb_ptr_id, piedra_id, "tieneWb", "direccionURLP") FROM stdin;
 \.
 
 
@@ -6035,7 +6126,7 @@ COPY anarapp_paginawebpiedra (paginaweb_ptr_id, piedra_id) FROM stdin;
 -- Data for Name: anarapp_paginawebyac; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY anarapp_paginawebyac (paginaweb_ptr_id, yacimiento_id) FROM stdin;
+COPY anarapp_paginawebyac (paginaweb_ptr_id, yacimiento_id, "tieneWb", "direccionURLy") FROM stdin;
 \.
 
 
@@ -6051,7 +6142,7 @@ COPY anarapp_pelicula (video_ptr_id) FROM stdin;
 -- Data for Name: anarapp_peliculapiedra; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY anarapp_peliculapiedra (pelicula_ptr_id, piedra_id) FROM stdin;
+COPY anarapp_peliculapiedra (pelicula_ptr_id, piedra_id, isvidyac, anioy, formatoy, tituloy, autory, instituciony, "numReferenciay", "isFromAnary", "numCopiay", archivoy) FROM stdin;
 \.
 
 
@@ -6059,7 +6150,7 @@ COPY anarapp_peliculapiedra (pelicula_ptr_id, piedra_id) FROM stdin;
 -- Data for Name: anarapp_peliyacimiento; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY anarapp_peliyacimiento (pelicula_ptr_id, yacimiento_id) FROM stdin;
+COPY anarapp_peliyacimiento (pelicula_ptr_id, yacimiento_id, isvidyac, anioy, formatoy, tituloy, autory, instituciony, "numReferenciay", "isFromAnary", "numCopiay", archivoy) FROM stdin;
 \.
 
 
@@ -6075,7 +6166,7 @@ COPY anarapp_piedra (id, yacimiento_id, codigo, nombre, "manifiestacionAsociada"
 -- Name: anarapp_piedra_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('anarapp_piedra_id_seq', 1, false);
+SELECT pg_catalog.setval('anarapp_piedra_id_seq', 4, true);
 
 
 --
@@ -6115,7 +6206,7 @@ SELECT pg_catalog.setval('anarapp_repgrafpiedra_id_seq', 1, false);
 -- Data for Name: anarapp_supervisadopiedra; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY anarapp_supervisadopiedra (supervisadopor_ptr_id, piedra_id) FROM stdin;
+COPY anarapp_supervisadopiedra (supervisadopor_ptr_id, piedra_id, "nombreP", "fechaP") FROM stdin;
 \.
 
 
@@ -6123,11 +6214,11 @@ COPY anarapp_supervisadopiedra (supervisadopor_ptr_id, piedra_id) FROM stdin;
 -- Data for Name: anarapp_supervisadopor; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY anarapp_supervisadopor (id, nombre, fecha) FROM stdin;
-1	Ruby De Valencia	3 / 8 / 1986
-2	Ruby De Valencia	1 / 5 / 2014
-3	Ruby De Valencia	6/8/1986
-4	Ruby De Valencia	1/5/2014
+COPY anarapp_supervisadopor (id) FROM stdin;
+1
+2
+3
+4
 \.
 
 
@@ -6142,11 +6233,11 @@ SELECT pg_catalog.setval('anarapp_supervisadopor_id_seq', 4, true);
 -- Data for Name: anarapp_supervisadoyac; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY anarapp_supervisadoyac (supervisadopor_ptr_id, yacimiento_id) FROM stdin;
-1	4
-2	4
-3	5
-4	5
+COPY anarapp_supervisadoyac (supervisadopor_ptr_id, yacimiento_id, "nombreY", "fechaY") FROM stdin;
+1	4		\N
+2	4		\N
+3	5		\N
+4	5		\N
 \.
 
 
@@ -6154,8 +6245,8 @@ COPY anarapp_supervisadoyac (supervisadopor_ptr_id, yacimiento_id) FROM stdin;
 -- Data for Name: anarapp_tecnicaparageoglifo; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY anarapp_tecnicaparageoglifo (id, tecnicas, yacimiento_id) FROM stdin;
-1	El geoglifo es una zanja laberíntica de unos 40 centímetros de profundidad y un metro de anchura, formando una figura en supuesta posición vertical. Tiene 32 metros de longitud. La parte central de la figura esta formada por tres círculos concéntricos; de la parte superior del circulo exterior salen dos zanjas más, ligeramente divergentes entre si que terminan formando dos espirales apenas enrolladas; en la parte extrema del mismo circulo exterior, es decir en la que esta en el lugar mas bajo del monte, se forma una especie de paralelogramo, de unos tres metros de anchura, del que salen en su parte inferior dos zanjas rectas, del tamaño de todas las demás, es decir de unos 40 centímetros de profundidad por 1 metro de anchura, que forman un ángulo agudo casi recto. Un detalle especial la voluta: sobre el circulo y la zanja inferior a manera de pata del lado izquierdo son visiblemente mayores que las similares del lado derecho	7
+COPY anarapp_tecnicaparageoglifo (id, tecnicas, yacimiento_id, "esGeoflifo") FROM stdin;
+1	El geoglifo es una zanja laberíntica de unos 40 centímetros de profundidad y un metro de anchura, formando una figura en supuesta posición vertical. Tiene 32 metros de longitud. La parte central de la figura esta formada por tres círculos concéntricos; de la parte superior del circulo exterior salen dos zanjas más, ligeramente divergentes entre si que terminan formando dos espirales apenas enrolladas; en la parte extrema del mismo circulo exterior, es decir en la que esta en el lugar mas bajo del monte, se forma una especie de paralelogramo, de unos tres metros de anchura, del que salen en su parte inferior dos zanjas rectas, del tamaño de todas las demás, es decir de unos 40 centímetros de profundidad por 1 metro de anchura, que forman un ángulo agudo casi recto. Un detalle especial la voluta: sobre el circulo y la zanja inferior a manera de pata del lado izquierdo son visiblemente mayores que las similares del lado derecho	7	f
 \.
 
 
@@ -6170,7 +6261,7 @@ SELECT pg_catalog.setval('anarapp_tecnicaparageoglifo_id_seq', 1, true);
 -- Data for Name: anarapp_tecnicaparamicropetro; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY anarapp_tecnicaparamicropetro (id, "esGrabado", "esGrabadoPercusion", "esGrabadoPercusionDirecta", "esGrabadoPercusionIndirecta", "esAbrasionPiedra", "esAbrasionArena", "esAbrasion", otros, yacimiento_id, "esConcha") FROM stdin;
+COPY anarapp_tecnicaparamicropetro (id, "esGrabado", "esGrabadoPercusion", "esGrabadoPercusionDirecta", "esGrabadoPercusionIndirecta", "esAbrasionPiedra", "esAbrasionArena", "esAbrasion", otros, yacimiento_id, "esConcha", "esMicro") FROM stdin;
 \.
 
 
@@ -6185,7 +6276,7 @@ SELECT pg_catalog.setval('anarapp_tecnicaparamicropetro_id_seq', 1, false);
 -- Data for Name: anarapp_tecnicaparamonumentos; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY anarapp_tecnicaparamonumentos (id, "esMonolito", "esMenhir", "esDolmen", tecnicas, otros, yacimiento_id) FROM stdin;
+COPY anarapp_tecnicaparamonumentos (id, "esMonolito", "esMenhir", "esDolmen", tecnicas, otros, yacimiento_id, "esMonumento") FROM stdin;
 \.
 
 
@@ -6200,7 +6291,7 @@ SELECT pg_catalog.setval('anarapp_tecnicaparamonumentos_id_seq', 1, false);
 -- Data for Name: anarapp_tecnicaparapetroglifo; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY anarapp_tecnicaparapetroglifo (id, "esGrabado", "esGrabadoPercusion", "esGrabadoPercusionDirecta", "esGrabadoPercusionIndirecta", "esAbrasionPiedra", "esAbrasionArena", "esAbrasion", otros, yacimiento_id, "esConcha") FROM stdin;
+COPY anarapp_tecnicaparapetroglifo (id, "esGrabado", "esGrabadoPercusion", "esGrabadoPercusionDirecta", "esGrabadoPercusionIndirecta", "esAbrasionPiedra", "esAbrasionArena", "esAbrasion", otros, yacimiento_id, "esConcha", "esPetroglifo") FROM stdin;
 \.
 
 
@@ -6215,11 +6306,11 @@ SELECT pg_catalog.setval('anarapp_tecnicaparapetroglifo_id_seq', 1, false);
 -- Data for Name: anarapp_tecnicaparapintura; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY anarapp_tecnicaparapintura (id, "conDedo", fibra, soplado, otros, yacimiento_id) FROM stdin;
-1	t	t	f		3
-2	t	t	f		4
-3	t	t	f	La casi totalidad de las pinturas de la Cueva de El Elefante, se halla localizada sobre el fondo de la misma, formando una especie de panel continuo, con una longitud aproximada  de 38 mts y un ancho de 2 a 3 mtrs.  	5
-4	t	t	f	Las pinturas rupestres están esparcidas en el techo, en una zona de 17 mts	6
+COPY anarapp_tecnicaparapintura (id, "conDedo", fibra, soplado, otros, yacimiento_id, "esPintura") FROM stdin;
+1	t	t	f		3	f
+2	t	t	f		4	f
+3	t	t	f	La casi totalidad de las pinturas de la Cueva de El Elefante, se halla localizada sobre el fondo de la misma, formando una especie de panel continuo, con una longitud aproximada  de 38 mts y un ancho de 2 a 3 mtrs.  	5	f
+4	t	t	f	Las pinturas rupestres están esparcidas en el techo, en una zona de 17 mts	6	f
 \.
 
 
@@ -6383,7 +6474,7 @@ SELECT pg_catalog.setval('anarapp_usoactsuelo_id_seq', 3, true);
 -- Data for Name: anarapp_video; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY anarapp_video (id, anio, formato, titulo, autor, institucion, "numReferencia", "isFromAnar", "numCopia", archivo) FROM stdin;
+COPY anarapp_video (id) FROM stdin;
 \.
 
 
@@ -6398,7 +6489,7 @@ SELECT pg_catalog.setval('anarapp_video_id_seq', 1, false);
 -- Data for Name: anarapp_videopiedra; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY anarapp_videopiedra (video_ptr_id, piedra_id) FROM stdin;
+COPY anarapp_videopiedra (video_ptr_id, piedra_id, isvidyac, anioy, formatoy, tituloy, autory, instituciony, "numReferenciay", "isFromAnary", "numCopiay", archivoy) FROM stdin;
 \.
 
 
@@ -6406,7 +6497,7 @@ COPY anarapp_videopiedra (video_ptr_id, piedra_id) FROM stdin;
 -- Data for Name: anarapp_videoyacimiento; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY anarapp_videoyacimiento (video_ptr_id, yacimiento_id) FROM stdin;
+COPY anarapp_videoyacimiento (video_ptr_id, yacimiento_id, isvidyac, anioy, formatoy, tituloy, autory, instituciony, "numReferenciay", "isFromAnary", "numCopiay", archivoy) FROM stdin;
 \.
 
 
@@ -6427,7 +6518,7 @@ COPY anarapp_yacimiento (id, codigo, pais, nombre, estado_id, municipio_id) FROM
 -- Name: anarapp_yacimiento_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('anarapp_yacimiento_id_seq', 11, true);
+SELECT pg_catalog.setval('anarapp_yacimiento_id_seq', 18, true);
 
 
 --
@@ -6822,7 +6913,7 @@ SELECT pg_catalog.setval('auth_permission_id_seq', 342, true);
 --
 
 COPY auth_user (id, username, first_name, last_name, email, password, is_staff, is_active, is_superuser, last_login, date_joined) FROM stdin;
-1	anar			savagej.p@gmail.com	pbkdf2_sha256$10000$A4LNQzzJTMTu$UmvZL5gmCohWlq6B2N8h4pYCUhO1v4CaFBmqnAiyiss=	t	t	t	2014-10-15 08:56:20.34314-04:30	2014-04-01 10:22:11.351767-04:30
+1	anar			savagej.p@gmail.com	pbkdf2_sha256$10000$A4LNQzzJTMTu$UmvZL5gmCohWlq6B2N8h4pYCUhO1v4CaFBmqnAiyiss=	t	t	t	2014-11-27 15:08:01.530202-05	2014-04-01 10:52:11.351767-04
 \.
 
 
@@ -6868,40 +6959,64 @@ SELECT pg_catalog.setval('auth_user_user_permissions_id_seq', 1, false);
 --
 
 COPY django_admin_log (id, action_time, user_id, content_type_id, object_id, object_repr, action_flag, change_message) FROM stdin;
-1	2014-04-01 10:35:29.93366-04:30	1	11	1	PB1-Prueba-Prueba	1	
-2	2014-04-01 10:37:11.72478-04:30	1	11	1	PB1-Prueba-Prueba	2	Añadido/a "" ...
-3	2014-04-01 10:38:42.534449-04:30	1	11	1	PB1-Prueba-Prueba	2	Eliminado/a "" ...
-4	2014-04-02 19:05:00.296779-04:30	1	11	1	PB1-Prueba-Prueba	2	Añadido/a "" 11. Fotografia. Añadido/a "" 11. Fotografia.
-5	2014-04-03 10:51:26.875987-04:30	1	11	2	PB1-327-CUEVA IGLESIA, CUEVA DEL CERRO DE LAS IGLESIAS, CUEVA MAPOYO  	1	
-6	2014-04-03 11:10:32.280379-04:30	1	11	2	PB1-327-CUEVA IGLESIA, CUEVA DEL CERRO DE LAS IGLESIAS, CUEVA MAPOYO  	3	
-7	2014-04-03 11:11:18.603004-04:30	1	11	1	PB1-Prueba-Prueba	3	
-8	2014-04-03 11:25:45.349251-04:30	1	11	3	PB1-327-CUEVA IGLESIA, CUEVA DEL CERRO DE LAS IGLESIAS, CUEVA MAPOYO  	1	
-9	2014-04-03 23:13:07.27698-04:30	1	11	3	PB1-327-CUEVA IGLESIA, CUEVA DEL CERRO DE LAS IGLESIAS, CUEVA MAPOYO  	2	Añadido/a "" 13. Tipo de Manifestación. Añadido/a "" 14. Ubicación. Añadido/a "" 15. Orientacion del Yacimiento. Añadido/a "" 22. Material. Añadido/a "" 13.2. Pintura Rupestre. Añadido/a "" 13.2. Pintura Rupestre.
-10	2014-04-05 07:39:35.153865-04:30	1	11	3	PB1-327-CUEVA IGLESIA, CUEVA DEL CERRO DE LAS IGLESIAS, CUEVA MAPOYO  	2	Añadido/a "" 11. Fotografia. Añadido/a "" 11. Fotografia.
-11	2014-04-05 09:33:56.068302-04:30	1	11	3	PB1-327-CUEVA IGLESIA, CUEVA DEL CERRO DE LAS IGLESIAS, CUEVA MAPOYO  	2	Añadido/a "" 27. Estado de la Conservación. Añadido/a "" 27.5.1. Causas. Añadido/a "" 27.6.1. Tiempo. Añadido/a "" 30. Manifestaciones Asociadas. Añadido/a "" 30. Manifestaciones Asociadas. Añadido/a "" 30. Manifestaciones Asociadas. Añadido/a "" 30. Manifestaciones Asociadas. Añadido/a "" 30. Manifestaciones Asociadas.
-12	2014-04-05 10:48:00.543103-04:30	1	11	3	PB1-327-CUEVA IGLESIA, CUEVA DEL CERRO DE LAS IGLESIAS, CUEVA MAPOYO  	2	Modificados otros para "" 30. Manifestaciones Asociadas.
-13	2014-04-05 19:20:50.289439-04:30	1	11	3	PB1-327-CUEVA IGLESIA, CUEVA DEL CERRO DE LAS IGLESIAS, CUEVA MAPOYO  	2	Añadido/a "" 30. Manifestaciones Asociadas. Modificados otros para "" 30. Manifestaciones Asociadas.
-14	2014-04-06 20:18:18.401057-04:30	1	11	3	PB1-327-CUEVA IGLESIA, CUEVA DEL CERRO DE LAS IGLESIAS, CUEVA MAPOYO  	2	Modificado/a pais.
-15	2014-05-01 12:18:35.064387-04:30	1	11	4	PB1-50-CUEVA SUSUDE INAVA, La Casa de Piedra	1	
-16	2014-05-01 12:41:02.710707-04:30	1	11	4	PB1-50-CUEVA SUSUDE INAVA, La Casa de Piedra	2	Añadido/a "" 11. Fotografia. Añadido/a "" 11. Fotografia. Modificados fecha y archivo para "" 11. Fotografia. Añadido/a "" 12. Tipo de Yacimiento. Añadido/a "" 16. Textura del Suelo. Añadido/a "" 17. Flora. Añadido/a "" 19. Hidrología. Añadido/a "" 20. Exposición. Añadido/a "" 21. Constitución del Yacimiento.
-17	2014-05-01 14:42:19.610231-04:30	1	11	4	PB1-50-CUEVA SUSUDE INAVA, La Casa de Piedra	2	Añadido/a "" 13. Tipo de Manifestación. Añadido/a "" 14. Ubicación. Añadido/a "" 15. Orientacion del Yacimiento. Añadido/a "" 22. Material.
-18	2014-05-01 15:28:45.55812-04:30	1	11	4	PB1-50-CUEVA SUSUDE INAVA, La Casa de Piedra	2	Añadido/a "" 13.2. Pintura Rupestre. Añadido/a "" 13.2. Pintura Rupestre. Añadido/a "" 25.6. Colores. Añadido/a "" 25.6. Colores. Añadido/a "" 27. Estado de la Conservación. Añadido/a "" 30. Manifestaciones Asociadas. Añadido/a "" 30. Manifestaciones Asociadas. Añadido/a "" 30. Manifestaciones Asociadas.
-19	2014-05-01 16:42:54.906454-04:30	1	11	4	PB1-50-CUEVA SUSUDE INAVA, La Casa de Piedra; El Carmen, Casa de Piedra Norte, Tiger Cave	2	Modificado/a nombre. Modificados numeroPlano para "" 7. Número de Plano. Añadido/a "" 11. Fotografia. Añadido/a "" 11. Fotografia. Añadido/a "" 11. Fotografia. Añadido/a "" 11. Fotografia. Añadido/a "" 11. Fotografia. Añadido/a "" 11. Fotografia. Añadido/a "" 11. Fotografia. Añadido/a "" 11. Fotografia. Modificados fecha para "" 11. Fotografia. Modificados fecha para "" 11. Fotografia. Modificados fecha para "" 11. Fotografia. Añadido/a "" 30. Manifestaciones Asociadas. Modificados descripcionCeramica para "" 30. Manifestaciones Asociadas. Añadido/a "" Bibliografía. Añadido/a "" Bibliografía. Añadido/a "" Bibliografía. Añadido/a "" Bibliografía. Añadido/a "" Información obtenida por. Añadido/a "" Ficha llenada por. Añadido/a "" Ficha llenada por. Añadido/a "" Ficha Supervisada Por. Añadido/a "" Ficha Supervisada Por.
-20	2014-05-01 17:34:06.364789-04:30	1	11	5	PB1-3-CUEVA de EL ELEFANTE	1	
-21	2014-05-01 17:49:33.529655-04:30	1	11	4	PB1-50-CUEVA SUSUDE INAVA, La Casa de Piedra; El Carmen, Casa de Piedra Norte, Tiger Cave	2	Modificados titulo para "" Bibliografía. Modificados titulo para "" Bibliografía. Modificados titulo y archivo para "" Bibliografía.
-22	2014-05-01 19:02:20.935395-04:30	1	11	5	PB1-3-CUEVA de EL ELEFANTE	2	Añadido/a "" 13. Tipo de Manifestación. Añadido/a "" 14. Ubicación. Añadido/a "" 15. Orientacion del Yacimiento. Modificados observaciones para "" 20. Exposición. Modificados otros para "" 21. Constitución del Yacimiento. Añadido/a "" 22. Material. Añadido/a "" 13.2. Pintura Rupestre. Añadido/a "" 13.2. Pintura Rupestre. Añadido/a "" 25.6. Colores. Añadido/a "" 25.6. Colores. Añadido/a "" 27. Estado de la Conservación. Añadido/a "" 27.5.1. Causas. Añadido/a "" 27.6.1. Tiempo. Añadido/a "" 29. Cronología Tentativa. Añadido/a "" 30. Manifestaciones Asociadas. Añadido/a "" 30. Manifestaciones Asociadas. Añadido/a "" 30. Manifestaciones Asociadas. Añadido/a "" 30. Manifestaciones Asociadas. Añadido/a "" 30. Manifestaciones Asociadas. Añadido/a "" Bibliografía. Añadido/a "" Bibliografía. Añadido/a "" Bibliografía. Añadido/a "" Bibliografía. Añadido/a "" Información obtenida por. Añadido/a "" Observaciones. Añadido/a "" Ficha llenada por. Añadido/a "" Ficha llenada por. Añadido/a "" Ficha Supervisada Por. Añadido/a "" Ficha Supervisada Por.
-23	2014-05-01 21:50:02.014579-04:30	1	11	6	PB1-444-Cueva Caño Ore, Cueva del Chamán, White Shaman Cave	1	
-24	2014-05-01 22:14:18.95924-04:30	1	11	6	PB1-444-Cueva Caño Ore, Cueva del Chamán, White Shaman Cave	2	Añadido/a "" Bibliografía. Modificados codigo, titulo, autor, ano, institucion, conDibujo y archivo para "" Bibliografía. Añadido/a "" Información obtenida por. Añadido/a "" Ficha llenada por.
-25	2014-05-01 22:22:46.086741-04:30	1	11	6	PB1-444-Cueva Caño Ore, Cueva del Chamán, White Shaman Cave	2	Modificados archivo para "" Bibliografía.
-26	2014-05-01 22:30:54.318002-04:30	1	11	5	PB1-3-CUEVA de EL ELEFANTE	2	No ha cambiado ningún campo.
-27	2014-05-01 22:39:53.802442-04:30	1	11	6	PB1-444-Cueva Caño Ore, Cueva del Chamán, White Shaman Cave	2	Modificados haciaValle para "" 15. Orientacion del Yacimiento. Modificados esRoca para "" 22. Material. Añadido/a "" Bibliografía. Modificados texto para "" Observaciones.
-28	2014-05-01 22:44:48.558474-04:30	1	11	6	PB1-444-CUEVA CAÑO ORE, Cueva del Chamán, White Shaman Cave	2	Modificado/a nombre.
-29	2014-05-01 22:46:31.600073-04:30	1	11	3	PB1-327-CUEVA IGLESIA, Cueva del Cerro Iglesias, Cueva Mapoyo	2	Modificado/a pais y nombre.
-30	2014-05-16 17:32:23.80833-04:30	1	11	7	PB1-51-La Rueda del Indio	1	
-31	2014-05-16 19:22:53.242412-04:30	1	11	7	PB1-51-La Rueda del Indio	2	Añadido/a "" 13. Tipo de Manifestación. Añadido/a "" 14. Ubicación. Añadido/a "" 15. Orientacion del Yacimiento. Añadido/a "" 20. Exposición. Añadido/a "" 22. Material.
-32	2014-05-16 19:28:05.995933-04:30	1	11	7	PB1-51-La Rueda del Indio	2	Añadido/a "" 13.1. Geoglifo. Añadido/a "" 27. Estado de la Conservación.
-33	2014-05-16 20:24:29.305356-04:30	1	11	7	PB1-51-La Rueda del Indio	2	Modificados latitud y utmAdicional para "" 8. Coordenadas. Añadido/a "" Otros valores del sitio. Añadido/a "" Bibliografía. Añadido/a "" Bibliografía. Añadido/a "" Bibliografía. Añadido/a "" Bibliografía. Añadido/a "" Bibliografía. Añadido/a "" Bibliografía. Añadido/a "" Bibliografía. Añadido/a "" Bibliografía. Añadido/a "" Bibliografía. Añadido/a "" Bibliografía. Añadido/a "" Observaciones. Añadido/a "" Ficha llenada por.
-34	2014-05-16 20:26:12.950055-04:30	1	11	7	PB1-51-LA RUEDA DEL INDIO	2	Modificado/a nombre.
+1	2014-04-01 11:05:29.93366-04	1	11	1	PB1-Prueba-Prueba	1	
+2	2014-04-01 11:07:11.72478-04	1	11	1	PB1-Prueba-Prueba	2	Añadido/a "" ...
+3	2014-04-01 11:08:42.534449-04	1	11	1	PB1-Prueba-Prueba	2	Eliminado/a "" ...
+4	2014-04-02 19:35:00.296779-04	1	11	1	PB1-Prueba-Prueba	2	Añadido/a "" 11. Fotografia. Añadido/a "" 11. Fotografia.
+5	2014-04-03 11:21:26.875987-04	1	11	2	PB1-327-CUEVA IGLESIA, CUEVA DEL CERRO DE LAS IGLESIAS, CUEVA MAPOYO  	1	
+6	2014-04-03 11:40:32.280379-04	1	11	2	PB1-327-CUEVA IGLESIA, CUEVA DEL CERRO DE LAS IGLESIAS, CUEVA MAPOYO  	3	
+7	2014-04-03 11:41:18.603004-04	1	11	1	PB1-Prueba-Prueba	3	
+8	2014-04-03 11:55:45.349251-04	1	11	3	PB1-327-CUEVA IGLESIA, CUEVA DEL CERRO DE LAS IGLESIAS, CUEVA MAPOYO  	1	
+9	2014-04-03 23:43:07.27698-04	1	11	3	PB1-327-CUEVA IGLESIA, CUEVA DEL CERRO DE LAS IGLESIAS, CUEVA MAPOYO  	2	Añadido/a "" 13. Tipo de Manifestación. Añadido/a "" 14. Ubicación. Añadido/a "" 15. Orientacion del Yacimiento. Añadido/a "" 22. Material. Añadido/a "" 13.2. Pintura Rupestre. Añadido/a "" 13.2. Pintura Rupestre.
+10	2014-04-05 08:09:35.153865-04	1	11	3	PB1-327-CUEVA IGLESIA, CUEVA DEL CERRO DE LAS IGLESIAS, CUEVA MAPOYO  	2	Añadido/a "" 11. Fotografia. Añadido/a "" 11. Fotografia.
+11	2014-04-05 10:03:56.068302-04	1	11	3	PB1-327-CUEVA IGLESIA, CUEVA DEL CERRO DE LAS IGLESIAS, CUEVA MAPOYO  	2	Añadido/a "" 27. Estado de la Conservación. Añadido/a "" 27.5.1. Causas. Añadido/a "" 27.6.1. Tiempo. Añadido/a "" 30. Manifestaciones Asociadas. Añadido/a "" 30. Manifestaciones Asociadas. Añadido/a "" 30. Manifestaciones Asociadas. Añadido/a "" 30. Manifestaciones Asociadas. Añadido/a "" 30. Manifestaciones Asociadas.
+12	2014-04-05 11:18:00.543103-04	1	11	3	PB1-327-CUEVA IGLESIA, CUEVA DEL CERRO DE LAS IGLESIAS, CUEVA MAPOYO  	2	Modificados otros para "" 30. Manifestaciones Asociadas.
+13	2014-04-05 19:50:50.289439-04	1	11	3	PB1-327-CUEVA IGLESIA, CUEVA DEL CERRO DE LAS IGLESIAS, CUEVA MAPOYO  	2	Añadido/a "" 30. Manifestaciones Asociadas. Modificados otros para "" 30. Manifestaciones Asociadas.
+14	2014-04-06 20:48:18.401057-04	1	11	3	PB1-327-CUEVA IGLESIA, CUEVA DEL CERRO DE LAS IGLESIAS, CUEVA MAPOYO  	2	Modificado/a pais.
+15	2014-05-01 12:48:35.064387-04	1	11	4	PB1-50-CUEVA SUSUDE INAVA, La Casa de Piedra	1	
+16	2014-05-01 13:11:02.710707-04	1	11	4	PB1-50-CUEVA SUSUDE INAVA, La Casa de Piedra	2	Añadido/a "" 11. Fotografia. Añadido/a "" 11. Fotografia. Modificados fecha y archivo para "" 11. Fotografia. Añadido/a "" 12. Tipo de Yacimiento. Añadido/a "" 16. Textura del Suelo. Añadido/a "" 17. Flora. Añadido/a "" 19. Hidrología. Añadido/a "" 20. Exposición. Añadido/a "" 21. Constitución del Yacimiento.
+17	2014-05-01 15:12:19.610231-04	1	11	4	PB1-50-CUEVA SUSUDE INAVA, La Casa de Piedra	2	Añadido/a "" 13. Tipo de Manifestación. Añadido/a "" 14. Ubicación. Añadido/a "" 15. Orientacion del Yacimiento. Añadido/a "" 22. Material.
+18	2014-05-01 15:58:45.55812-04	1	11	4	PB1-50-CUEVA SUSUDE INAVA, La Casa de Piedra	2	Añadido/a "" 13.2. Pintura Rupestre. Añadido/a "" 13.2. Pintura Rupestre. Añadido/a "" 25.6. Colores. Añadido/a "" 25.6. Colores. Añadido/a "" 27. Estado de la Conservación. Añadido/a "" 30. Manifestaciones Asociadas. Añadido/a "" 30. Manifestaciones Asociadas. Añadido/a "" 30. Manifestaciones Asociadas.
+19	2014-05-01 17:12:54.906454-04	1	11	4	PB1-50-CUEVA SUSUDE INAVA, La Casa de Piedra; El Carmen, Casa de Piedra Norte, Tiger Cave	2	Modificado/a nombre. Modificados numeroPlano para "" 7. Número de Plano. Añadido/a "" 11. Fotografia. Añadido/a "" 11. Fotografia. Añadido/a "" 11. Fotografia. Añadido/a "" 11. Fotografia. Añadido/a "" 11. Fotografia. Añadido/a "" 11. Fotografia. Añadido/a "" 11. Fotografia. Añadido/a "" 11. Fotografia. Modificados fecha para "" 11. Fotografia. Modificados fecha para "" 11. Fotografia. Modificados fecha para "" 11. Fotografia. Añadido/a "" 30. Manifestaciones Asociadas. Modificados descripcionCeramica para "" 30. Manifestaciones Asociadas. Añadido/a "" Bibliografía. Añadido/a "" Bibliografía. Añadido/a "" Bibliografía. Añadido/a "" Bibliografía. Añadido/a "" Información obtenida por. Añadido/a "" Ficha llenada por. Añadido/a "" Ficha llenada por. Añadido/a "" Ficha Supervisada Por. Añadido/a "" Ficha Supervisada Por.
+20	2014-05-01 18:04:06.364789-04	1	11	5	PB1-3-CUEVA de EL ELEFANTE	1	
+21	2014-05-01 18:19:33.529655-04	1	11	4	PB1-50-CUEVA SUSUDE INAVA, La Casa de Piedra; El Carmen, Casa de Piedra Norte, Tiger Cave	2	Modificados titulo para "" Bibliografía. Modificados titulo para "" Bibliografía. Modificados titulo y archivo para "" Bibliografía.
+22	2014-05-01 19:32:20.935395-04	1	11	5	PB1-3-CUEVA de EL ELEFANTE	2	Añadido/a "" 13. Tipo de Manifestación. Añadido/a "" 14. Ubicación. Añadido/a "" 15. Orientacion del Yacimiento. Modificados observaciones para "" 20. Exposición. Modificados otros para "" 21. Constitución del Yacimiento. Añadido/a "" 22. Material. Añadido/a "" 13.2. Pintura Rupestre. Añadido/a "" 13.2. Pintura Rupestre. Añadido/a "" 25.6. Colores. Añadido/a "" 25.6. Colores. Añadido/a "" 27. Estado de la Conservación. Añadido/a "" 27.5.1. Causas. Añadido/a "" 27.6.1. Tiempo. Añadido/a "" 29. Cronología Tentativa. Añadido/a "" 30. Manifestaciones Asociadas. Añadido/a "" 30. Manifestaciones Asociadas. Añadido/a "" 30. Manifestaciones Asociadas. Añadido/a "" 30. Manifestaciones Asociadas. Añadido/a "" 30. Manifestaciones Asociadas. Añadido/a "" Bibliografía. Añadido/a "" Bibliografía. Añadido/a "" Bibliografía. Añadido/a "" Bibliografía. Añadido/a "" Información obtenida por. Añadido/a "" Observaciones. Añadido/a "" Ficha llenada por. Añadido/a "" Ficha llenada por. Añadido/a "" Ficha Supervisada Por. Añadido/a "" Ficha Supervisada Por.
+23	2014-05-01 22:20:02.014579-04	1	11	6	PB1-444-Cueva Caño Ore, Cueva del Chamán, White Shaman Cave	1	
+24	2014-05-01 22:44:18.95924-04	1	11	6	PB1-444-Cueva Caño Ore, Cueva del Chamán, White Shaman Cave	2	Añadido/a "" Bibliografía. Modificados codigo, titulo, autor, ano, institucion, conDibujo y archivo para "" Bibliografía. Añadido/a "" Información obtenida por. Añadido/a "" Ficha llenada por.
+25	2014-05-01 22:52:46.086741-04	1	11	6	PB1-444-Cueva Caño Ore, Cueva del Chamán, White Shaman Cave	2	Modificados archivo para "" Bibliografía.
+26	2014-05-01 23:00:54.318002-04	1	11	5	PB1-3-CUEVA de EL ELEFANTE	2	No ha cambiado ningún campo.
+27	2014-05-01 23:09:53.802442-04	1	11	6	PB1-444-Cueva Caño Ore, Cueva del Chamán, White Shaman Cave	2	Modificados haciaValle para "" 15. Orientacion del Yacimiento. Modificados esRoca para "" 22. Material. Añadido/a "" Bibliografía. Modificados texto para "" Observaciones.
+28	2014-05-01 23:14:48.558474-04	1	11	6	PB1-444-CUEVA CAÑO ORE, Cueva del Chamán, White Shaman Cave	2	Modificado/a nombre.
+29	2014-05-01 23:16:31.600073-04	1	11	3	PB1-327-CUEVA IGLESIA, Cueva del Cerro Iglesias, Cueva Mapoyo	2	Modificado/a pais y nombre.
+30	2014-05-16 18:02:23.80833-04	1	11	7	PB1-51-La Rueda del Indio	1	
+31	2014-05-16 19:52:53.242412-04	1	11	7	PB1-51-La Rueda del Indio	2	Añadido/a "" 13. Tipo de Manifestación. Añadido/a "" 14. Ubicación. Añadido/a "" 15. Orientacion del Yacimiento. Añadido/a "" 20. Exposición. Añadido/a "" 22. Material.
+32	2014-05-16 19:58:05.995933-04	1	11	7	PB1-51-La Rueda del Indio	2	Añadido/a "" 13.1. Geoglifo. Añadido/a "" 27. Estado de la Conservación.
+33	2014-05-16 20:54:29.305356-04	1	11	7	PB1-51-La Rueda del Indio	2	Modificados latitud y utmAdicional para "" 8. Coordenadas. Añadido/a "" Otros valores del sitio. Añadido/a "" Bibliografía. Añadido/a "" Bibliografía. Añadido/a "" Bibliografía. Añadido/a "" Bibliografía. Añadido/a "" Bibliografía. Añadido/a "" Bibliografía. Añadido/a "" Bibliografía. Añadido/a "" Bibliografía. Añadido/a "" Bibliografía. Añadido/a "" Bibliografía. Añadido/a "" Observaciones. Añadido/a "" Ficha llenada por.
+34	2014-05-16 20:56:12.950055-04	1	11	7	PB1-51-LA RUEDA DEL INDIO	2	Modificado/a nombre.
+35	2014-10-28 12:12:05.961265-04	1	64	1	Pa-456456456-xghfh	1	
+36	2014-10-28 12:12:40.300038-04	1	64	1	Pa-456456456-xghfh	3	
+37	2014-10-28 12:13:02.010656-04	1	11	12	PB1-32132321-miyac	1	
+38	2014-10-28 12:13:54.110518-04	1	11	12	PB1-32132321-miyac	3	
+39	2014-10-30 11:05:14.498779-04	1	11	13	PB1-123456-yacimiento de prueba	1	
+40	2014-10-30 11:05:36.243004-04	1	11	13	PB1-123456-yacimiento de prueba	3	
+41	2014-11-11 10:56:28.248599-05	1	11	14	PB1-123456789-prueba2	1	
+42	2014-11-11 10:56:43.915242-05	1	11	14	PB1-123456789-prueba2	3	
+43	2014-11-13 11:52:35.395178-05	1	11	16	PB1-131221313-qwerty	1	
+44	2014-11-13 11:53:05.369675-05	1	11	16	PB1-131221313-qwerty	3	
+45	2014-11-21 08:33:20.936423-05	1	11	17	PB1-112312-sfgsdg	1	
+46	2014-11-21 08:33:37.825843-05	1	11	17	PB1-112312-sfgsdg	3	
+47	2014-11-21 08:34:27.209379-05	1	64	2	Pa-2312312313-cxvvcxbcvb	1	
+48	2014-11-21 08:34:40.967278-05	1	64	2	Pa-2312312313-cxvvcxbcvb	3	
+49	2014-11-25 15:34:20.390493-05	1	11	18	PB1-999999999-yacimiento de prueba	1	
+50	2014-11-25 16:13:30.732686-05	1	11	18	PB1-999999999-yacimiento de prueba	2	Añadido/a "" ...
+51	2014-11-25 16:14:05.423999-05	1	11	18	PB1-999999999-yacimiento de prueba	2	Eliminado/a "" ...
+52	2014-11-25 16:14:21.869571-05	1	11	18	PB1-999999999-yacimiento de prueba	3	
+53	2014-11-25 16:28:05.194065-05	1	64	3	Pa-9999999999-piedra de prueba	1	
+54	2014-11-25 16:28:36.143185-05	1	64	3	Pa-9999999999-piedra de prueba	2	Añadido/a "" 1.1. Fotografia.
+55	2014-11-25 16:28:53.246036-05	1	64	3	Pa-9999999999-piedra de prueba	2	Eliminado/a "" 1.1. Fotografia.
+56	2014-11-25 16:29:02.34135-05	1	64	3	Pa-9999999999-piedra de prueba	3	
+57	2014-11-27 15:09:19.990361-05	1	64	4	Pa-123123123-rocadeprueba	1	
+58	2014-11-27 15:09:42.562956-05	1	64	4	Pa-123123123-rocadeprueba	3	
 \.
 
 
@@ -6909,7 +7024,7 @@ COPY django_admin_log (id, action_time, user_id, content_type_id, object_id, obj
 -- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('django_admin_log_id_seq', 34, true);
+SELECT pg_catalog.setval('django_admin_log_id_seq', 58, true);
 
 
 --
@@ -7046,54 +7161,86 @@ SELECT pg_catalog.setval('django_content_type_id_seq', 114, true);
 --
 
 COPY django_session (session_key, session_data, expire_date) FROM stdin;
-101421c7d2f4afca2d242fc4e976a641	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-04-15 10:26:57.330141-04:30
-cda6eb68683ccf450b12628b542a111d	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-04-15 10:54:10.763128-04:30
-b992fd81fa8bb94a00d0469ab2d6771d	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-04-15 10:54:23.042783-04:30
-8a91f2504167f2633c90be82f8bf6d58	NjJjNzVjNWRkMzM5MTUzMjJlNWUwYzJiMDA4ZGVlNGIyYjA2NTIwNDqAAn1xAS4=\n	2014-04-15 10:54:30.239282-04:30
-2c8c761d16602a76e003d961f6ccf08a	NjJjNzVjNWRkMzM5MTUzMjJlNWUwYzJiMDA4ZGVlNGIyYjA2NTIwNDqAAn1xAS4=\n	2014-04-18 14:42:00.44726-04:30
-97df21ca057172834a1e66e5ae1375ee	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-04-18 14:42:10.443988-04:30
-0ab24f1d875a98001504c5a95cc257fd	NjJjNzVjNWRkMzM5MTUzMjJlNWUwYzJiMDA4ZGVlNGIyYjA2NTIwNDqAAn1xAS4=\n	2014-04-21 21:39:55.127127-04:30
-abcf3481e0a6643529a16f87466dc224	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-04-24 19:42:50.389279-04:30
-e61753d5a4badf634b5b0ddacb3841e9	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-05-08 11:36:36.963314-04:30
-e10d69b42a01ca3cf834a02bd60c98ef	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-05-16 08:47:04.588408-04:30
-2290701ca20eefe51bf429cbe73e00c4	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-05-23 11:18:24.625362-04:30
-a0e8cc9a7d4b596249ab09d2a31d964c	NjJjNzVjNWRkMzM5MTUzMjJlNWUwYzJiMDA4ZGVlNGIyYjA2NTIwNDqAAn1xAS4=\n	2014-05-23 11:18:35.747308-04:30
-0198616fe3838d58d4ac05eb664b410b	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-05-23 11:18:49.073777-04:30
-b558ae9a396ba93743ee964a7775e8c5	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-05-23 11:18:52.181423-04:30
-b9b0bbd460963d9eabe96a48b14892f4	NjJjNzVjNWRkMzM5MTUzMjJlNWUwYzJiMDA4ZGVlNGIyYjA2NTIwNDqAAn1xAS4=\n	2014-05-24 14:27:08.108135-04:30
-67ee430b782de406a6d8dd184b0501c1	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-05-30 09:43:45.727506-04:30
-47a136576e265f7c2f2e46eae513a608	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-06-02 21:57:55.269059-04:30
-520a8bf0f8fbb103ad45774549ededec	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-06-07 10:22:54.289878-04:30
-4dab03d6c1be5d2f6c59acec6d139d2a	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-06-07 18:53:37.316907-04:30
-cb66a810fb1abba88d24dcd93f84e168	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-06-19 13:54:47.345274-04:30
-22fba1f7937892c0036b064c41a21eb2	NjJjNzVjNWRkMzM5MTUzMjJlNWUwYzJiMDA4ZGVlNGIyYjA2NTIwNDqAAn1xAS4=\n	2014-07-09 16:39:14.041034-04:30
-0bc877d7d724d380c23febc588863bbe	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-07-09 17:29:11.474151-04:30
-4a14d23006c7668e4d9b2b5766a2c98a	NjJjNzVjNWRkMzM5MTUzMjJlNWUwYzJiMDA4ZGVlNGIyYjA2NTIwNDqAAn1xAS4=\n	2014-07-16 16:59:55.772266-04:30
-470d4658d5181f4ff169c1beb6795dc9	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-07-30 08:34:28.647528-04:30
-400af2a40c88d4e48b674bd2f2bbc7a7	YjNhMzE3MzdlYTQwODY0ZjRjMzljNmE3MjJmMjE4OTVlODcxZjY5ODqAAn1xAVUKdGVzdGNvb2tp\nZVUGd29ya2VkcQJzLg==\n	2014-07-30 08:34:56.417474-04:30
-a6c6fb249de460cf22907d38d9c06609	YjNhMzE3MzdlYTQwODY0ZjRjMzljNmE3MjJmMjE4OTVlODcxZjY5ODqAAn1xAVUKdGVzdGNvb2tp\nZVUGd29ya2VkcQJzLg==\n	2014-07-30 12:51:54.538197-04:30
-82510c1e9cf00e074ea3adc7f971d3e4	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-08-02 10:12:19.024565-04:30
-9e82ce5da81a748eee8ed79b7e3cf6eb	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-08-02 15:40:48.969284-04:30
-77aea2dec26af543bf695f660d7fac7e	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-08-10 10:55:28.433769-04:30
-6bd3152cb39a934587ac36c66d4e17b1	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-08-10 18:39:10.551753-04:30
-269f8a4a2553360e7cf793099c4da07a	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-08-15 10:00:22.302377-04:30
-cce91bbf4d4da251aa81684bdb7abf56	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-08-17 18:43:56.891147-04:30
-fe23ec93731454a0c6779dc55199b495	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-08-19 07:04:49.547994-04:30
-4ad90fc8bb80490aaab20a804a02ea3b	NjJjNzVjNWRkMzM5MTUzMjJlNWUwYzJiMDA4ZGVlNGIyYjA2NTIwNDqAAn1xAS4=\n	2014-08-19 08:56:36.110437-04:30
-7b2d7f71dce6c4b7abff604ce59f7084	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-09-26 20:08:21.590884-04:30
-07cad08d6deb3b52cbb98c278dcaafbf	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-09-27 11:30:33.620438-04:30
-07ad9b31070953800bc7b6f4922e5bf1	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-09-27 11:44:37.639644-04:30
-95a3146f1a48cab62bb0b57e5ce1a4b8	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-09-27 12:55:14.808732-04:30
-1b9ad4c1a98401edc99391a1fe560ba3	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-09-27 12:56:45.87471-04:30
-1fa74596144e4540228cde7278549baa	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-09-27 21:54:30.02867-04:30
-29a323814ec4d31b511e716e5edf9d21	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-09-30 20:22:59.764597-04:30
-fab6519ae67bacecd2e22a3386e5d40b	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-09-30 20:28:46.928679-04:30
-722c96f7aba04d104291d61728d7c795	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-09-30 20:31:28.238532-04:30
-60f15131d095b990065b16061479af2e	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-10-01 18:19:04.02715-04:30
-e54470bb120c69ee9e26fcdada7e7c9c	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-10-03 13:59:53.013686-04:30
-4be6336cb467952893021d89a1910232	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-10-05 11:12:43.395152-04:30
-778a27acb82b42130968dfa5a99172de	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-10-08 20:15:09.508251-04:30
-1dd4bcb34fbb92b146dc81e72eb4cab5	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-10-29 08:56:20.418909-04:30
+101421c7d2f4afca2d242fc4e976a641	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-04-15 10:56:57.330141-04
+cda6eb68683ccf450b12628b542a111d	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-04-15 11:24:10.763128-04
+b992fd81fa8bb94a00d0469ab2d6771d	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-04-15 11:24:23.042783-04
+8a91f2504167f2633c90be82f8bf6d58	NjJjNzVjNWRkMzM5MTUzMjJlNWUwYzJiMDA4ZGVlNGIyYjA2NTIwNDqAAn1xAS4=\n	2014-04-15 11:24:30.239282-04
+2c8c761d16602a76e003d961f6ccf08a	NjJjNzVjNWRkMzM5MTUzMjJlNWUwYzJiMDA4ZGVlNGIyYjA2NTIwNDqAAn1xAS4=\n	2014-04-18 15:12:00.44726-04
+97df21ca057172834a1e66e5ae1375ee	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-04-18 15:12:10.443988-04
+0ab24f1d875a98001504c5a95cc257fd	NjJjNzVjNWRkMzM5MTUzMjJlNWUwYzJiMDA4ZGVlNGIyYjA2NTIwNDqAAn1xAS4=\n	2014-04-21 22:09:55.127127-04
+abcf3481e0a6643529a16f87466dc224	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-04-24 20:12:50.389279-04
+e61753d5a4badf634b5b0ddacb3841e9	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-05-08 12:06:36.963314-04
+e10d69b42a01ca3cf834a02bd60c98ef	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-05-16 09:17:04.588408-04
+2290701ca20eefe51bf429cbe73e00c4	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-05-23 11:48:24.625362-04
+a0e8cc9a7d4b596249ab09d2a31d964c	NjJjNzVjNWRkMzM5MTUzMjJlNWUwYzJiMDA4ZGVlNGIyYjA2NTIwNDqAAn1xAS4=\n	2014-05-23 11:48:35.747308-04
+0198616fe3838d58d4ac05eb664b410b	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-05-23 11:48:49.073777-04
+b558ae9a396ba93743ee964a7775e8c5	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-05-23 11:48:52.181423-04
+b9b0bbd460963d9eabe96a48b14892f4	NjJjNzVjNWRkMzM5MTUzMjJlNWUwYzJiMDA4ZGVlNGIyYjA2NTIwNDqAAn1xAS4=\n	2014-05-24 14:57:08.108135-04
+67ee430b782de406a6d8dd184b0501c1	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-05-30 10:13:45.727506-04
+47a136576e265f7c2f2e46eae513a608	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-06-02 22:27:55.269059-04
+520a8bf0f8fbb103ad45774549ededec	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-06-07 10:52:54.289878-04
+4dab03d6c1be5d2f6c59acec6d139d2a	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-06-07 19:23:37.316907-04
+cb66a810fb1abba88d24dcd93f84e168	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-06-19 14:24:47.345274-04
+22fba1f7937892c0036b064c41a21eb2	NjJjNzVjNWRkMzM5MTUzMjJlNWUwYzJiMDA4ZGVlNGIyYjA2NTIwNDqAAn1xAS4=\n	2014-07-09 17:09:14.041034-04
+0bc877d7d724d380c23febc588863bbe	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-07-09 17:59:11.474151-04
+4a14d23006c7668e4d9b2b5766a2c98a	NjJjNzVjNWRkMzM5MTUzMjJlNWUwYzJiMDA4ZGVlNGIyYjA2NTIwNDqAAn1xAS4=\n	2014-07-16 17:29:55.772266-04
+470d4658d5181f4ff169c1beb6795dc9	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-07-30 09:04:28.647528-04
+400af2a40c88d4e48b674bd2f2bbc7a7	YjNhMzE3MzdlYTQwODY0ZjRjMzljNmE3MjJmMjE4OTVlODcxZjY5ODqAAn1xAVUKdGVzdGNvb2tp\nZVUGd29ya2VkcQJzLg==\n	2014-07-30 09:04:56.417474-04
+a6c6fb249de460cf22907d38d9c06609	YjNhMzE3MzdlYTQwODY0ZjRjMzljNmE3MjJmMjE4OTVlODcxZjY5ODqAAn1xAVUKdGVzdGNvb2tp\nZVUGd29ya2VkcQJzLg==\n	2014-07-30 13:21:54.538197-04
+82510c1e9cf00e074ea3adc7f971d3e4	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-08-02 10:42:19.024565-04
+9e82ce5da81a748eee8ed79b7e3cf6eb	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-08-02 16:10:48.969284-04
+77aea2dec26af543bf695f660d7fac7e	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-08-10 11:25:28.433769-04
+6bd3152cb39a934587ac36c66d4e17b1	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-08-10 19:09:10.551753-04
+269f8a4a2553360e7cf793099c4da07a	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-08-15 10:30:22.302377-04
+cce91bbf4d4da251aa81684bdb7abf56	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-08-17 19:13:56.891147-04
+fe23ec93731454a0c6779dc55199b495	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-08-19 07:34:49.547994-04
+4ad90fc8bb80490aaab20a804a02ea3b	NjJjNzVjNWRkMzM5MTUzMjJlNWUwYzJiMDA4ZGVlNGIyYjA2NTIwNDqAAn1xAS4=\n	2014-08-19 09:26:36.110437-04
+7b2d7f71dce6c4b7abff604ce59f7084	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-09-26 20:38:21.590884-04
+07cad08d6deb3b52cbb98c278dcaafbf	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-09-27 12:00:33.620438-04
+07ad9b31070953800bc7b6f4922e5bf1	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-09-27 12:14:37.639644-04
+95a3146f1a48cab62bb0b57e5ce1a4b8	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-09-27 13:25:14.808732-04
+1b9ad4c1a98401edc99391a1fe560ba3	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-09-27 13:26:45.87471-04
+1fa74596144e4540228cde7278549baa	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-09-27 22:24:30.02867-04
+29a323814ec4d31b511e716e5edf9d21	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-09-30 20:52:59.764597-04
+fab6519ae67bacecd2e22a3386e5d40b	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-09-30 20:58:46.928679-04
+722c96f7aba04d104291d61728d7c795	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-09-30 21:01:28.238532-04
+60f15131d095b990065b16061479af2e	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-10-01 18:49:04.02715-04
+e54470bb120c69ee9e26fcdada7e7c9c	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-10-03 14:29:53.013686-04
+4be6336cb467952893021d89a1910232	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-10-05 11:42:43.395152-04
+778a27acb82b42130968dfa5a99172de	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-10-08 20:45:09.508251-04
+1dd4bcb34fbb92b146dc81e72eb4cab5	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-10-29 09:26:20.418909-04
+8b96e14f5efabb096425731a9ff6a27c	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-11-11 11:08:20.139301-05
+55e37bb2b75b3ddfc4c3cca09d2211f3	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-11-11 19:02:36.247284-05
+fa475d684b481ef8c88a92c41cd4e3d5	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-11-15 23:11:44.831857-05
+9ccfe26a2dc165435d6b36f15983affa	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-11-17 08:22:30.606111-05
+76e24482de6a170ee5cb07ae2503c017	YjNhMzE3MzdlYTQwODY0ZjRjMzljNmE3MjJmMjE4OTVlODcxZjY5ODqAAn1xAVUKdGVzdGNvb2tp\nZVUGd29ya2VkcQJzLg==\n	2014-11-17 15:14:52.297587-05
+2bf8209e8484c9313cc28ba33233681c	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-11-18 08:46:05.389711-05
+e7a499ac365821d4eb4dc4863f5745fa	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-11-18 16:26:00.017714-05
+abb730b9180044282cd2e47575573bf9	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-11-19 14:17:40.267425-05
+7f01ea64c0a5cca643d3bf04f8c7ee00	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-11-20 13:56:52.882775-05
+3569677f38847716cee766f41c315cb5	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-11-25 10:51:42.554539-05
+b753bf42348cfa25322ca0227a8f047c	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-11-26 16:27:14.52097-05
+c7d9a2708270bdb20ad44234201a5ff6	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-11-26 16:44:21.582304-05
+2528121602c237925fde60019c406642	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-11-27 08:27:26.557891-05
+f0515b62f1928a273a322a7ef31dec12	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-11-27 11:45:00.523131-05
+417988b4b3bed41bfd9a58b25956f671	YjNhMzE3MzdlYTQwODY0ZjRjMzljNmE3MjJmMjE4OTVlODcxZjY5ODqAAn1xAVUKdGVzdGNvb2tp\nZVUGd29ya2VkcQJzLg==\n	2014-11-27 23:03:41.76376-05
+d8969402ec244cc8dfd4e42616360960	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-11-28 09:25:04.335078-05
+285dd194144668da0e32f1bfd0dbc69d	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-11-29 17:58:59.65369-05
+6899133cd6144f33a92fbc6012e7e5f3	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-11-30 18:59:04.2897-05
+8173358f1179d81b31258e4dc5f0af2b	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-12-01 21:32:58.231086-05
+42575bac4acab974fe9b860acb92c440	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-12-03 09:26:04.117576-05
+c4e958b2921f85f082861985f28bc77c	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-12-04 08:54:54.315024-05
+308054bfac67eebdaf52a52d46cf0d7e	YjNhMzE3MzdlYTQwODY0ZjRjMzljNmE3MjJmMjE4OTVlODcxZjY5ODqAAn1xAVUKdGVzdGNvb2tp\nZVUGd29ya2VkcQJzLg==\n	2014-12-05 10:25:22.857756-05
+babab339bd7dac9c84822227b05c5bc1	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-12-05 17:16:51.9635-05
+1a5c88383260e485d21d65d0bb32aff5	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-12-06 13:36:35.067179-05
+98e10b65f855253a9f6fc0026cb4680c	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-12-07 09:39:57.53815-05
+97af0277bcfe928ca3072fda65fc033b	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-12-08 12:41:45.529732-05
+3972629bfc823f331c352f9c266fc388	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-12-08 16:36:09.325227-05
+68e3f6736a69395b4c6fccfb2beccd21	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-12-09 08:48:56.585069-05
+f867617414ec5bc951972e30176712c0	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-12-09 16:39:35.457528-05
+cce28393d091e151f8238ef423ad4232	YzI5OTQwM2JkZTg2MzgyMGVkNTQ2NjZlNmYxMDM0MmIxYTAwMmNmNTqAAn1xAVUKdGVzdGNvb2tp\nZXECVQZ3b3JrZWRxA3Mu\n	2014-12-10 17:01:19.462878-05
+378c7b300a2abe13a4b3ae44d0c8f678	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-12-11 11:53:59.442118-05
+8dbfeaca344aa12f9cf50908b5e0c97a	Nzc3OWZlZjMzY2U1NDAwY2UzMzM5MTg1M2JlNGYyMDRmZGFlNTA4ZjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n	2014-12-11 15:08:01.539167-05
 \.
 
 
@@ -7118,27 +7265,43 @@ SELECT pg_catalog.setval('django_site_id_seq', 1, true);
 --
 
 COPY south_migrationhistory (id, app_name, migration, applied) FROM stdin;
-1	anarapp	0001_initial	2014-04-01 10:22:27.401637-04:30
-2	anarapp	0002_auto__del_tipomanifestacion__del_ubicacionyacimiento__add_manifestubic	2014-04-01 10:22:27.837054-04:30
-3	anarapp	0003_auto__chg_field_llenadapor_yacimiento__del_unique_llenadapor_yacimient	2014-04-01 10:22:29.50916-04:30
-4	anarapp	0004_auto__del_bibliografia__del_llenadapor__del_paginaweb__del_materialapo	2014-04-01 10:22:29.772838-04:30
-5	anarapp	0005_auto__add_dimensionpiedra__add_llenadopiedra__add_foto__add_piedra__ad	2014-04-01 10:22:33.463313-04:30
-6	anarapp	0006_auto__del_manifestubicacionyacimiento__add_notasyacimiento__add_manife	2014-04-01 10:22:41.111337-04:30
-7	anarapp	0007_auto__chg_field_cronologiatentativa_yacimiento__del_unique_cronologiat	2014-04-01 10:22:41.697029-04:30
-8	anarapp	0008_auto__chg_field_tenenciadetierra_esTenenciaOtros__chg_field_foto_numMa	2014-04-01 10:22:48.183352-04:30
-9	anarapp	0009_auto__del_field_fotografiayac_urlImagen__add_field_fotografiayac_archi	2014-04-01 10:22:48.77009-04:30
-10	anarapp	0010_auto__add_fotografiapiedra	2014-04-01 10:22:49.31257-04:30
-11	anarapp	0011_auto__add_unique_yacimiento_codigo__chg_field_piedra_yacimiento__del_u	2014-04-01 10:22:50.16216-04:30
-12	anarapp	0012_auto__add_field_tecnicaparamicropetro_esConcha	2014-04-01 10:22:50.939913-04:30
-13	anarapp	0013_auto__del_field_manifestacionyacimiento_tipoManifestacion__add_field_m	2014-04-01 10:22:55.284828-04:30
-14	anarapp	0014_auto__add_intensidaddestruccionyac__add_causasdestruccionyac__del_fiel	2014-04-01 10:22:56.079466-04:30
-15	anarapp	0015_auto__add_field_intensidaddestruccionyac_observaciones__del_field_caus	2014-04-01 10:22:56.677397-04:30
-16	anarapp	0016_auto__add_manifestacionescementerio__add_manifestacionesmonticulo__add	2014-04-01 10:22:58.220132-04:30
-17	anarapp	0017_auto__del_fotobibliografia__del_fotobibpiedra__del_fotobibyac__add_fie	2014-04-01 10:23:02.051907-04:30
-18	anarapp	0018_auto__add_municipio__add_estado__del_field_yacimiento_estado__del_fiel	2014-04-01 10:23:03.030828-04:30
-19	anarapp	0019_auto__del_field_yacimiento_estado_fk__del_field_yacimiento_municipio_f	2014-04-01 10:23:03.81479-04:30
-20	anarapp	0020_auto__chg_field_foto_fecha__chg_field_yacimiento_municipio__chg_field_	2014-04-02 19:04:49.259241-04:30
-21	anarapp	0021_auto__add_desccolores__add_colores	2014-04-05 21:42:25.754811-04:30
+1	anarapp	0001_initial	2014-04-01 10:52:27.401637-04
+2	anarapp	0002_auto__del_tipomanifestacion__del_ubicacionyacimiento__add_manifestubic	2014-04-01 10:52:27.837054-04
+3	anarapp	0003_auto__chg_field_llenadapor_yacimiento__del_unique_llenadapor_yacimient	2014-04-01 10:52:29.50916-04
+4	anarapp	0004_auto__del_bibliografia__del_llenadapor__del_paginaweb__del_materialapo	2014-04-01 10:52:29.772838-04
+5	anarapp	0005_auto__add_dimensionpiedra__add_llenadopiedra__add_foto__add_piedra__ad	2014-04-01 10:52:33.463313-04
+6	anarapp	0006_auto__del_manifestubicacionyacimiento__add_notasyacimiento__add_manife	2014-04-01 10:52:41.111337-04
+7	anarapp	0007_auto__chg_field_cronologiatentativa_yacimiento__del_unique_cronologiat	2014-04-01 10:52:41.697029-04
+8	anarapp	0008_auto__chg_field_tenenciadetierra_esTenenciaOtros__chg_field_foto_numMa	2014-04-01 10:52:48.183352-04
+9	anarapp	0009_auto__del_field_fotografiayac_urlImagen__add_field_fotografiayac_archi	2014-04-01 10:52:48.77009-04
+10	anarapp	0010_auto__add_fotografiapiedra	2014-04-01 10:52:49.31257-04
+11	anarapp	0011_auto__add_unique_yacimiento_codigo__chg_field_piedra_yacimiento__del_u	2014-04-01 10:52:50.16216-04
+12	anarapp	0012_auto__add_field_tecnicaparamicropetro_esConcha	2014-04-01 10:52:50.939913-04
+13	anarapp	0013_auto__del_field_manifestacionyacimiento_tipoManifestacion__add_field_m	2014-04-01 10:52:55.284828-04
+14	anarapp	0014_auto__add_intensidaddestruccionyac__add_causasdestruccionyac__del_fiel	2014-04-01 10:52:56.079466-04
+15	anarapp	0015_auto__add_field_intensidaddestruccionyac_observaciones__del_field_caus	2014-04-01 10:52:56.677397-04
+16	anarapp	0016_auto__add_manifestacionescementerio__add_manifestacionesmonticulo__add	2014-04-01 10:52:58.220132-04
+17	anarapp	0017_auto__del_fotobibliografia__del_fotobibpiedra__del_fotobibyac__add_fie	2014-04-01 10:53:02.051907-04
+18	anarapp	0018_auto__add_municipio__add_estado__del_field_yacimiento_estado__del_fiel	2014-04-01 10:53:03.030828-04
+19	anarapp	0019_auto__del_field_yacimiento_estado_fk__del_field_yacimiento_municipio_f	2014-04-01 10:53:03.81479-04
+20	anarapp	0020_auto__chg_field_foto_fecha__chg_field_yacimiento_municipio__chg_field_	2014-04-02 19:34:49.259241-04
+21	anarapp	0021_auto__add_desccolores__add_colores	2014-04-05 22:12:25.754811-04
+22	anarapp	0022_auto__add_field_tecnicaparapintura_esPintura__add_field_bibyacimiento_	2014-10-28 12:06:41.404475-04
+23	anarapp	0023_auto__del_field_bibyacimiento_descripcion__add_field_bibyacimiento_des	2014-11-21 08:31:13.230835-05
+24	anarapp	0024_auto__add_field_matavyacimiento_ismatavy__add_field_matavyacimiento_fo	2014-11-21 08:31:14.321799-05
+25	anarapp	0025_auto__add_field_videoyacimiento_isvidyac__add_field_videoyacimiento_an	2014-11-21 08:31:16.915719-05
+26	anarapp	0026_auto__add_field_peliyacimiento_isvidyac__add_field_peliyacimiento_anio	2014-11-21 08:31:19.489276-05
+27	anarapp	0027_auto__add_field_paginawebpiedra_tieneWb__add_field_paginawebpiedra_dir	2014-11-21 08:31:20.651194-05
+28	anarapp	0028_auto__add_field_multimediapiedra_ismult__add_field_multimediapiedra_te	2014-11-21 08:31:21.728356-05
+29	anarapp	0029_auto__del_field_obtencioninfo_twitter__del_field_obtencioninfo_telefon	2014-11-21 08:31:25.496944-05
+30	anarapp	0030_auto__del_field_observaciones_texto__add_field_observacionesyac_textoY	2014-11-21 08:31:26.495531-05
+31	anarapp	0031_auto__add_field_llenadopiedra_nombreP__add_field_llenadopiedra_fechaP_	2014-11-21 08:31:27.442038-05
+32	anarapp	0032_auto__del_field_supervisadopor_nombre__del_field_supervisadopor_fecha_	2014-11-21 08:31:28.405726-05
+33	anarapp	0033_auto__add_field_bibyacimiento_archivo1__add_field_bibyacimiento_archiv	2014-11-21 08:31:29.264061-05
+34	anarapp	0034_auto__add_field_bibpiedra_tieneFotografia__add_field_bibpiedra_tieneFo	2014-11-21 08:31:30.065796-05
+35	anarapp	0035_auto__add_field_foto_esfoto__add_field_bibpiedra_esbilbio	2014-11-21 08:31:30.897535-05
+36	anarapp	0036_auto__del_field_foto_tipoFotografia__add_field_foto_tipoFotoA__add_fie	2014-11-21 08:31:31.751326-05
+37	anarapp	0037_auto__del_field_escnatpiedra_tipoReproduccion__add_field_escnatpiedra_	2014-11-27 15:05:40.377054-05
 \.
 
 
@@ -7146,7 +7309,7 @@ COPY south_migrationhistory (id, app_name, migration, applied) FROM stdin;
 -- Name: south_migrationhistory_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('south_migrationhistory_id_seq', 21, true);
+SELECT pg_catalog.setval('south_migrationhistory_id_seq', 37, true);
 
 
 --
