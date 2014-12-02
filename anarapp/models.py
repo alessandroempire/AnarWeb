@@ -1583,7 +1583,7 @@ class Foto (models.Model):
     numFoto = CharField('13.1.6. Nro de foto')
     numMarcaNegativo = CharField('13.1.7. Nro marca en negativo')
     esDeAnar = models.BooleanField('13.1.8. ¿Es de Anar?')
-    numCopiaAnar = models.IntegerField('13.1.8.1. Num Copia ANAR')
+    numCopiaAnarFoto = models.IntegerField('13.1.8.1. Num Copia ANAR', blank=True, null=True)
 
     def __unicode__(self):
         return '' # '# ' + str(self.id)
@@ -1944,7 +1944,7 @@ class VideoYacimiento (Video) :
     instituciony = CharField('31.3.4. Institucion',)
     numReferenciay = models.IntegerField('31.3.5. Nro de referencia')
     isFromAnary = models.BooleanField('31.3.6. ¿Es de ANAR?')
-    numCopiay = models.IntegerField('31.3.6.1. Nro de copia')
+    numCopiayac = models.IntegerField('31.3.6.1. Nro de copia', blank=True, null=True)
     archivoy = models.FileField('31.3.7. Video - Archivo', upload_to='video/%Y_%m', null=True, blank=True)
     
     abbr = 'vdy'
@@ -1964,7 +1964,7 @@ class VideoPiedra (Video) :
     instituciony = CharField('13.6.4. Institucion',)
     numReferenciay = models.IntegerField('13.6.5. Nro de referencia')
     isFromAnary = models.BooleanField('13.6.6. ¿Es de ANAR?')
-    numCopiay = models.IntegerField('13.6.6.1. Nro de copia')
+    numCopiaPiedra = models.IntegerField('13.6.6.1. Nro de copia', blank=True, null=True)
     archivoy = models.FileField('13.6.7. Video - Archivo', upload_to='video/%Y_%m', null=True, blank=True)
 
     abbr = 'vdp'
@@ -1992,7 +1992,7 @@ class PeliYacimiento (Pelicula):
     instituciony = CharField('31.4.4. Institucion',)
     numReferenciay = models.IntegerField('31.4.5. Nro de referencia')
     isFromAnary = models.BooleanField('31.4.6. ¿Es de ANAR?')
-    numCopiay = models.IntegerField('31.4.1. Nro de copia', blank=True)
+    numCopiayac = models.IntegerField('31.4.1. Nro de copia', blank=True, null=True)
     archivoy = models.FileField('31.4.7. Video - Archivo', upload_to='video/%Y_%m', null=True, blank=True)
     
     abbr = 'ply'
@@ -2012,7 +2012,7 @@ class PeliculaPiedra (Pelicula):
     instituciony = CharField('13.7.4. Institucion',)
     numReferenciay = models.IntegerField('13.7.5. Nro de referencia')
     isFromAnary = models.BooleanField('13.7.6. ¿Es de ANAR?')
-    numCopiay = models.IntegerField('13.7.6.1. Nro de copia', blank=True)
+    numCopiaPiedra = models.IntegerField('13.7.6.1. Nro de copia', blank=True, null=True)
     archivoy = models.FileField('13.7.7. Video - Archivo', upload_to='video/%Y_%m', null=True, blank=True)
     
     abbr = 'plp'
