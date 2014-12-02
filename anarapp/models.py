@@ -1301,7 +1301,7 @@ class FotografiaPiedra (models.Model):
     piedra = models.ForeignKey(Piedra, related_name='FotografiaPiedra')
     aerea = models.BooleanField('1.2.1. Aerea')
     noEsAerea = models.BooleanField('1.2.2. No Aerea')
-    satelital = models.BooleanField('1.2.1. Aerea')
+    satelital = models.BooleanField('1.2.3. Satelital')
     fecha = models.CharField('1.2.4. Fecha', blank = True, null= True, max_length=100)
     archivo = models.ImageField('1.2.5. Fotografía - Archivo', 
                                 upload_to='piedra/%Y_%m', 
@@ -1344,9 +1344,9 @@ class DimensionPiedra(models.Model):
     piedra = models.ForeignKey(Piedra, related_name='DimensionPiedra')
     
     dimensiones = CharField('6a. Número de cara trabajada')
-    alto =  models.DecimalField('7.1. Alto ', max_digits=12, decimal_places=6)
-    largo = models.DecimalField('7.2. Largo ',max_digits=12, decimal_places=6)
-    ancho = models.DecimalField('7.3. Ancho ',max_digits=12, decimal_places=6)
+    alto =  CharField('7.1. Alto ' ,null = True, blank = True)
+    largo = CharField('7.2. Largo ',null = True, blank = True)
+    ancho = CharField('7.3. Ancho ',null = True, blank = True)
                                         
     abbr = 'dip'
     
