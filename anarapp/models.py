@@ -1285,7 +1285,6 @@ class Piedra(models.Model):
     
     codigo = models.CharField('0- Codigo de la roca', unique = True, max_length=20)#, primary_key=True)        
     nombre = CharField('1- Nombre de la roca', )
-    manifiestacionAsociada = CharField('1.1 Manifestaciones asociadas', blank = True )
     
     def __unicode__(self):
         return short_text('Pa-' + self.codigo + '-' + self.nombre)
@@ -1505,13 +1504,13 @@ class Manifestaciones(models.Model):
 
     """Representa la información de la ficha pa, indicando el tipo de manifestacion"""
 
-    piedra = models.OneToOneField(Piedra, related_name='Manifestaciones')
+    piedra = models.ForeignKey(Piedra, related_name='Manifestaciones')
     
-    hasPetroglifo = CharField('1.2.1. Petroglifos', blank=True)
-    hasPinturaRupestre = CharField('1.2.2. Pintura Rupestre', blank=True)
-    hasAmoladores = CharField('1.2.3. Amoladores', blank=True)
-    hasPuntosAcoplados = CharField('1.2.4. Puntos Acoplados', blank=True)
-    hasCupulas = CharField('1.2.5. Cupulas', blank=True)
+    tienePetroglifos = models.BooleanField('1.2.1. Petroglifos', blank=True)
+    tieneRupestres = models.BooleanField('1.2.2. Pintura Rupestre', blank=True)
+    tieneAmoladore = models.BooleanField('1.2.3. Amoladores', blank=True)
+    tienePuntosAc = models.BooleanField('1.2.4. Puntos Acoplados', blank=True)
+    tieneCupula = models.BooleanField('1.2.5. Cupulas', blank=True)
     hasMitos = CharField('1.2.6. Mitos', blank=True) 
     hasOtros = CharField('1.2.7. Otros', blank=True)
     
@@ -2165,7 +2164,7 @@ class OtrosValPiedra(OtrosValores):
     
     class Meta:
         verbose_name = ''
-        verbose_name_plural = ''
+        verbose_name_plural = '15. Otros valores de la Roca'
 
 # Observaciones
 

@@ -490,6 +490,7 @@ class ManifestacionesInline(admin.StackedInline):
     extra = 1
     max_num = 1
     model =  Manifestaciones
+    form = forms.ManifestacionesAsociadasForm
     template = 'InlineTemplates/ManifestacionesPiedra.html'
 
 class CaraTrabajadaInline(admin.TabularInline):
@@ -696,19 +697,15 @@ class PiedraAdmin (admin.ModelAdmin):
             'classes': ('suit-tab suit-tab-generales',),
             'fields': ['yacimiento', 'codigo', 'nombre']
         }),
-        ('Manifestaciones Asociadas', {
-            'classes': ('suit-tab suit-tab-manifestaciones',),
-            'fields': ['manifiestacionAsociada',]
-        }),
      ]
 
 
 
     inlines = [
         FotografiaPiedraInline, Piedra2Inline, CaraTrabajadaInline, DimensionPiedraInline, UbicacionCarasInline, FigurasPorTipoInline,
-        EsquemaPorCaraInline,ConexionFigurasInline, ManifestacionesInline, TratFotoInline, 		FotoDigPiedraInline,EscalaNatPiedraInline, EscalaRedPiedraInline, BibPiedraInline,
+        EsquemaPorCaraInline,ConexionFigurasInline, ManifestacionesInline, OtrosValPiedraInline, TratFotoInline, FotoDigPiedraInline,EscalaNatPiedraInline, EscalaRedPiedraInline, BibPiedraInline,
         MatAudioVisualInline, VideoPiedraInline, PeliculaPiedraInline, PaginaWebPiedraInline,
-        MultimediaPiedraInline, ObtInfoPiedraInline, OtrosValPiedraInline, ObservacionPiedraInline,
+        MultimediaPiedraInline, ObtInfoPiedraInline,  ObservacionPiedraInline,
         LlenadaPorPiedraInline, SupervisadaPorPiedraInline
     ] 
     suit_form_tabs = (('generales', 'Datos Generales de la Roca'),

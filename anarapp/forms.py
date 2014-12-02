@@ -1070,7 +1070,7 @@ class OtrosValForm(ModelForm) :
 class ObservacionesForm(ModelForm) :
     class Meta:
         widgets = {                               
-                'texto':  AutosizedTextarea(attrs=regularTextArea),
+                'texto':  TextInput(attrs=regularTextArea),
         }
 
 ### Formularios para las clases de multimedia
@@ -1174,7 +1174,15 @@ class DimensionPiedraForm(ModelForm) :
                 'largo': TextInput(attrs={'class': 'input-small'}),
             	'ancho': TextInput(attrs={'class': 'input-small'}),
         }
-        
+  
+class ManifestacionesAsociadasForm(ModelForm):
+
+	class Meta:
+		widgets = {
+				'hasMitos' : TextInput(attrs=regularTextField),
+				'hasOtros' : TextInput(attrs=regularTextField),
+		}
+
 class UbicacionCarasForm(ModelForm) :
 
     class Meta:
@@ -1206,7 +1214,6 @@ class PiedraForm(ModelForm) :
     class Meta:
         widgets = {
                 'yacimiento': LinkedSelect,
-                'manifiestacionAsociada' :  AutosizedTextarea(attrs=regularTextArea),		             
                 'codigo': TextInput(attrs=regularTextField),
                 'nombre': TextInput(attrs=regularTextField),
         }
