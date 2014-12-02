@@ -1322,7 +1322,7 @@ class Piedra2(models.Model):
 
     yacimiento = models.ForeignKey(Piedra, related_name='Piedra2')
 
-    nombreFiguras = CharField('2- Nombre de las figuras', null=True, blank=True)    
+    nombreFiguras = CharField('2- Nombre de las figuras', blank=True)    
     estado = models.ForeignKey(Estado, related_name='EstadoPied', verbose_name = '3- Estado/Provincia', blank = True, null = True)     
     numeroCaras = models.IntegerField('4- Numero de Caras', help_text= mark_safe("<br><br> <a href='#' onclick='pop1()' >?</a> <script> function pop1() {window.open('/static/ayudas y glosarios/numeroCaras.html','name','height=500,width=500,scrollbars=yes');return false;} </script> </html>"))
     numeroCarasTrajabadas = models.IntegerField('5- Numero de caras trabajadas')
@@ -1344,9 +1344,9 @@ class DimensionPiedra(models.Model):
     piedra = models.ForeignKey(Piedra, related_name='DimensionPiedra')
     
     dimensiones = CharField('6a. Número de cara trabajada')
-    alto =  CharField('7.1. Alto ' ,null = True, blank = True)
-    largo = CharField('7.2. Largo ',null = True, blank = True)
-    ancho = CharField('7.3. Ancho ',null = True, blank = True)
+    alto =  CharField('7.1. Alto ' , blank = True)
+    largo = CharField('7.2. Largo ', blank = True)
+    ancho = CharField('7.3. Ancho ', blank = True)
                                         
     abbr = 'dip'
     
@@ -1410,7 +1410,7 @@ class UbicacionCaras(models.Model):
     lagoInterior = models.BooleanField('8.2.3. Lago interior')
     claraboya = models.BooleanField('8.2.4. Claraboya')
 
-    bocaPrincipal = models.DecimalField('8.3. Distancia Boca Principal',max_digits=12, decimal_places=6)
+    bocaPrincipal = models.DecimalField('8.3. Distancia Boca Principal',max_digits=12, decimal_places=6 )
     luminosidad = models.IntegerField('8.3.1. Luminosidad', choices = LUMINOSIDAD)
     altura = models.DecimalField('8.3.2. Altura',max_digits=6, decimal_places=3)   
     requiereAndamiaje = models.BooleanField('8.3.2.1. ¿Requiere andamiaje?')
@@ -1450,7 +1450,7 @@ class FigurasPorTipo(models.Model):
     tipoFigura = models.IntegerField('9. Figuras',choices = TIPO_FIGURA)	
     cantidad = CharField('9.a. Cantidad', help_text=AYUDA_TIPO)  
     esCantidadInexacta = models.BooleanField('9.b. Cantidad Inexacta O Desconocida')	
-    descripcion = CharField('9.c. Descripcion',)
+    descripcion = CharField('9.c. Descripcion', blank=True)
     abbr = 'fpt'    
     
     def __unicode__(self):
@@ -1468,7 +1468,7 @@ class EsquemaPorCara(models.Model):
     piedra = models.ForeignKey(Piedra, related_name='EsquemaPorCara')    
     numero =  CharField( '6.a. Número de cara trabajada ')  
     textoCara = CharField('10.1. Cara') 
-    posicion = CharField('10.2. Posicion de las figuras en la cara') 
+    posicion = CharField('10.2. Posicion de las figuras en la cara', ) 
     
     def __unicode__(self):
         return '' # '# ' + str(self.id)
@@ -1507,13 +1507,13 @@ class Manifestaciones(models.Model):
 
     piedra = models.OneToOneField(Piedra, related_name='Manifestaciones')
     
-    hasPetroglifo = CharField('1.2.1. Petroglifos')
-    hasPinturaRupestre = CharField('1.2.2. Pintura Rupestre')
-    hasAmoladores = CharField('1.2.3. Amoladores')
-    hasPuntosAcoplados = CharField('1.2.4. Puntos Acoplados')
-    hasCupulas = CharField('1.2.5. Cupulas')
-    hasMitos = CharField('1.2.6. Mitos') 
-    hasOtros = CharField('1.2.7. Otros')
+    hasPetroglifo = CharField('1.2.1. Petroglifos', blank=True)
+    hasPinturaRupestre = CharField('1.2.2. Pintura Rupestre', blank=True)
+    hasAmoladores = CharField('1.2.3. Amoladores', blank=True)
+    hasPuntosAcoplados = CharField('1.2.4. Puntos Acoplados', blank=True)
+    hasCupulas = CharField('1.2.5. Cupulas', blank=True)
+    hasMitos = CharField('1.2.6. Mitos', blank=True) 
+    hasOtros = CharField('1.2.7. Otros', blank=True)
     
     def __unicode__(self):
         return '' # '# ' + str(self.id)
@@ -1536,11 +1536,11 @@ class TratFoto(models.Model):
 
     """Representa el tratamiento dado a las fotografias recopiladas"""
     
-    limpiezaCon = CharField('12.1. Limpieza con')
-    rellenoSurcos = CharField('12.2. Relleno de surcos con')
-    tratamientoDigital = CharField('12.3. Tratamiento digital')
-    programaVersion = CharField('12.4. Programa/versión')
-    otrosTratamientos = CharField('12.5. Otros')
+    limpiezaCon = CharField('12.1. Limpieza con', blank=True)
+    rellenoSurcos = CharField('12.2. Relleno de surcos con', blank=True)
+    tratamientoDigital = CharField('12.3. Tratamiento digital', blank=True)
+    programaVersion = CharField('12.4. Programa/versión', blank=True)
+    otrosTratamientos = CharField('12.5. Otros', blank=True)
 
     def __unicode__(self):
         return '' # '# ' + str(self.id)
@@ -1571,7 +1571,7 @@ class Foto (models.Model):
     )
 
     esfoto = models.BooleanField('13.1 Fotográfico')
-    negativo =  CharField('13.1.0. Negativo', )
+    negativo =  CharField('13.1.0. Negativo', blank=True)
     tipoFotoA  = models.BooleanField('13.1.0.1. Aerea')
     tipoFotoNA = models.BooleanField('13.1.0.2. No Aerea')
     tipoFotoS  = models.BooleanField('13.1.0.3. Satelital')
@@ -1992,7 +1992,7 @@ class PeliYacimiento (Pelicula):
     instituciony = CharField('31.4.4. Institucion',)
     numReferenciay = models.IntegerField('31.4.5. Nro de referencia')
     isFromAnary = models.BooleanField('31.4.6. ¿Es de ANAR?')
-    numCopiay = models.IntegerField('31.4.1. Nro de copia')
+    numCopiay = models.IntegerField('31.4.1. Nro de copia', blank=True)
     archivoy = models.FileField('31.4.7. Video - Archivo', upload_to='video/%Y_%m', null=True, blank=True)
     
     abbr = 'ply'
@@ -2012,7 +2012,7 @@ class PeliculaPiedra (Pelicula):
     instituciony = CharField('13.7.4. Institucion',)
     numReferenciay = models.IntegerField('13.7.5. Nro de referencia')
     isFromAnary = models.BooleanField('13.7.6. ¿Es de ANAR?')
-    numCopiay = models.IntegerField('13.7.6.1. Nro de copia')
+    numCopiay = models.IntegerField('13.7.6.1. Nro de copia', blank=True)
     archivoy = models.FileField('13.7.7. Video - Archivo', upload_to='video/%Y_%m', null=True, blank=True)
     
     abbr = 'plp'
@@ -2121,7 +2121,7 @@ class ObtInfoPiedra (ObtencionInfo):
     isinfo = models.BooleanField('14. Información obtenida por')
     prospeccionP = models.BooleanField('14.1. Prospección sistemática')
     comunicacionP = models.BooleanField('14.2. Comunicación personal')
-    nombreP = CharField('14.2.1. Nombre')
+    nombreP = CharField('14.2.1. Nombre', blank=True)
     direccionP = CharField('14.2.2. Dirección', blank = True)
     telefonoP = CharField('14.2.3. Telefono/Fax',  blank = True)
     telefonoCelP = CharField('14.2.4. Telefono celular',  blank = True)

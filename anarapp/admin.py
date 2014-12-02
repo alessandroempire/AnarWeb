@@ -593,7 +593,7 @@ class MultimediaPiedraInline(admin.StackedInline):
     suit_classes = 'suit-tab suit-tab-apoyos'
 
 class ObtInfoPiedraInline(admin.StackedInline):
-    extra = 1 
+    extra = 1
     model =  ObtInfoPiedra
     form = forms.ObtencionInfoForm
     suit_classes = 'suit-tab suit-tab-apoyos'
