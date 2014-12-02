@@ -50,6 +50,12 @@
 	width : 20%;
 }
 
+label[for=id_CaracSurcoPetroglifo-0] {
+	background: url(base_redondas.png) no-repeat;
+	background-position: 120px;
+	background_size: cover;
+}
+
 label[for=id_CaracSurcoPetroglifo-0-esBaseRedonda] {
 	background: url(base_redonda.png) no-repeat;
 	background-position: 120px;

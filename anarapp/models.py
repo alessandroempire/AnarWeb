@@ -140,7 +140,7 @@ class LocalidadYacimiento(models.Model):
     esIndigena = models.BooleanField('4.1.3. Indigena')
     nombrePoblado = CharField('4.1.4. Nombre', blank = True)
     esCentroNoPoblado = models.BooleanField('4.2. No Poblado')
-    nombreNoPoblado = CharField('4.2.1. Nombre', blank = True, help_text= mark_safe("<br><br> <a href='#' onclick='pop3()' >?</a> <script> function pop3() {window.open('/static/ayudas y glosarios/localidad.html','name','height=500,width=500,scrollbars=yes');return false;} </script> </html>"))
+    nombreNoPoblado = CharField('4.2.1. Nombre', blank = True)
 
     abbr = 'loc'
 
@@ -224,7 +224,7 @@ class Croquis (models.Model):
 class Plano (models.Model):
     
     yacimiento = models.OneToOneField(Yacimiento, related_name='Plano')
-    numeroPlano = CharField('7. Número de plano', blank = True, help_text= mark_safe("<br><br> <a href='#' onclick='pop4()' >?</a> <script> function pop4() {window.open('/static/ayudas y glosarios/plancha.html','name','height=500,width=500,scrollbars=yes');return false;} </script> </html>"))
+    numeroPlano = CharField('7. Número de plano', blank = True)
     abbr = 'pln'
 
     class Meta:
@@ -238,10 +238,8 @@ class Plano (models.Model):
 class Coordenadas (models.Model):
     
     yacimiento = models.OneToOneField(Yacimiento, related_name='Coordenadas')
-
-    COORD_AYUDA='Localización por, y según la plancha o plano trabajado.'
-    
-    longitud = CharField('8. Long. O(W)', blank = True, help_text= COORD_AYUDA)
+   
+    longitud = CharField('8. Long. O(W)', blank = True)
     latitud = CharField('8. Lat. N', blank = True)
     utmAdicional = CharField('8. Utm Adicional', blank = True)
     
@@ -262,7 +260,7 @@ class Datum (models.Model):
     ) 
      
     yacimiento = models.OneToOneField(Yacimiento, related_name='Datum')    
-    tipoDatum = models.IntegerField('9. Datum GPS',choices = OPCIONES_DATUM, blank = True,null = True, help_text=mark_safe("<br><br> <a href='#' onclick='pop5()' >?</a> <script> function pop5() {window.open('/static/ayudas y glosarios/gps.html','name','height=500,width=500,scrollbars=yes');return false;} </script> </html>"))
+    tipoDatum = models.IntegerField('9. Datum GPS',choices = OPCIONES_DATUM, blank = True,null = True)
     
     abbr = 'dtm'
 
@@ -281,7 +279,7 @@ class Altitud (models.Model):
     altura = CharField('10.1. Altura en mts', blank = True)
     superficie = CharField('10.2. Superficie en m2', blank = True)
     desarrollo = CharField('10.3. Desarrollo', blank = True)
-    desnivel = CharField('10.4. Desnivel', blank = True , help_text=mark_safe("<br><br> <a href='#' onclick='pop6()' >?</a> <script> function pop6() {window.open('/static/ayudas y glosarios/altitud.html','name','height=500,width=500,scrollbars=yes');return false;} </script> </html>"))
+    desnivel = CharField('10.4. Desnivel', blank = True)
     abbr = 'atd'  
 
     class Meta:
@@ -321,7 +319,7 @@ class TipoYacimiento (models.Model):
     esCueva = models.BooleanField('12.5. Cueva')
     esCuevadeRec = models.BooleanField('12.6. Cueva de Recubrimiento')
     esTerrenoSup = models.BooleanField('12.7. Terreno Superficial')
-    esTerrenoPro = models.BooleanField('12.8. Terreno Profundo', help_text=mark_safe("<br><br> <a href='#' onclick='pop7()' >?</a> <script> function pop7() {window.open('/static/ayudas y glosarios/tipoDeYac.html','name','height=500,width=500,scrollbars=yes');return false;} </script> </html>"))
+    esTerrenoPro = models.BooleanField('12.8. Terreno Profundo')
     
     abbr = 'tyc'
 
@@ -419,7 +417,7 @@ class UbicacionYacimiento(models.Model):
     enRioMargenIzquierda = models.BooleanField('14.3.3. Margen Izquierda')
     enRioIsla = models.BooleanField('14.3.4. Isla')
     enRioRaudal = models.BooleanField('14.3.5. Raudal')
-    enRioCosta = models.BooleanField('14.4. Costa', help_text=mark_safe("<br><br> <a href='#' onclick='pop8()' >?</a> <script> function pop8() {window.open('/static/ayudas y glosarios/ubicacion.html','name','height=500,width=500,scrollbars=yes');return false;} </script> </html>"))
+    enRioCosta = models.BooleanField('14.4. Costa')
 
     abbr = 'ubm'
         
@@ -529,7 +527,7 @@ class TipoExposicionYac(models.Model):
     expuesto = models.BooleanField('20.1. Expuesto')
     noExpuesto = models.BooleanField('20.2. No Expuesto')
     expuestoPeriodicamente = models.BooleanField('20.3. Expuesto Periódicamente')
-    observaciones = CharField('20.4. Observaciones', blank = True, help_text=mark_safe("<br><br> <a href='#' onclick='pop9()' >?</a> <script> function pop9() {window.open('/static/ayudas y glosarios/exposicion.html','name','height=500,width=500,scrollbars=yes');return false;} </script> </html>"))
+    observaciones = CharField('20.4. Observaciones', blank = True)
     
     abbr = 'tey'
 
@@ -1122,7 +1120,7 @@ class ManifestacionesAsociadas(models.Model):
     descripcionOseo = CharField('30.3. Descripción Oseo', blank = True)
     esConcha = models.BooleanField('30.4. Concha')
     descripcionConcha = CharField('30.4. Descripción Concha', blank = True)
-    esCarbon = models.BooleanField('30.5. Carbón No Superficial')
+    esCarbon = models.BooleanField('30.5. Carbón No Superficial', help_text='Se refiere a antiguos fogones encontrados en la estratigrafía.')
     descripcionCarbon = CharField('30.5. Descripción Carbón No Superficial', blank = True)
     esMito = models.BooleanField('30.6. Mitos')
     descripcionMito = CharField('30.6. Descripción Mitos', blank = True)
@@ -1324,7 +1322,7 @@ class DimensionPiedra(models.Model):
     
     altoMaximo =  models.DecimalField('7.a. Alto Maximo', max_digits=12, decimal_places=6)
     largoMaximo = models.DecimalField('7.b. Largo Maximo',max_digits=12, decimal_places=6)
-    anchoMaximo = models.DecimalField('7.c. Ancho Maximo',max_digits=12, decimal_places=6,help_text= mark_safe("<br><br> <a href='#' onclick='pop2()' >?</a> <script> function pop2() {window.open('/static/ayudas y glosarios/dimensiones.html','name','height=500,width=500,scrollbars=yes');return false;} </script> </html>"))
+    anchoMaximo = models.DecimalField('7.c. Ancho Maximo',max_digits=12, decimal_places=6)
     
     abbr = 'dip'
     
@@ -1682,7 +1680,7 @@ class BibYacimiento(Bibliografia):
                                  null=True, 
                                  blank=True)
 
-    esFotografia = models.BooleanField('31.1.7. Con fotografía', help_text=mark_safe("<br><br> <a href='#' onclick='pop10()' >?</a> <script> function pop10() {window.open('/static/ayudas y glosarios/apoyosYac.html','name','height=500,width=500,scrollbars=yes');return false;} </script> </html>"))
+    esFotografia = models.BooleanField('31.1.7. Con fotografía')
     tieneFotografia = models.FileField('31.1.7.0.0. Fotografía - Archivo', 
                                  upload_to='bibliografia_yac/%Y_%m', 
                                  null=True, 
@@ -1736,7 +1734,7 @@ class BibYacimiento(Bibliografia):
     
     class Meta:
         verbose_name = 'Bibliografía'
-        verbose_name_plural = '31 Apoyos'
+        verbose_name_plural = '31. Apoyos'
 
 class BibPiedra(Bibliografia):
 
