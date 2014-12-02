@@ -1283,7 +1283,7 @@ class Piedra(models.Model):
 
     yacimiento = models.ForeignKey(Yacimiento, related_name='Yacimiento')
     
-    codigo = models.CharField('0. Codigo de la roca', unique = True, max_length=20)#, primary_key=True)        
+    codigo = models.CharField('0- Codigo de la roca', unique = True, max_length=20)#, primary_key=True)        
     nombre = CharField('1- Nombre de la roca', )
     manifiestacionAsociada = CharField('1.1 Manifestaciones asociadas', blank = True )
     
