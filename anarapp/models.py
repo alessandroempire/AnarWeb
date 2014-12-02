@@ -1448,7 +1448,7 @@ class FigurasPorTipo(models.Model):
     piedra = models.ForeignKey(Piedra, related_name='FigurasPorTipo')    
     numero =  CharField( '6.a. Número de cara trabajada') 
     tipoFigura = models.IntegerField('9. Figuras',choices = TIPO_FIGURA)	
-    cantidad = CharField('9.a. Cantidad', help_text=AYUDA_TIPO)  
+    cantidad = CharField('9.a. Cantidad', help_text=AYUDA_TIPO, blank=True)  
     esCantidadInexacta = models.BooleanField('9.b. Cantidad Inexacta O Desconocida')	
     descripcion = CharField('9.c. Descripcion', blank=True)
     abbr = 'fpt'    
