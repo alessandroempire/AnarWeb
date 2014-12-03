@@ -1,0 +1,32 @@
+<html>
+	<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Figuras</title>
+	</head>
+		<body BGCOLOR=CCEEFF>
+
+<div style="float:right;width:90%;">
+<img src="images/help.png">
+</div>
+<br><br>
+<b>9  - FIGURAS</b><br>
+<br>
+<IMG SRC="images/cuadroFigura.png">
+<br><br>
+Utilícese la letra "i" (incompleto) delante del número,
+para los casos en que la cantidad de figuras, sea mayor que la expuesta,
+pero no se pueda cuantificar con exactitud, 
+cuánto mayor por la altura de los grabados, por efectos de erosión u otros.
+<br>
+Por ejemplo, en la cara 4 de una roca hay más de 25 puntos, 
+sin poderse cuantificar con exactitud esa cifra. 
+Se coloca entonces: i-25.   
+<br>
+Para aquellos casos en que se desconozcan las cantidades totalmente, 
+se usará "i" en lugar de números.
+
+
+
+		</body>
+
+</html>

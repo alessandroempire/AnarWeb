@@ -1,21 +1,20 @@
 {% load i18n admin_static %}
-<div class="suit-tab suit-tab-generales">
+<div class="suit-tab suit-tab-apoyos">
 <div class="inline-group" id="{{ inline_admin_formset.formset.prefix }}-group">
-{{ inline_admin_formset.formset.management_form }}
 <div style="margin-bottom: 30px;">
-<div style="float:left;width:40%;">
+<div style="float:left;width:20%;">
   <h2>{{ inline_admin_formset.opts.verbose_name_plural|title }}</h2>
 </div>
-<div style="float:right;width:60%;">
-<button type="button" onclick= "window.open('/static/ayudas y glosarios/indicacionesYac.html','name','height=500,width=500,scrollbars=yes');return false;"style="font-size: larger; color: red; background-color: #F2DBDB; border: 3pt ridge lightgrey">?</button>
+<div style="float:right;width:80%;">
+<button type="button" onclick= "window.open('/static/ayudas y glosarios/apoyoPiedra.html','name','height=500,width=500,scrollbars=yes');return false;"style="font-size: larger; color: red; background-color: #F2DBDB; border: 3pt ridge lightgrey">?</button>
 </div>
 </div>
 <br><br>
-
+{{ inline_admin_formset.formset.management_form }}
 {{ inline_admin_formset.formset.non_form_errors }}
 
 {% for inline_admin_form in inline_admin_formset %}<div class="inline-related{% if forloop.last %} empty-form last-related{% endif %}" id="{{ inline_admin_formset.formset.prefix }}-{% if not forloop.last %}{{ forloop.counter0 }}{% else %}empty{% endif %}">
-  <h3><b>{{ inline_admin_formset.opts.verbose_name|title }}:</b>&nbsp;<span class="inline_label">{% if inline_admin_form.original %}{{ inline_admin_form.original }}{% else %}{% endif %}</span>
+  <h3><b>{{ inline_admin_formset.opts.verbose_name|title }}</b>&nbsp;<span class="inline_label">{% if inline_admin_form.original %}{{ inline_admin_form.original }}{% else %}{% endif %}</span>
     {% if inline_admin_form.show_url %}<a href="../../../r/{{ inline_admin_form.original_content_type_id }}/{{ inline_admin_form.original.id }}/">{% trans "View on site" %}</a>{% endif %}
     {% if inline_admin_formset.formset.can_delete and inline_admin_form.original %}<span class="delete">{{ inline_admin_form.deletion_field.field }} {{ inline_admin_form.deletion_field.label_tag }}</span>{% endif %}
   </h3>

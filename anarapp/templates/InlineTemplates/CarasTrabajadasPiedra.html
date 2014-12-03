@@ -4,15 +4,16 @@
   <div class="tabular inline-related {% if forloop.last %}last-related{% endif %}">
 {{ inline_admin_formset.formset.management_form }}
 <fieldset class="module">
-   <div style="margin-bottom: 30px;">
+  <div style="margin-bottom: 30px;">
 <div style="float:left;width:40%;">
   <h2>{{ inline_admin_formset.opts.verbose_name_plural|title }}</h2>
 </div>
 <div style="float:right;width:60%;">
-<img src="/static/ayudas y glosarios/images/7dimensiones.jpg">
-<button type="button" onclick= "window.open('/static/ayudas y glosarios/dimensiones.html','name','height=500,width=500,scrollbars=yes');return false;"style="font-size: larger; color: red; background-color: #F2DBDB; border: 3pt ridge lightgrey">?</button>
+<img src="/static/ayudas y glosarios/images/CarasTrab.jpg">
 </div>
 </div>
+<br>
+
    {{ inline_admin_formset.formset.non_form_errors }}
    <table width="120%" style="float:middle;width:45%;">
      <thead><tr>
@@ -20,7 +21,7 @@
      {% for field in inline_admin_formset.fields %}
        {% if not field.widget.is_hidden %}
          <th{% if forloop.first %} align="left" style="float:middle;width:20%;" colspan="2"{% endif %}{% if field.required %} class="required"{% endif %}>{{ field.label|capfirst }}
-         {% if field.help_text %}&nbsp;<img src="{% static "admin/img/icon-unknown.gif" %}" class="help help-tooltip" width="10" height="10" alt="({{ field.help_text|striptags }})" title="{{ field.help_text|striptags }}" />{% endif %}
+         {% if field.help_text %}&nbsp;&nbsp;<img src="{% static "admin/img/help.png" %}" class="help help-tooltip" width="25" height="20" alt="({{ field.help_text|striptags }})" title="{{ field.help_text|striptags }}" />{% endif %}
          </th>
        {% endif %}
      {% endfor %}

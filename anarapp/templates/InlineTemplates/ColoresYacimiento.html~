@@ -1,13 +1,21 @@
 {% load i18n admin_static admin_modify %}
-<div class="suit-tab suit-tab-generales">
+<div class="suit-tab suit-tab-tecnicas">
 <div class="inline-group" id="{{ inline_admin_formset.formset.prefix }}-group">
   <div class="tabular inline-related {% if forloop.last %}last-related{% endif %}">
 {{ inline_admin_formset.formset.management_form }}
 <fieldset class="module">
-   <h2>{{ inline_admin_formset.opts.verbose_name_plural|capfirst }}</h2>
+   <div style="margin-bottom: 30px;">
+<div style="float:left;width:20%;">
+  <h2>{{ inline_admin_formset.opts.verbose_name_plural|title }}</h2>
+</div>
+<div style="float:right;width:80%;">
+<button type="button" onclick= "window.open('/static/ayudas y glosarios/colores.html','name','height=500,width=500,scrollbars=yes');return false;"style="font-size: larger; color: red; background-color: #F2DBDB; border: 3pt ridge lightgrey">?</button>
+</div>
+</div>
    {{ inline_admin_formset.formset.non_form_errors }}
-   <table>
+   <table width="120%">
      <thead><tr>
+<h3><b>{{ inline_admin_formset.opts.verbose_name|title }}:</b>&nbsp;<span class="inline_label">{% if inline_admin_form.original %}{{ inline_admin_form.original }}{% else %}{% endif %}</span></h3>
      {% for field in inline_admin_formset.fields %}
        {% if not field.widget.is_hidden %}
          <th{% if forloop.first %} colspan="2"{% endif %}{% if field.required %} class="required"{% endif %}>{{ field.label|capfirst }}
@@ -57,7 +65,7 @@
           {% endfor %}
         {% endfor %}
         {% if inline_admin_formset.formset.can_delete %}
-          <td class="delete">{% if inline_admin_form.original %}{{ inline_admin_form.deletion_field.field }}{% endif %}</td>
+          <td class="delete" style="float:right;width:50%;">{% if inline_admin_form.original %}{{ inline_admin_form.deletion_field.field }}{% endif %}</td>
         {% endif %}
         </tr>
      {% endfor %}

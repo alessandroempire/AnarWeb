@@ -1323,7 +1323,7 @@ class Piedra2(models.Model):
 
     nombreFiguras = CharField('2- Nombre de las figuras', blank=True)    
     estado = models.ForeignKey(Estado, related_name='EstadoPied', verbose_name = '3- Estado/Provincia', blank = True, null = True)     
-    numeroCaras = models.IntegerField('4- Numero de Caras', help_text= mark_safe("<br><br> <a href='#' onclick='pop1()' >?</a> <script> function pop1() {window.open('/static/ayudas y glosarios/numeroCaras.html','name','height=500,width=500,scrollbars=yes');return false;} </script> </html>"))
+    numeroCaras = models.IntegerField('4- Numero de Caras')
     numeroCarasTrajabadas = models.IntegerField('5- Numero de caras trabajadas')
 
     abbr = 'pd2'  
@@ -1375,9 +1375,11 @@ class CaraTrabajada(models.Model):
     )
 
     AYUDA_OCT='En caso de no conocerse la orientación cardinal úsese la letra "n" (no conocido) en lugar del número respectivo. Para más de una cara trabajada sin orientación cardinal conocida, úsese n1, n2, n3 y así sucesivamente según el número de caras trabajadas, por roca. Usese estas mismas denominaciones en todos los casos en que se pida el número de la cara trabajada. (Punto 6, 7, 9 y 10).'
+
+    AYUDA_NCT='En rocas al aire libre se contarán únicamente las caras factibles de trabajar; no se cuenta la cara apoyada sobre el suelo. En cuevas se cuentan el piso, el techo y las paredes internas. En abrigos se pueden agregar paredes externas factibles de trabajar '
 	
     piedra = models.ForeignKey(Piedra, related_name='CaraTrabajada')
-    numero =  CharField('6a. Número de cara trabajada' )
+    numero =  CharField('6a. Número de cara trabajada',help_text=AYUDA_NCT )
     orientacion = models.IntegerField('6b. Orientación de la cara', choices = ORIENTACION_CARA_TRABAJADA, help_text= AYUDA_OCT)
     
     abbr = 'cat'
@@ -1442,12 +1444,11 @@ class FigurasPorTipo(models.Model):
         (10, '9.10 - Bateas'),
     )
 
-    AYUDA_TIPO="Utilícese la letra 'i' (incompleto) delante del número para los casos en que la cantidad de figuras sea mayor que la expuesta, pero no se pueda cuantificar con exactitud, cuánto mayor por la altura de los grabados, por efectos de erosión u otros. Por ejemplo, en la cara 4 de una roca hay más de 25 puntos, sin poderse cuantificar con exactitud esa cifra. Se coloca entonces: i-25. Para aquellos casos en que se desconozcan las cantidades totalmente totalmente, se usará 'i' en lugar de números."
-	
+   
     piedra = models.ForeignKey(Piedra, related_name='FigurasPorTipo')    
     numero =  CharField( '6.a. Número de cara trabajada') 
     tipoFigura = models.IntegerField('9. Figuras',choices = TIPO_FIGURA)	
-    cantidad = CharField('9.a. Cantidad', help_text=AYUDA_TIPO, blank=True)  
+    cantidad = CharField('9.a. Cantidad', blank=True)  
     esCantidadInexacta = models.BooleanField('9.b. Cantidad Inexacta O Desconocida')	
     descripcion = CharField('9.c. Descripcion', blank=True)
     abbr = 'fpt'    

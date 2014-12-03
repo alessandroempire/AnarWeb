@@ -72,7 +72,7 @@ class CoordenadasYacInline(admin.TabularInline):
     form = forms.CoordenadasForm
     extra = 1
     max_num = 1
-    #template = 'InlineTemplates/CoordenadasYac.html'
+    template = 'InlineTemplates/CoordenadasYac.html'
     suit_classes = 'suit-tab suit-tab-generales'
 
 class DatumYacInline(admin.StackedInline):
@@ -256,7 +256,7 @@ class ColoresInline(admin.TabularInline):
     model = Colores  
     form = forms.ColoresForm	
     extra = 6
-    #template = 'InlineTemplates/ColoresYacimiento.html'    
+    template = 'InlineTemplates/ColoresYacimiento.html'    
     suit_classes = 'suit-tab suit-tab-tecnicas'	
 	
 class DescColoresInline(admin.StackedInline):
@@ -333,7 +333,7 @@ class ManifestacionesAsociadasYacInline(admin.StackedInline):
     form = forms.ManifestacionesAsociadasForm
     extra = 1
     max_num = 1
-    suit_classes = 'suit-tab suit-tab-manifestaciones'
+    template = 'InlineTemplates/ManifestacionYacimiento.html'
 
 class ManifestacionesLiticaInline(admin.TabularInline):
     model = ManifestacionesLitica
@@ -483,8 +483,7 @@ class DimensionPiedraInline(admin.TabularInline):
     extra = 4
     model =  DimensionPiedra
     form = forms.DimensionPiedraForm
-    #template = 'InlineTemplates/DimensionesPiedra.html'
-    suit_classes = 'suit-tab suit-tab-generales'
+    template = 'InlineTemplates/DimensionesPiedra.html'
 
 class ManifestacionesInline(admin.StackedInline):
     extra = 1
@@ -497,7 +496,7 @@ class CaraTrabajadaInline(admin.TabularInline):
     extra = 6
     model = CaraTrabajada
     form = forms.CaraTrabajadaForm
-    suit_classes = 'suit-tab suit-tab-generales'
+    template = 'InlineTemplates/CarasTrabajadasPiedra.html'
 
 class UbicacionCarasInline(admin.StackedInline):
     extra = 1
@@ -511,13 +510,13 @@ class FigurasPorTipoInline(admin.TabularInline):
     max_num = 60  
     model =  FigurasPorTipo
     form = forms.FigurasPorTipoForm
-    suit_classes = 'suit-tab suit-tab-figuras'
+    template = 'InlineTemplates/FigurasPiedra.html'
 	
 class EsquemaPorCaraInline(admin.TabularInline):
     extra = 6
     max_num = 6
     model =  EsquemaPorCara
-    suit_classes = 'suit-tab suit-tab-figuras'
+    template = 'InlineTemplates/EsquemasPorCaras.html'
 	
 class ConexionFigurasInline(admin.StackedInline):
     extra = 1
@@ -542,7 +541,7 @@ class FotoDigPiedraInline(admin.StackedInline):
     extra = 1
     model =  FotoPiedra
     form = forms.FotoForm
-    template = 'InlineTemplates/stackedApoyos.html'
+    template = 'InlineTemplates/ApoyosPiedra.html'
 
 class EscalaNatPiedraInline(admin.StackedInline):
     extra = 1
@@ -674,7 +673,7 @@ class YacimientoAdmin(admin.ModelAdmin):
                       )
 
     suit_form_includes = (
-        ('InlineTemplates/Glosario1.html', 'middle', 'manifestaciones'),
+        ('InlineTemplates/Glosario1.html', 'top', 'manifestaciones'),
     )
        
     class Media:
