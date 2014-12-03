@@ -1322,7 +1322,7 @@ class Piedra2(models.Model):
     yacimiento = models.ForeignKey(Piedra, related_name='Piedra2')
 
     nombreFiguras = CharField('2- Nombre de las figuras', blank=True)    
-    estado = models.ForeignKey(Estado, related_name='EstadoPied', verbose_name = '3- Estado/Provincia', blank = True, null = True)     
+    estado = models.ForeignKey(Estado, related_name='EstadoPied', verbose_name = '3- Estado', blank = True, null = True)
     numeroCaras = models.IntegerField('4- Numero de Caras')
     numeroCarasTrajabadas = models.IntegerField('5- Numero de caras trabajadas')
 
@@ -1411,9 +1411,9 @@ class UbicacionCaras(models.Model):
     lagoInterior = models.BooleanField('8.2.3. Lago interior')
     claraboya = models.BooleanField('8.2.4. Claraboya')
 
-    bocaPrincipal = models.DecimalField('8.3. Distancia Boca Principal',max_digits=12, decimal_places=6 )
-    luminosidad = models.IntegerField('8.3.1. Luminosidad', choices = LUMINOSIDAD)
-    altura = models.DecimalField('8.3.2. Altura',max_digits=6, decimal_places=3)   
+    mouthPrincipal = models.DecimalField('8.3. Distancia Boca Principal',max_digits=12, decimal_places=6, blank=True, null=True)
+    luminosity = models.IntegerField('8.3.1. Luminosidad', choices = LUMINOSIDAD, blank=True, null=True)
+    height = models.DecimalField('8.3.2. Altura',max_digits=6, decimal_places=3, blank=True, null=True)   
     requiereAndamiaje = models.BooleanField('8.3.2.1. ¿Requiere andamiaje?')
     
     abbr = 'uca'
