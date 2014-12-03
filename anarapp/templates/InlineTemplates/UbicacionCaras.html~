@@ -5,7 +5,7 @@
 <div style="float:left;width:60%;">
   <h2>{{ inline_admin_formset.opts.verbose_name_plural|title }}</h2>
 </div>
-<div style="float:right;width:40%;">
+<div style="float:right;width:60%;">
 <button type="button" onclick= "window.open('/static/ayudas y glosarios/UbiCarTrab.html','name','height=500,width=500,scrollbars=yes');return false;"style="font-size: larger; color: red; background-color: #F2DBDB; border: 3pt ridge lightgrey">?</button>
 </div>
 </div>
