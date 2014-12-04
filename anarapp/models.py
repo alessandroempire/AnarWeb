@@ -1411,9 +1411,9 @@ class UbicacionCaras(models.Model):
     lagoInterior = models.BooleanField('8.2.3. Lago interior')
     claraboya = models.BooleanField('8.2.4. Claraboya')
 
-    mouthPrincipal = models.DecimalField('8.3. Distancia Boca Principal',max_digits=12, decimal_places=6, blank=True, null=True)
+    principalMouth = CharField('8.3. Distancia Boca Principal',blank=True, null=True)
     luminosity = models.IntegerField('8.3.1. Luminosidad', choices = LUMINOSIDAD, blank=True, null=True)
-    height = models.DecimalField('8.3.2. Altura',max_digits=6, decimal_places=3, blank=True, null=True)   
+    heights = CharField('8.3.2. Altura', blank=True, null=True)   
     requiereAndamiaje = models.BooleanField('8.3.2.1. ¿Requiere andamiaje?')
     
     abbr = 'uca'
