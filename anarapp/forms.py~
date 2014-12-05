@@ -729,9 +729,9 @@ class PlanoForm(ModelForm) :
 class CoordenadasForm(ModelForm) :
     class Meta:
         widgets = {
-                'longitud': TextInput(attrs=regularTextField),
-                'latitud': TextInput(attrs=regularTextField),
-                'utmAdicional': TextInput(attrs=regularTextField),
+                'longitud': TextInput(attrs=fullTextField),
+                'latitud': TextInput(attrs=fullTextField),
+                'utmAdicional': TextInput(attrs=fullTextField),
         }
 
 class AltitudForm(ModelForm) :
@@ -1070,7 +1070,7 @@ class OtrosValForm(ModelForm) :
 class ObservacionesForm(ModelForm) :
     class Meta:
         widgets = {                               
-                'texto':  AutosizedTextarea(attrs=regularTextArea),
+                'texto':  TextInput(attrs=regularTextArea),
         }
 
 ### Formularios para las clases de multimedia
@@ -1168,12 +1168,21 @@ class TratFotoPiedraForm(ModelForm) :
 class DimensionPiedraForm(ModelForm) :
 
     class Meta:
-        widgets = {                
-                'altoMaximo':  TextInput(attrs=regularTextField),
-                'largoMaximo': TextInput(attrs=regularTextField),
-                'anchoMaximo': TextInput(attrs=regularTextField),                    
+        widgets = {
+        		'dimensiones': TextInput(attrs={'class': 'input-medium'}),            
+                'alto': TextInput(attrs={'class': 'input-small'}),
+                'largo': TextInput(attrs={'class': 'input-small'}),
+            	'ancho': TextInput(attrs={'class': 'input-small'}),
         }
-        
+  
+class ManifestacionesAsociadasForm(ModelForm):
+
+	class Meta:
+		widgets = {
+				'hasMitos' : TextInput(attrs=regularTextField),
+				'hasOtros' : TextInput(attrs=regularTextField),
+		}
+
 class UbicacionCarasForm(ModelForm) :
 
     class Meta:
@@ -1191,16 +1200,13 @@ class FigurasPorTipoForm (ModelForm):
             'tipoFigura': Select(attrs={'class': 'input-medium'}),
             'numero': TextInput(attrs={'class': 'input-small'}),
             'descripcion' : AutosizedTextarea(attrs={'rows': 2})
-        }
+        }			
 	
 class CaraTrabajadaForm (ModelForm):
     class Meta:
         widgets = {
             'numero': TextInput(attrs={'class': 'input-medium'}),
-            'orientacion': Select(attrs={'class': 'input-medium'}),
-            'alto': TextInput(attrs={'class': 'input-small'}),
-            'ancho': TextInput(attrs={'class': 'input-small'}),
-            'largo': TextInput(attrs={'class': 'input-small'}),			
+            'orientacion': Select(attrs={'class': 'input-medium'})
         }
 		
 class PiedraForm(ModelForm) :
@@ -1208,12 +1214,8 @@ class PiedraForm(ModelForm) :
     class Meta:
         widgets = {
                 'yacimiento': LinkedSelect,
-                'manifiestacionAsociada' :  AutosizedTextarea(attrs=regularTextArea),		             
                 'codigo': TextInput(attrs=regularTextField),
-                'nombreFiguras':  AutosizedTextarea(attrs=regularTextArea),
                 'nombre': TextInput(attrs=regularTextField),
-                'numeroCaras': TextInput(attrs=regularTextField),
-                'numeroCarasTrajabadas': TextInput(attrs=regularTextField),                     
         }
 
 

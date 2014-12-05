@@ -1444,12 +1444,14 @@ class FigurasPorTipo(models.Model):
         (10, '9.10 - Bateas'),
     )
 
+    AYUDA_CID= 'Utilícese la letra "i" (incompleto) delante del número, para los casos en que la cantidad de figuras, sea mayor que la expuesta, pero no se pueda cuantificar con exactitud, que sea mayor por la altura de los grabados, por efectos de erosión u otros. \n Por ejemplo, en la cara 4 de una roca hay más de 25 puntos, sin poderse cuantificar con exactitud esa cifra. Se coloca entonces: i-25.\nPara aquellos casos en que se desconozcan las cantidades totalmente, se usará "i" en lugar de números.'
+
    
     piedra = models.ForeignKey(Piedra, related_name='FigurasPorTipo')    
     numero =  CharField( '6.a. Número de cara trabajada') 
     tipoFigura = models.IntegerField('9. Figuras',choices = TIPO_FIGURA)	
     cantidad = CharField('9.a. Cantidad', blank=True)  
-    esCantidadInexacta = models.BooleanField('9.b. Cantidad Inexacta O Desconocida')	
+    esCantidadInexacta = models.CharField('9.b. Cantidad Inexacta O Desconocida', max_length=10 ,help_text= AYUDA_CID)	
     descripcion = CharField('9.c. Descripcion', blank=True)
     abbr = 'fpt'    
     

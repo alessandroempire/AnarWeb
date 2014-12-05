@@ -1199,6 +1199,7 @@ class FigurasPorTipoForm (ModelForm):
             'cantidad': TextInput(attrs={'class': 'input-small'}),
             'tipoFigura': Select(attrs={'class': 'input-medium'}),
             'numero': TextInput(attrs={'class': 'input-small'}),
+            'esCantidadInexacta' : TextInput(attrs={'class': 'input-small'}),
             'descripcion' : AutosizedTextarea(attrs={'rows': 2})
         }			
 	
